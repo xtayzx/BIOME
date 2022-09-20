@@ -1,2 +1,2 @@
 # BIOME
-The repository for our IAT 410 game
+IAT 410 Game Project
