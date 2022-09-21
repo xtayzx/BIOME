@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -14,7 +15,36 @@ public class Player : MonoBehaviour
     private int superJumpsRemaining;
     private float speed = 1f;
     // private bool isGrounded;
-    
+
+    PlayerControls controls;
+    Vector2 move;
+    //Left Joystick reads as Vector2 but our 3D world is a Vector3
+
+    void Awake () {
+        //CONTROLLER FUNCTIONALITY
+        controls = new PlayerControls();
+
+        controls.Gameplay.Jump.performed += ctx => Jump();
+
+        //set move to the value of our thumbstick
+        controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
+
+        //set to zero when not moving
+        controls.Gameplay.Move.canceled += ctx => move = Vector2.zero;
+    }
+
+    void Jump() {
+        jumpKeyPressed = true;
+        Debug.Log("Jump pressed");
+    }
+
+    void OnEnable() {
+        controls.Gameplay.Enable();
+    }
+
+    void OnDisable() {
+        controls.Gameplay.Disable();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +55,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //***CONTROLLER FUNCTIONALITY
+        Vector3 moveAction = new Vector3(move.x, 0, move.y) * Time.deltaTime*speed;
+        transform.Translate(moveAction, Space.World);
+        
+        //***KEYBOARD FUNCTIONALITY
         //FORWARD
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
             transform.Translate(Vector3.forward*Time.deltaTime*speed);
@@ -37,12 +72,12 @@ public class Player : MonoBehaviour
 
         //LEFT
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
-            transform.Translate(Vector3.left*Time.deltaTime);
+            transform.Translate(Vector3.left*Time.deltaTime*speed);
         }
 
         //RIGHT
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
-            transform.Translate(Vector3.right*Time.deltaTime);
+            transform.Translate(Vector3.right*Time.deltaTime*speed);
         }
 
         //JUMP (space bar pressed)
