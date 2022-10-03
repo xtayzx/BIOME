@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-// TODO: able to toggle through the menu with game controller, however still triggers as like gameplay (jump toggled) so don't know need to fix that
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
@@ -49,6 +48,11 @@ public class PauseMenu : MonoBehaviour
     }
 
     void Pause() {
+        if (GameIsPaused) {
+            Resume();
+            return;
+        }
+        
         pauseMenuUI.SetActive(true);
 
         //freezes the game

@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
 
     void Jump() {
         jumpKeyPressed = true;
-        Debug.Log("Jump pressed");
+        // Debug.Log("Jump pressed");
     }
 
     void OnEnable() {
@@ -49,6 +49,9 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Set game frame rate - cause my fans are going crazy so I think this sets it up
+        // TODO: Delete later as already called in Main Menu
+        Application.targetFrameRate = 90;
         rigidbodyComponent = GetComponent<Rigidbody>();
     }
 

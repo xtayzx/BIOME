@@ -6,17 +6,19 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEditor;
 
-// TODO: game controller works with navigation, however cannot select - need to fix going in and out of options menu as well
-// UPDATE: selects but only selects start game with remote, doesn't activate anything else
-// also should change controller direction as still uses "jump" from gameplay functionality
 public class MainMenu : MonoBehaviour
 {
 
-    // TODO: currently below does nothing - update it doesn't really help
-    public GameObject mainMenuFirstButton, optionsButton, quitButton;
+    // public GameObject optionsMenu, mainMenu;
+    public GameObject mainMenuFirstButton, optionsFirstButton, optionsClosedButton;
     
     PlayerControls controls;
     GameObject currentObject;
+
+    void Start () {
+        // Set game frame rate - cause my fans are going crazy so I think this sets it up
+        Application.targetFrameRate = 100;
+    }
 
     void Awake() {
         controls = new PlayerControls();
@@ -26,7 +28,7 @@ public class MainMenu : MonoBehaviour
         //set a new selected object
         EventSystem.current.SetSelectedGameObject(mainMenuFirstButton);
 
-        controls.Gameplay.Jump.performed += ctx => Select();
+        controls.Menu.Select.performed += ctx => Select();
     }
 
     public void Select() {
@@ -34,27 +36,41 @@ public class MainMenu : MonoBehaviour
         // buttonPressed = true;
         Debug.Log(currentObject);
 
-        if(currentObject = mainMenuFirstButton) {
-            PlayGame();
-            return;
-        }
+        // if(currentObject = mainMenuFirstButton) {
+        //     PlayGame();
+        //     return;
+        // }
 
-        else if(currentObject = quitButton) {
-            QuitGame();
-            return;
-        }
+        // else if(currentObject = quitButton) {
+        //     QuitGame();
+        //     return;
+        // }
     }
 
     void OnEnable() {
-        controls.Gameplay.Enable();
+        controls.Menu.Enable();
     }
 
     void OnDisable() {
-        controls.Gameplay.Disable();
+        controls.Menu.Disable();
     }
 
     public void PlayGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void OpenOptions() {
+        //clear selected object 
+        EventSystem.current.SetSelectedGameObject(null);
+        //set a new selected object
+        EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+    }
+
+    public void CloseOptions() {
+        //clear selected object 
+        EventSystem.current.SetSelectedGameObject(null);
+        //set a new selected object
+        EventSystem.current.SetSelectedGameObject(optionsClosedButton);
     }
 
     public void QuitGame() {
