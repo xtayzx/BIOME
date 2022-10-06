@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private Rigidbody rigidbodyComponent;
     private int superJumpsRemaining;
     private float speed = 1f;
+    GameManager gameManager;
     // private bool isGrounded;
 
     PlayerControls controls;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     void Awake () {
         //CONTROLLER FUNCTIONALITY
         controls = new PlayerControls();
+        // gameManager.ActivateControls("PlayControls");
 
         controls.Gameplay.Jump.performed += ctx => Jump();
 

@@ -5,20 +5,22 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class NPCTutorial : MonoBehaviour
+public class NPC : MonoBehaviour
 {
 
     [SerializeField] private bool triggerActive = false;
 
+    public GameObject NPCObject;
     public GameObject NPCIcon;
     private DialogueTrigger trigger;
-    // private bool nextSentence = false;
+    GameManager gameManager;
 
     PlayerControls controls;
 
         void Awake() {
             controls = new PlayerControls();
 
+            // gameManager.ActivateControls("PlayControls");
             controls.Gameplay.Talk.performed += ctx => Talk();
             controls.Gameplay.Conversation.performed += ctx => Conversation();
         }
@@ -68,14 +70,17 @@ public class NPCTutorial : MonoBehaviour
         {
             //For controller input
             if (triggerActive) {
-                FindObjectOfType<DialogueTrigger>().TriggerDialogue();
-                // Debug.Log("HELLO!");
+                // FindObjectOfType<DialogueTrigger>().TriggerDialogue();
+
+                //Finds the local DialogueTrigger rather than global
+                GetComponent<DialogueTrigger>().TriggerDialogue();
             }
         }
 
         public void Conversation() {
             if (triggerActive) { 
+                //There is only one DialogueManager so that's why we still use FindObjectOfType
                 FindObjectOfType<DialogueManager>().DisplayNextSentence();
-            }
         }
+    }
 }

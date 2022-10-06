@@ -11,12 +11,15 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI, resumeButton, menuButton, exitButton;
 
+    public GameManager gameManager;
+
     PlayerControls controls;
 
     void Awake() {
         controls = new PlayerControls();
-
+        // gameManager.ActivateControls("PauseControls");
         controls.Gameplay.Menu.performed += ctx => Pause();
+        // gameManager.ActivateControls("PauseControls");
     }
 
     void OnEnable() {
@@ -43,7 +46,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume() {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        gameManager.UnfreezeGame();
         GameIsPaused = false;
     }
 
@@ -56,9 +59,11 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
 
         //freezes the game
-        Time.timeScale = 0f;
+        gameManager.FreezeGame();
 
         GameIsPaused = true;
+
+        // gameManager.SelectFirstButton(resumeButton);
 
         //clear selected object 
         EventSystem.current.SetSelectedGameObject(null);
@@ -69,20 +74,21 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu() {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        gameManager.UnfreezeGame();
         GameIsPaused = false;
         SceneManager.LoadScene("Menu");
     }
 
     public void ResetGame() {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        gameManager.UnfreezeGame();
         GameIsPaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //TODO: what does this classify, what is the reset?
     }
 
     public void QuitGame () {
         Debug.Log("QUIT!");
-        Application.Quit();
+        // Application.Quit();
     }
 }

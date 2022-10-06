@@ -14,19 +14,15 @@ public class MainMenu : MonoBehaviour
     
     PlayerControls controls;
     GameObject currentObject;
-
-    void Start () {
-        // Set game frame rate - cause my fans are going crazy so I think this sets it up
-        Application.targetFrameRate = 100;
-    }
+    public GameManager gameManager;
 
     void Awake() {
         controls = new PlayerControls();
-
-        //clear selected object 
+         //clear selected object 
         EventSystem.current.SetSelectedGameObject(null);
         //set a new selected object
         EventSystem.current.SetSelectedGameObject(mainMenuFirstButton);
+        // gameManager.SelectFirstButton(mainMenuFirstButton);
 
         controls.Menu.Select.performed += ctx => Select();
     }
@@ -56,7 +52,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void PlayGame() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("LevelSelection");
     }
 
     public void OpenOptions() {
@@ -64,6 +60,7 @@ public class MainMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         //set a new selected object
         EventSystem.current.SetSelectedGameObject(optionsFirstButton);
+        // gameManager.SelectFirstButton(optionsFirstButton);
     }
 
     public void CloseOptions() {
@@ -71,6 +68,7 @@ public class MainMenu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         //set a new selected object
         EventSystem.current.SetSelectedGameObject(optionsClosedButton);
+        // gameManager.SelectFirstButton(optionsClosedButton);
     }
 
     public void QuitGame() {
