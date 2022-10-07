@@ -55,12 +55,14 @@ public class EndTrigger : MonoBehaviour
     }
 
     public void LevelSelection() {
-        gameManager.UnfreezeGame();
+        // gameManager.UnfreezeGame();
+        Time.timeScale = 1f;
         SceneManager.LoadScene("LevelSelection");
     }
 
     public void MainMenu() {
-        gameManager.UnfreezeGame();
+        // gameManager.UnfreezeGame();
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
     }
 }

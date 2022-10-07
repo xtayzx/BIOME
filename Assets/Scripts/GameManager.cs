@@ -73,10 +73,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void UnfreezeGame() {
-        //unfreezes the game
-        Time.timeScale = 1f;
-    }
+    // public void UnfreezeGame() {
+    //     //unfreezes the game
+    //     Time.timeScale = 1f;
+    // }
     
     public void SelectFirstButton(GameObject firstButton) {
 

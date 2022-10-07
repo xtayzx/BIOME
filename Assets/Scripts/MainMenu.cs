@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
     
     PlayerControls controls;
     GameObject currentObject;
-    public GameManager gameManager;
+    // public GameManager gameManager;
 
     void Awake() {
         controls = new PlayerControls();

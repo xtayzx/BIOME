@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI, resumeButton, menuButton, exitButton;
 
-    public GameManager gameManager;
+    // public GameManager gameManager;
 
     PlayerControls controls;
 
@@ -46,7 +46,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume() {
         pauseMenuUI.SetActive(false);
-        gameManager.UnfreezeGame();
+        Time.timeScale = 1f;
+        // gameManager.UnfreezeGame();
         GameIsPaused = false;
     }
 
@@ -59,7 +60,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(true);
 
         //freezes the game
-        gameManager.FreezeGame();
+        // gameManager.FreezeGame();
+        Time.timeScale = 0f;
 
         GameIsPaused = true;
 
@@ -74,14 +76,16 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu() {
         pauseMenuUI.SetActive(false);
-        gameManager.UnfreezeGame();
+        // gameManager.UnfreezeGame();
+        Time.timeScale = 1f;
         GameIsPaused = false;
         SceneManager.LoadScene("Menu");
     }
 
     public void ResetGame() {
         pauseMenuUI.SetActive(false);
-        gameManager.UnfreezeGame();
+        // gameManager.UnfreezeGame();
+        Time.timeScale = 1f;
         GameIsPaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         //TODO: what does this classify, what is the reset?
