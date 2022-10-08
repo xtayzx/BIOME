@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     //     controls.Menu.Disable();
     // }
 
-    public void CompleteLevel () {
+    public void CompleteLevel() {
 
         FreezeGame();
 

@@ -4,7 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEditor;
+
+#if UNITY_EDITOR 
+    using UnityEditor;
+#endif
+// using UnityEditor;
 
 public class EndTrigger : MonoBehaviour
 {
@@ -27,7 +31,9 @@ public class EndTrigger : MonoBehaviour
     }
 
     public void Select() {
+        #if UNITY_EDITOR
         currentObject = Selection.activeGameObject;
+        #endif
         // buttonPressed = true;
         Debug.Log(currentObject);
 
@@ -50,8 +56,11 @@ public class EndTrigger : MonoBehaviour
         controls.Menu.Disable();
     }
 
-    public void OnTriggerEnter() {
-        gameManager.CompleteLevel();
+    public void OnTriggerEnter(Collider exit) {
+        if (exit.CompareTag("Player"))
+            {
+              gameManager.CompleteLevel();
+            }
     }
 
     public void LevelSelection() {

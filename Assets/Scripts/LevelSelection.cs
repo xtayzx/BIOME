@@ -4,7 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEditor;
+
+#if UNITY_EDITOR 
+    using UnityEditor;
+#endif
+// using UnityEditor;
 
 public class LevelSelection : MonoBehaviour
 {
@@ -36,7 +40,9 @@ public class LevelSelection : MonoBehaviour
     }
 
     public void Select() {
+        #if UNITY_EDITOR
         currentObject = Selection.activeGameObject;
+        #endif
         // buttonPressed = true;
         Debug.Log("Button Pressed");
 
@@ -61,7 +67,8 @@ public class LevelSelection : MonoBehaviour
     }
 
     public void LevelOne() {
-        SceneManager.LoadScene("Level1");
+        Debug.Log("Currently not avaliable to play");
+        // SceneManager.LoadScene("Level1");
     }
 
     public void MainMenu() {

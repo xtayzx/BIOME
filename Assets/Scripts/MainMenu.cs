@@ -4,7 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEditor;
+
+#if UNITY_EDITOR 
+    using UnityEditor;
+#endif
+// using UnityEditor;
 
 public class MainMenu : MonoBehaviour
 {
@@ -28,7 +32,9 @@ public class MainMenu : MonoBehaviour
     }
 
     public void Select() {
+        #if UNITY_EDITOR
         currentObject = Selection.activeGameObject;
+        #endif
         // buttonPressed = true;
         Debug.Log(currentObject);
 
@@ -73,6 +79,6 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame() {
         Debug.Log("QUIT!");
-        // Application.Quit();
+        Application.Quit();
     }
 }

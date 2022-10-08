@@ -875,7 +875,6 @@ MonoBehaviour:
   levelFirstButton: {fileID: 1393537720}
   levelOneButton: {fileID: 1865403396}
   backButton: {fileID: 384461681}
-  gameManager: {fileID: 164158264}
 --- !u!1 &1180536017
 GameObject:
   m_ObjectHideFlags: 0
