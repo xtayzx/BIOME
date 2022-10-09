@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform groundCheckTransform;
     [SerializeField] private LayerMask playerMask;
 
+    private bool startConvo = true;
+
     private bool bucketObtained = false;
     private bool bucketFilled = false;
     private bool waterObtained = false;
@@ -39,7 +41,7 @@ public class Player : MonoBehaviour
 
         controls.Gameplay.Jump.performed += ctx => Jump();
 
-        controls.Gameplay.Talk.performed += ctx => Interact();
+        controls.Gameplay.Interact.performed += ctx => Interact();
 
         //set move to the value of our thumbstick
         controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
@@ -113,6 +115,20 @@ public class Player : MonoBehaviour
 
         horizontalInput = Input.GetAxis("Horizontal");
     }
+
+    public bool startConvoActive() {
+        return startConvo;
+    }
+
+    public void startConvoValue(int value) {
+            if(value == 0) {
+                startConvo = false;
+            }
+
+            if(value == 1) {
+                startConvo = true;
+            }
+        }
 
     private void Interact() {
         if (triggerActiveWater == true) {

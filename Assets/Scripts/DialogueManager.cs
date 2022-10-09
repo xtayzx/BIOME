@@ -8,6 +8,7 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
+    public GameObject player;
     private Queue<string> sentences;
 
     public Animator animator;
@@ -65,6 +66,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue() {
         animator.SetBool("IsOpen", false);
+        player.GetComponent<Player>().startConvoValue(1);
         // Debug.Log("End of conversation");
     }
 

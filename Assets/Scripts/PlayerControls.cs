@@ -55,7 +55,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Talk"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""c6d6d746-543b-4901-b316-b0fd86288e9a"",
                     ""expectedControlType"": ""Button"",
@@ -114,7 +114,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Talk"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -167,7 +167,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Menu = m_Gameplay.FindAction("Menu", throwIfNotFound: true);
-        m_Gameplay_Talk = m_Gameplay.FindAction("Talk", throwIfNotFound: true);
+        m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_Conversation = m_Gameplay.FindAction("Conversation", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
@@ -234,7 +234,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Menu;
-    private readonly InputAction m_Gameplay_Talk;
+    private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_Conversation;
     public struct GameplayActions
     {
@@ -243,7 +243,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Menu => m_Wrapper.m_Gameplay_Menu;
-        public InputAction @Talk => m_Wrapper.m_Gameplay_Talk;
+        public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputAction @Conversation => m_Wrapper.m_Gameplay_Conversation;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
@@ -263,9 +263,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Menu.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMenu;
-                @Talk.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTalk;
-                @Talk.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTalk;
-                @Talk.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnTalk;
+                @Interact.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInteract;
                 @Conversation.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnConversation;
                 @Conversation.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnConversation;
                 @Conversation.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnConversation;
@@ -282,9 +282,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
-                @Talk.started += instance.OnTalk;
-                @Talk.performed += instance.OnTalk;
-                @Talk.canceled += instance.OnTalk;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
                 @Conversation.started += instance.OnConversation;
                 @Conversation.performed += instance.OnConversation;
                 @Conversation.canceled += instance.OnConversation;
@@ -330,7 +330,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
-        void OnTalk(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
         void OnConversation(InputAction.CallbackContext context);
     }
     public interface IMenuActions

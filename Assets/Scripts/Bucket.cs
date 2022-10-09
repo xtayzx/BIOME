@@ -21,7 +21,7 @@ public class Bucket : MonoBehaviour
             controls = new PlayerControls();
 
             // gameManager.ActivateControls("PlayControls");
-            controls.Gameplay.Talk.performed += ctx => Interact();
+            controls.Gameplay.Interact.performed += ctx => Interact();
             // controls.Gameplay.Conversation.performed += ctx => Conversation();
         }
 

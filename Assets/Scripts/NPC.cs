@@ -12,7 +12,10 @@ public class NPC : MonoBehaviour
 
     public GameObject NPCObject;
     public GameObject NPCIcon;
+    public GameObject player;
     private DialogueTrigger trigger;
+    private bool playerStartConvo;
+    //private bool convoActive = false;
     GameManager gameManager;
 
     PlayerControls controls;
@@ -21,8 +24,8 @@ public class NPC : MonoBehaviour
             controls = new PlayerControls();
 
             // gameManager.ActivateControls("PlayControls");
-            controls.Gameplay.Talk.performed += ctx => Talk();
-            controls.Gameplay.Conversation.performed += ctx => Conversation();
+            controls.Gameplay.Interact.performed += ctx => Talk();
+            // controls.Gameplay.Conversation.performed += ctx => Conversation();
         }
 
         void OnEnable() {
@@ -54,33 +57,46 @@ public class NPC : MonoBehaviour
  
         private void Update()
         {
+            playerStartConvo = player.GetComponent<Player>().startConvoActive();
             //Keyboard Action
             if (triggerActive && Input.GetKeyDown(KeyCode.O))
             {
                 Talk();
             }
 
-            if (triggerActive && Input.GetKeyDown(KeyCode.Return)) {
-                Conversation();
-                return;
-            }
+            // if (triggerActive && Input.GetKeyDown(KeyCode.Return)) {
+            //     Conversation();
+            //     return;
+            // }
         }
  
+        //TODO: implement conversation method here bc using the triangle button is not working
         public void Talk()
         {
             //For controller input
             if (triggerActive) {
+                if(playerStartConvo == true) {
+                    playerStartConvo = false;
+                    player.GetComponent<Player>().startConvoValue(0);
+                    GetComponent<DialogueTrigger>().TriggerDialogue();
+                    return;
+                }
+
+                else if(playerStartConvo == false) {
+                    FindObjectOfType<DialogueManager>().DisplayNextSentence();
+                    return;
+                }
                 // FindObjectOfType<DialogueTrigger>().TriggerDialogue();
 
                 //Finds the local DialogueTrigger rather than global
-                GetComponent<DialogueTrigger>().TriggerDialogue();
+                
             }
         }
 
-        public void Conversation() {
-            if (triggerActive) { 
-                //There is only one DialogueManager so that's why we still use FindObjectOfType
-                FindObjectOfType<DialogueManager>().DisplayNextSentence();
-        }
-    }
+        // public void Conversation() {
+        //     if (triggerActive) { 
+        //         //There is only one DialogueManager so that's why we still use FindObjectOfType
+                
+        // }
+    //}
 }

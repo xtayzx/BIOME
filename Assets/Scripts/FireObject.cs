@@ -9,9 +9,9 @@ public class FireObject : MonoBehaviour
 {
     [SerializeField] private bool triggerActive = false;
 
-    public GameObject FireObjectItem;
-    public GameObject FireIcon;
-    public GameObject Player;
+    public GameObject fireObjectItem;
+    public GameObject fireIcon;
+    public GameObject player;
     private bool waterObtained;
 
     GameManager gameManager;
@@ -22,7 +22,7 @@ public class FireObject : MonoBehaviour
             controls = new PlayerControls();
 
             // gameManager.ActivateControls("PlayControls");
-            controls.Gameplay.Talk.performed += ctx => Interact();
+            controls.Gameplay.Interact.performed += ctx => Interact();
             // controls.Gameplay.Conversation.performed += ctx => Conversation();
         }
 
@@ -40,7 +40,7 @@ public class FireObject : MonoBehaviour
             {
                 if(waterObtained == true) {
                     triggerActive = true;
-                    FireIcon.SetActive(true);
+                    fireIcon.SetActive(true);
                     Debug.Log("Press O to put out the fire");
                 }
             }
@@ -51,14 +51,14 @@ public class FireObject : MonoBehaviour
             if (fire.CompareTag("Player"))
             {
                 triggerActive = false;
-                FireIcon.SetActive(false);
+                fireIcon.SetActive(false);
             }
         }
  
         private void Update()
         {
             //Check if player has water before they are able to put out the object
-            waterObtained = Player.GetComponent<Player>().WaterObtainedValue();
+            waterObtained = player.GetComponent<Player>().WaterObtainedValue();
 
             //Keyboard Action
             if (triggerActive && Input.GetKeyDown(KeyCode.O))
@@ -71,8 +71,8 @@ public class FireObject : MonoBehaviour
         {
             //For controller input
             if (triggerActive) {
-                FireObjectItem.SetActive(false);
-                Player.GetComponent<Player>().PlayerNoBucket();
+                fireObjectItem.SetActive(false);
+                player.GetComponent<Player>().PlayerNoBucket();
                 Debug.Log("YAY YOU HAVE PUT OUT THE FIRE");
             }
         }
