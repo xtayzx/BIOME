@@ -37,6 +37,7 @@ public class Bucket : MonoBehaviour
         {
             if (bucket.CompareTag("Player"))
             {
+                FindObjectOfType<AudioManager>().Play("Object");
                 triggerActive = true;
                 BucketIcon.SetActive(true);
                 Debug.Log("Press O to collect the bucket");
@@ -65,6 +66,7 @@ public class Bucket : MonoBehaviour
         {
             //For controller input
             if (triggerActive) {
+                FindObjectOfType<AudioManager>().Play("Interact");
                 BucketObject.SetActive(false);
                 Player.GetComponent<Player>().ActiveBucket(1);
             }

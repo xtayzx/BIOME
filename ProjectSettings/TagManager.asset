@@ -8,6 +8,8 @@ TagManager:
   - Bucket
   - Water
   - Fire
+  - Checkpoint
+  - PushObject
   layers:
   - Default
   - TransparentFX

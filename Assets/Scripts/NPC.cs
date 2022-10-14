@@ -40,6 +40,7 @@ public class NPC : MonoBehaviour
         {
             if (npc.CompareTag("Player"))
             {
+                FindObjectOfType<AudioManager>().Play("Object");
                 triggerActive = true;
                 NPCIcon.SetActive(true);
                 Debug.Log("Press O to interact with the character");
@@ -76,6 +77,7 @@ public class NPC : MonoBehaviour
             //For controller input
             if (triggerActive) {
                 if(playerStartConvo == true) {
+                    FindObjectOfType<AudioManager>().Play("Interact");
                     playerStartConvo = false;
                     player.GetComponent<Player>().startConvoValue(0);
                     GetComponent<DialogueTrigger>().TriggerDialogue();
@@ -83,6 +85,7 @@ public class NPC : MonoBehaviour
                 }
 
                 else if(playerStartConvo == false) {
+                    FindObjectOfType<AudioManager>().Play("Conversation");
                     FindObjectOfType<DialogueManager>().DisplayNextSentence();
                     return;
                 }

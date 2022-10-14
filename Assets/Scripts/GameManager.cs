@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour
     public void CompleteLevel() {
 
         FreezeGame();
+        FindObjectOfType<AudioManager>().Pause("MainSong");
+        FindObjectOfType<AudioManager>().Play("End");
 
         // GameIsPaused = true;
         Debug.Log("LEVEL WON");

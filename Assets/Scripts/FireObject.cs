@@ -39,6 +39,7 @@ public class FireObject : MonoBehaviour
             if (fire.CompareTag("Player"))
             {
                 if(waterObtained == true) {
+                    FindObjectOfType<AudioManager>().Play("Object");
                     triggerActive = true;
                     fireIcon.SetActive(true);
                     Debug.Log("Press O to put out the fire");
@@ -71,6 +72,7 @@ public class FireObject : MonoBehaviour
         {
             //For controller input
             if (triggerActive) {
+                FindObjectOfType<AudioManager>().Play("Splash");
                 fireObjectItem.SetActive(false);
                 player.GetComponent<Player>().PlayerNoBucket();
                 Debug.Log("YAY YOU HAVE PUT OUT THE FIRE");

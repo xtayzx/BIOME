@@ -45,6 +45,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Resume() {
+        FindObjectOfType<AudioManager>().Play("MainSong");
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         // gameManager.UnfreezeGame();
@@ -57,6 +58,7 @@ public class PauseMenu : MonoBehaviour
             return;
         }
         
+        FindObjectOfType<AudioManager>().Pause("MainSong");
         pauseMenuUI.SetActive(true);
 
         //freezes the game
@@ -87,12 +89,23 @@ public class PauseMenu : MonoBehaviour
         // gameManager.UnfreezeGame();
         Time.timeScale = 1f;
         GameIsPaused = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        PushObject[] pushObjects = FindObjectsOfType<PushObject>();
+        for (int i = 0; i < pushObjects.Length; i++) {
+            {
+                pushObjects[i].ObjectStartPosition();
+            }
+        }
+
+        FindObjectOfType<Player>().StartAtCheckpoint();
+        FindObjectOfType<AudioManager>().Play("MainSong");
+
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         //TODO: what does this classify, what is the reset?
     }
 
     public void QuitGame () {
         Debug.Log("QUIT!");
-        // Application.Quit();
+        Application.Quit();
     }
 }

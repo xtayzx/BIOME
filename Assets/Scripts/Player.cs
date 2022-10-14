@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform groundCheckTransform;
     [SerializeField] private LayerMask playerMask;
 
+    private Vector3 checkpointPosition;
+
     private bool startConvo = true;
 
     private bool bucketObtained = false;
@@ -48,6 +50,8 @@ public class Player : MonoBehaviour
 
         //set to zero when not moving
         controls.Gameplay.Move.canceled += ctx => move = Vector2.zero;
+
+        checkpointPosition = this.transform.position;
     }
 
     void Jump() {
@@ -116,6 +120,16 @@ public class Player : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
     }
 
+    //CHECKPOINT
+    public void CheckpointPositionChange(Vector3 newPosition) {
+        checkpointPosition = newPosition;
+    }
+
+    public void StartAtCheckpoint() {
+        this.transform.position = checkpointPosition;
+    }
+
+    //INTERACTING WITH OBJECTS AND NPC
     public bool startConvoActive() {
         return startConvo;
     }
@@ -132,6 +146,7 @@ public class Player : MonoBehaviour
 
     private void Interact() {
         if (triggerActiveWater == true) {
+            FindObjectOfType<AudioManager>().Play("Splash");
             waterObtained = true;
             Debug.Log("Player has obtained water");
             playersBucket.SetActive(true);
@@ -139,6 +154,8 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    // JUMPING MECHANICS
     //fixedUpdate called once every physics update
     private void FixedUpdate() {
 
@@ -152,6 +169,7 @@ public class Player : MonoBehaviour
         // Check if space key is pressed down
         if (jumpKeyPressed)
         {
+            FindObjectOfType<AudioManager>().Play("Jump");
             float jumpPower = 5f;
             rigidbodyComponent.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
             jumpKeyPressed = false;
@@ -159,6 +177,8 @@ public class Player : MonoBehaviour
 
         
     }
+
+    //COLLECT BUCKET
 
     public void ActiveBucket(int number) {
 
@@ -199,9 +219,10 @@ public class Player : MonoBehaviour
             if (player.CompareTag("Water"))
             {
                 if (bucketObtained == true) {
-                triggerActiveWater = true;
-                playerBucketIcon.SetActive(true);
-                Debug.Log("Press O to fill bucket");
+                    FindObjectOfType<AudioManager>().Play("Object");
+                    triggerActiveWater = true;
+                    playerBucketIcon.SetActive(true);
+                    Debug.Log("Press O to fill bucket");
                 }
             }
         }
@@ -211,8 +232,8 @@ public class Player : MonoBehaviour
             if (player.CompareTag("Water"))
             {
                 if (bucketObtained == true) {
-                triggerActiveWater = false;
-                playerBucketIcon.SetActive(false);
+                    triggerActiveWater = false;
+                    playerBucketIcon.SetActive(false);
                 }
             }
         }
