@@ -10,7 +10,7 @@ public class PushObject : MonoBehaviour
     void Start()
     {
         objectPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        Debug.Log("Object Position - X Pos: " + transform.position.x + " // Y Pos: " + transform.position.y + " // Z Pos: " + transform.position.z);
+        // Debug.Log("Object Position - X Pos: " + transform.position.x + " // Y Pos: " + transform.position.y + " // Z Pos: " + transform.position.z);
     }
 
     public void ObjectStartPosition() {

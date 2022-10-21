@@ -98,7 +98,29 @@ public class PauseMenu : MonoBehaviour
         }
 
         FindObjectOfType<Player>().StartAtCheckpoint();
+        FindObjectOfType<MainCamera>().ResetCamera();
         FindObjectOfType<AudioManager>().Play("MainSong");
+
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //TODO: what does this classify, what is the reset?
+    }
+
+    public void FallResetGame() {
+        // pauseMenuUI.SetActive(false);
+        // gameManager.UnfreezeGame();
+        // Time.timeScale = 1f;
+        // GameIsPaused = false;
+
+        // PushObject[] pushObjects = FindObjectsOfType<PushObject>();
+        // for (int i = 0; i < pushObjects.Length; i++) {
+        //     {
+        //         pushObjects[i].ObjectStartPosition();
+        //     }
+        // }
+
+        FindObjectOfType<MainCamera>().ResetCamera();
+        FindObjectOfType<Player>().StartAtCheckpoint();
+        FindObjectOfType<AudioManager>().Play("Checkpoint");
 
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         //TODO: what does this classify, what is the reset?

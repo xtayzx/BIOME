@@ -10,11 +10,43 @@ public class GameManager : MonoBehaviour
 {
     public GameObject completeLevelUI;
     PlayerControls controls;
+    public GameObject player;
+    // public Camera mainCamera;
+
+    // private float newX;
+    // private float newY;
+    // private float newZ;
+
+    // private bool trigger;
 
     void Start () {
         // Set game frame rate - cause my fans are going crazy so I think this sets it up
-        Application.targetFrameRate = 100;
+        Application.targetFrameRate = 60;
+        // trigger = false;
     }
+
+    // void FixedUpdate() {
+    //     if(FindObjectOfType<Player>().playerIsFalling() == false) {
+    //         newX = mainCamera.transform.position.x;
+    //         newY = mainCamera.transform.position.y;
+    //         newZ = mainCamera.transform.position.z;
+    //     }
+
+    //     else if(FindObjectOfType<Player>().playerIsFalling() == true) {
+    //         trigger = true;
+    //     }
+
+    //     if(trigger == true) {
+    //         StopCamera();
+    //         trigger = false;
+    //         return;
+    //     }
+    // }
+
+    // void StopCamera() {
+    //     mainCamera.transform.position = new Vector3(newX, newY, newZ);
+    //     // FindObjectOfType<AudioManager>().Play("Checkpoint");
+    // }
 
     // public void ActivateControls(string controllerType) {
     //     controls = new PlayerControls();

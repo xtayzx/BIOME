@@ -26,6 +26,11 @@ public class Player : MonoBehaviour
     private float speed = 1f;
     private float verticalSpeed = 1.5f;
 
+    public float fallingThreshold = -6f;
+    [HideInInspector]
+    private bool falling = false;
+    private float fallPoint = -20f;
+
     GameManager gameManager;
 
     public GameObject playerBucketIcon;
@@ -72,13 +77,27 @@ public class Player : MonoBehaviour
     {
         // Set game frame rate - cause my fans are going crazy so I think this sets it up
         // TODO: Delete later as already called in Main Menu
-        Application.targetFrameRate = 90;
+        // Application.targetFrameRate = 90;
         rigidbodyComponent = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 moveN = new Vector3(1, 0, 0) * Time.deltaTime*speed;
+        Vector3 moveW = new Vector3(0, 0, -1) * Time.deltaTime*speed;
+        Vector3 moveS = new Vector3(-1, 0, 0) * Time.deltaTime*speed;
+        Vector3 moveE = new Vector3(0, 0, 1) * Time.deltaTime*speed;
+        Vector3 rotation = new Vector3(0, 0, 1);
+
+        // Vector3 rotation = new Vector3(0, 0, Camera.main.transform.localEulerAngles.y) * Time.deltaTime*speed;
+
+        Vector3 newN = moveN+moveE;
+        Vector3 newS = moveS+moveW;
+        Vector3 newW = (moveW+rotation);
+        Vector3 newE = (moveE+rotation);
+        // Debug.Log("ROTATION VALUE: "+ Camera.main.transform.localEulerAngles.y);
+
         //***CONTROLLER FUNCTIONALITY
         Vector3 moveWE = new Vector3(move.x, 0, 0) * Time.deltaTime*speed;
         Vector3 moveNS = new Vector3(0, 0, move.y) * Time.deltaTime*verticalSpeed;
@@ -87,22 +106,38 @@ public class Player : MonoBehaviour
         //***KEYBOARD FUNCTIONALITY
         //FORWARD
         if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
-            transform.Translate(Vector3.forward*Time.deltaTime*verticalSpeed);
+            // WORLD DIRECTION
+            // transform.Translate(Vector3.forward*Time.deltaTime*verticalSpeed);
+
+            transform.Translate(newN, Space.World);
         }
 
         //BACK
         if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) {
-            transform.Translate(Vector3.back*Time.deltaTime*verticalSpeed);
+            // WORLD DIRECTION
+            // transform.Translate(Vector3.back*Time.deltaTime*verticalSpeed);
+
+            transform.Translate(newS, Space.World);
         }
 
         //LEFT
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
-            transform.Translate(Vector3.left*Time.deltaTime*speed);
+            // WORLD DIRECTION
+            // transform.Translate(Vector3.left*Time.deltaTime*speed);
+
+            transform.Translate((Vector3.left+rotation)*Time.deltaTime);
+            // transform.Translate(direction*Time.deltaTime);
+            // transform.Translate(desiredMoveDirection*Time.deltaTime);
         }
 
         //RIGHT
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
-            transform.Translate(Vector3.right*Time.deltaTime*speed);
+            // WORLD DIRECTION
+            // transform.Translate(Vector3.right*Time.deltaTime*speed);
+            
+            // transform.Translate(desiredMoveDirection*Time.deltaTime);
+            transform.Translate((Vector3.right-rotation)*Time.deltaTime);
+            // transform.Translate(rotation);
         }
 
         //JUMP (space bar pressed)
@@ -115,6 +150,21 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.O))
         {
             Interact();
+        }
+
+        // PLAYER FALL RESET
+        if (this.transform.position.y < fallPoint) {
+            FindObjectOfType<PauseMenu>().FallResetGame();
+        }
+
+        // PLAYER FALLING
+        if (rigidbodyComponent.velocity.y < fallingThreshold) {
+            falling = true;
+            // Debug.Log("Player is falling");
+        }
+
+        else {
+            falling = false;
         }
 
         horizontalInput = Input.GetAxis("Horizontal");
@@ -132,6 +182,10 @@ public class Player : MonoBehaviour
     //INTERACTING WITH OBJECTS AND NPC
     public bool startConvoActive() {
         return startConvo;
+    }
+
+    public bool playerIsFalling() {
+        return falling;
     }
 
     public void startConvoValue(int value) {
@@ -176,6 +230,8 @@ public class Player : MonoBehaviour
         }
 
         
+
+        // Debug.Log("Player falling: " + falling);
     }
 
     //COLLECT BUCKET
@@ -215,28 +271,28 @@ public class Player : MonoBehaviour
     }
 
     public void OnTriggerEnter(Collider player)
+    {
+        if (player.CompareTag("Water"))
         {
-            if (player.CompareTag("Water"))
-            {
-                if (bucketObtained == true) {
-                    FindObjectOfType<AudioManager>().Play("Object");
-                    triggerActiveWater = true;
-                    playerBucketIcon.SetActive(true);
-                    Debug.Log("Press O to fill bucket");
-                }
+            if (bucketObtained == true) {
+                FindObjectOfType<AudioManager>().Play("Object");
+                triggerActiveWater = true;
+                playerBucketIcon.SetActive(true);
+                Debug.Log("Press O to fill bucket");
             }
         }
+    }
  
     public void OnTriggerExit(Collider player)
+    {
+        if (player.CompareTag("Water"))
         {
-            if (player.CompareTag("Water"))
-            {
-                if (bucketObtained == true) {
-                    triggerActiveWater = false;
-                    playerBucketIcon.SetActive(false);
-                }
+            if (bucketObtained == true) {
+                triggerActiveWater = false;
+                playerBucketIcon.SetActive(false);
             }
         }
+    }
 
     // private void OnCollisionEnter(Collision collision) {
     //     isGrounded = true;

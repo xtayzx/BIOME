@@ -22,7 +22,9 @@ public class CheckpointTrigger : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("Checkpoint");
             Debug.Log("Entered checkpoint!");
             // player.transform.position = checkpoint.position;
+            
             FindObjectOfType<Player>().CheckpointPositionChange(checkpointPosition);
+            // FindObjectOfType<Camera>().ChangeStartPosition(checkpointPosition);
         }
     }
 
