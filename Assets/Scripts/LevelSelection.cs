@@ -67,8 +67,8 @@ public class LevelSelection : MonoBehaviour
     }
 
     public void LevelOne() {
-        Debug.Log("Currently not avaliable to play");
-        // SceneManager.LoadScene("Level1");
+        // Debug.Log("Currently not avaliable to play");
+        SceneManager.LoadScene("Level1");
     }
 
     public void MainMenu() {
