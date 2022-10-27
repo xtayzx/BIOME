@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -8,11 +11,28 @@ public class InventoryManager : MonoBehaviour
     public GameObject inventoryItemPrefab;
     private int maxCount = 4;
 
-    public int selectedSlot = -1; //IMPORTANT FOR ITEM SELECTION LATER
+    public int selectedSlot = 0; //IMPORTANT FOR ITEM SELECTION LATER
+
+    // GameManager gameManager;
+    PlayerControls controls;
 
     private void Start() {
         ChangeSelectedSlot(0);
     }
+
+    void OnEnable() {
+        controls.Gameplay.Enable();
+    }
+
+    void OnDisable() {
+        controls.Gameplay.Disable();
+    }
+
+    void Awake() {
+            controls = new PlayerControls();
+            controls.Gameplay.InventoryIncrease.performed += ctx => IncreaseSlot();
+            controls.Gameplay.InventoryDecrease.performed += ctx => DecreaseSlot();
+        }
 
     private void Update() {
         if (Input.inputString != null) {
@@ -21,6 +41,35 @@ public class InventoryManager : MonoBehaviour
                 ChangeSelectedSlot(number - 1);
             }
         }
+        Debug.Log(selectedSlot);
+    }
+
+    public void IncreaseSlot() {
+        int value = selectedSlot;
+        if (value <= 5) {
+            value++;
+        }
+
+        if (value > 5) {
+            value = 0;
+        }
+
+        ChangeSelectedSlot(value);
+        // Debug.Log("INCREASING");
+    }
+
+    public void DecreaseSlot() {
+        int value = selectedSlot;
+        if (value >= 0) {
+            value--;
+        }
+
+        if (value < 0) {
+            value = 5;
+        }
+
+        ChangeSelectedSlot(value);
+        // Debug.Log("DECREASING");
     }
 
     void ChangeSelectedSlot(int newValue) {

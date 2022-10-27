@@ -40,6 +40,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "InventoryIncrease",
+                    "type": "Button",
+                    "id": "c3760a3c-b130-4746-abf4-e61810b89b44",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InventoryDecrease",
+                    "type": "Button",
+                    "id": "3147f0bc-b8b7-4d71-97c8-1b12604acda3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -84,6 +102,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Conversation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bb7f82a8-5494-4486-a1f9-696f946a19f3",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryIncrease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eb287db5-0daa-4f33-a848-3947c01d6358",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryDecrease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
