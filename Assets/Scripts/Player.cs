@@ -21,15 +21,15 @@ public class Player : MonoBehaviour
 
     private bool jumpKeyPressed;
     private float horizontalInput;
-    private Rigidbody rigidbodyComponent;
+    [SerializeField] private Rigidbody rigidbodyComponent;
     private int superJumpsRemaining;
-    private float speed = 1f;
-    private float verticalSpeed = 1.5f;
+    private float speed = 3f;
+    // private float verticalSpeed = 1.5f;
 
     public float fallingThreshold = -6f;
     [HideInInspector]
     private bool falling = false;
-    private float fallPoint = -20f;
+    private float fallPoint = -5f;
 
     GameManager gameManager;
 
@@ -38,8 +38,19 @@ public class Player : MonoBehaviour
     // private bool isGrounded;
 
     PlayerControls controls;
-    Vector2 move;
+    // Vector2 move;
     //Left Joystick reads as Vector2 but our 3D world is a Vector3
+
+    //////
+
+    private Vector3 input;
+    private float turnSpeed = 360;
+
+    public InventoryManager inventoryManager;
+    public Item[] itemsToPickup;
+    private Item selectedItem;
+    [SerializeField] public Item bucket;
+    [SerializeField] public Item filledBucket;
 
     void Awake () {
         //CONTROLLER FUNCTIONALITY
@@ -51,10 +62,10 @@ public class Player : MonoBehaviour
         controls.Gameplay.Interact.performed += ctx => Interact();
 
         //set move to the value of our thumbstick
-        controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
+        // controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
 
         //set to zero when not moving
-        controls.Gameplay.Move.canceled += ctx => move = Vector2.zero;
+        // controls.Gameplay.Move.canceled += ctx => move = Vector2.zero;
 
         checkpointPosition = this.transform.position;
     }
@@ -78,67 +89,91 @@ public class Player : MonoBehaviour
         // Set game frame rate - cause my fans are going crazy so I think this sets it up
         // TODO: Delete later as already called in Main Menu
         // Application.targetFrameRate = 90;
-        rigidbodyComponent = GetComponent<Rigidbody>();
+        
+        // rigidbodyComponent = GetComponent<Rigidbody>();
+    }
+
+    void GatherInput() {
+        input = new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical"));
+    }
+
+    void Move() {
+        rigidbodyComponent.MovePosition(transform.position + (transform.forward * input.magnitude) * speed * Time.deltaTime);
+    }
+
+    void Look() {
+
+        if (input != Vector3.zero) {
+
+            var relative = (transform.position + input.ToIso()) - transform.position; //find relative angle between us
+            var rot = Quaternion.LookRotation(relative, Vector3.up);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
+        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 moveN = new Vector3(1, 0, 0) * Time.deltaTime*speed;
-        Vector3 moveW = new Vector3(0, 0, -1) * Time.deltaTime*speed;
-        Vector3 moveS = new Vector3(-1, 0, 0) * Time.deltaTime*speed;
-        Vector3 moveE = new Vector3(0, 0, 1) * Time.deltaTime*speed;
-        Vector3 rotation = new Vector3(0, 0, 1);
+        GatherInput();
+        Look();
+        selectedItem = inventoryManager.GetSelectedItem();
+        // Vector3 moveN = new Vector3(1, 0, 0) * Time.deltaTime*speed;
+        // Vector3 moveW = new Vector3(0, 0, -1) * Time.deltaTime*speed;
+        // Vector3 moveS = new Vector3(-1, 0, 0) * Time.deltaTime*speed;
+        // Vector3 moveE = new Vector3(0, 0, 1) * Time.deltaTime*speed;
+        // Vector3 rotation = new Vector3(0, 0, 1);
 
-        // Vector3 rotation = new Vector3(0, 0, Camera.main.transform.localEulerAngles.y) * Time.deltaTime*speed;
+        // // Vector3 rotation = new Vector3(0, 0, Camera.main.transform.localEulerAngles.y) * Time.deltaTime*speed;
 
-        Vector3 newN = moveN+moveE;
-        Vector3 newS = moveS+moveW;
-        Vector3 newW = (moveW+rotation);
-        Vector3 newE = (moveE+rotation);
-        // Debug.Log("ROTATION VALUE: "+ Camera.main.transform.localEulerAngles.y);
+        // Vector3 newN = moveN+moveE;
+        // Vector3 newS = moveS+moveW;
+        // Vector3 newW = (moveW+rotation);
+        // Vector3 newE = (moveE+rotation);
+        // // Debug.Log("ROTATION VALUE: "+ Camera.main.transform.localEulerAngles.y);
 
-        //***CONTROLLER FUNCTIONALITY
-        Vector3 moveWE = new Vector3(move.x, 0, 0) * Time.deltaTime*speed;
-        Vector3 moveNS = new Vector3(0, 0, move.y) * Time.deltaTime*verticalSpeed;
-        transform.Translate((moveNS+moveWE), Space.World);
+        // //***CONTROLLER FUNCTIONALITY
+        // Vector3 moveWE = new Vector3(move.x, 0, 0) * Time.deltaTime*speed;
+        // Vector3 moveNS = new Vector3(0, 0, move.y) * Time.deltaTime*verticalSpeed;
+        // transform.Translate((moveNS+moveWE), Space.World);
         
-        //***KEYBOARD FUNCTIONALITY
-        //FORWARD
-        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
-            // WORLD DIRECTION
-            // transform.Translate(Vector3.forward*Time.deltaTime*verticalSpeed);
+        // //***KEYBOARD FUNCTIONALITY
+        // //FORWARD
+        // if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
+        //     // WORLD DIRECTION
+        //     // transform.Translate(Vector3.forward*Time.deltaTime*verticalSpeed);
 
-            transform.Translate(newN, Space.World);
-        }
+        //     transform.Translate(newN, Space.World);
+        // }
 
-        //BACK
-        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) {
-            // WORLD DIRECTION
-            // transform.Translate(Vector3.back*Time.deltaTime*verticalSpeed);
+        // //BACK
+        // if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) {
+        //     // WORLD DIRECTION
+        //     // transform.Translate(Vector3.back*Time.deltaTime*verticalSpeed);
 
-            transform.Translate(newS, Space.World);
-        }
+        //     transform.Translate(newS, Space.World);
+        // }
 
-        //LEFT
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
-            // WORLD DIRECTION
-            // transform.Translate(Vector3.left*Time.deltaTime*speed);
+        // //LEFT
+        // if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
+        //     // WORLD DIRECTION
+        //     // transform.Translate(Vector3.left*Time.deltaTime*speed);
 
-            transform.Translate((Vector3.left+rotation)*Time.deltaTime);
-            // transform.Translate(direction*Time.deltaTime);
-            // transform.Translate(desiredMoveDirection*Time.deltaTime);
-        }
+        //     transform.Translate((Vector3.left+rotation)*Time.deltaTime);
+        //     // transform.Translate(direction*Time.deltaTime);
+        //     // transform.Translate(desiredMoveDirection*Time.deltaTime);
+        // }
 
-        //RIGHT
-        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
-            // WORLD DIRECTION
-            // transform.Translate(Vector3.right*Time.deltaTime*speed);
+        // //RIGHT
+        // if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
+        //     // WORLD DIRECTION
+        //     // transform.Translate(Vector3.right*Time.deltaTime*speed);
             
-            // transform.Translate(desiredMoveDirection*Time.deltaTime);
-            transform.Translate((Vector3.right-rotation)*Time.deltaTime);
-            // transform.Translate(rotation);
-        }
+        //     // transform.Translate(desiredMoveDirection*Time.deltaTime);
+        //     transform.Translate((Vector3.right-rotation)*Time.deltaTime);
+        //     // transform.Translate(rotation);
+        // }
 
         //JUMP (space bar pressed)
         if (Input.GetKeyDown(KeyCode.Space))
@@ -147,7 +182,7 @@ public class Player : MonoBehaviour
         }
 
         //GETTING WATER
-        if (Input.GetKey(KeyCode.O))
+        if (Input.GetKey(KeyCode.E))
         {
             Interact();
         }
@@ -199,21 +234,57 @@ public class Player : MonoBehaviour
         }
 
     private void Interact() {
-        if (triggerActiveWater == true) {
+        if (triggerActiveWater == true && waterObtained == false) {
             FindObjectOfType<AudioManager>().Play("Splash");
-            waterObtained = true;
+            // waterObtained = true;
+            UseSelectedItem();
+            Debug.Log("Bucket is removed");
+            
+            // Bucket(0);
+            
+            
+            PickupItem(1);
+            Debug.Log("Filled bucket is added");
             Debug.Log("Player has obtained water");
             playersBucket.SetActive(true);
+            waterObtained = true;
+            return;
             //TODO: add code here to make it look like the bucket has water now 
         }
+    }
+
+    public void Bucket(int num) {
+        
+        //FILL BUCKET
+        if(num == 1) {
+            UseSelectedItem();
+            PickupItem(1);
+            return;
+        }
+
+        //EMPTY BUCKET
+        else if (num == 0) {
+            UseSelectedItem();
+            PickupItem(0);
+            return;
+        }
+        
+    }
+
+    public Item playerSelectedItem() {
+        return selectedItem;
+    }
+
+    public Item playerSelectedFilledBucket() {
+        return filledBucket;
     }
 
 
     // JUMPING MECHANICS
     //fixedUpdate called once every physics update
-    private void FixedUpdate() {
-
-        rigidbodyComponent.velocity = new Vector3(horizontalInput, rigidbodyComponent.velocity.y, 0);
+    void FixedUpdate() {
+        Move();
+        // rigidbodyComponent.velocity = new Vector3(horizontalInput, rigidbodyComponent.velocity.y, 0);
 
         //always colliding with self
         if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length == 0) {
@@ -234,6 +305,29 @@ public class Player : MonoBehaviour
         // Debug.Log("Player falling: " + falling);
     }
 
+    // INVENTORY
+    public void PickupItem(int id) {
+       bool result = inventoryManager.AddItem(itemsToPickup[id]);
+       if (result == true) {
+            Debug.Log("Item added");
+       }
+       else {
+            Debug.Log("Item not added");
+       }
+    }
+
+    public void UseSelectedItem() {
+       Item receivedItem = inventoryManager.UseItem(true);
+       if (receivedItem != null) {
+            Debug.Log("Used item: " + receivedItem);
+       }
+       else {
+            Debug.Log("No item used");
+       }
+    }
+
+    
+
     //COLLECT BUCKET
 
     public void ActiveBucket(int number) {
@@ -241,6 +335,7 @@ public class Player : MonoBehaviour
         if(number == 1) {
             bucketObtained = true;
             Debug.Log("Bucket has essentially been collected");
+            PickupItem(0);
             //TODO: code here to show that player has a bucket
         }
 
@@ -272,12 +367,13 @@ public class Player : MonoBehaviour
 
     public void OnTriggerEnter(Collider player)
     {
-        if (player.CompareTag("Water"))
+        if (player.CompareTag("Water") && selectedItem == bucket)
         {
             if (bucketObtained == true) {
                 FindObjectOfType<AudioManager>().Play("Object");
                 triggerActiveWater = true;
                 playerBucketIcon.SetActive(true);
+                FindObjectOfType<Tutorial>().ShowControls();
                 Debug.Log("Press O to fill bucket");
             }
         }
@@ -290,6 +386,7 @@ public class Player : MonoBehaviour
             if (bucketObtained == true) {
                 triggerActiveWater = false;
                 playerBucketIcon.SetActive(false);
+                FindObjectOfType<Tutorial>().HideControls();
             }
         }
     }

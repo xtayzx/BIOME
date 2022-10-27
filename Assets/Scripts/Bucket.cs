@@ -40,7 +40,8 @@ public class Bucket : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Object");
                 triggerActive = true;
                 BucketIcon.SetActive(true);
-                Debug.Log("Press O to collect the bucket");
+                FindObjectOfType<Tutorial>().ShowControls();
+                // Debug.Log("Press O to collect the bucket");
             }
         }
  
@@ -50,13 +51,14 @@ public class Bucket : MonoBehaviour
             {
                 triggerActive = false;
                 BucketIcon.SetActive(false);
+                
             }
         }
  
         private void Update()
         {
             //Keyboard Action
-            if (triggerActive && Input.GetKeyDown(KeyCode.O))
+            if (triggerActive && Input.GetKeyDown(KeyCode.E))
             {
                 Interact();
             }
@@ -67,6 +69,7 @@ public class Bucket : MonoBehaviour
             //For controller input
             if (triggerActive) {
                 FindObjectOfType<AudioManager>().Play("Interact");
+                FindObjectOfType<Tutorial>().HideControls();
                 BucketObject.SetActive(false);
                 Player.GetComponent<Player>().ActiveBucket(1);
             }

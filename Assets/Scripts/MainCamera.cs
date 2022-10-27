@@ -7,14 +7,18 @@ public class MainCamera : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 checkpointPosition;
 
-    private float newX;
-    private float newY;
-    private float newZ;
+    // private float newX;
+    // private float newY;
+    // private float newZ;
     // private bool trigger;
 
     private float startX;
     private float startY;
     private float startZ;
+
+
+    public Transform target;
+    public Vector3 offset;
 
     void Start() {
         startPosition = this.transform.localPosition;
@@ -26,13 +30,17 @@ public class MainCamera : MonoBehaviour
         startZ = this.transform.localPosition.z;
     }
 
-    public void ResetCamera() {
-        // this.transform.localPosition = new Vector3(startPosition.x, startPosition.y, startPosition.z);
-        // trigger = false;
-        this.transform.localPosition = new Vector3(startX, startY, startZ);
-
-        Debug.Log("Camera successfully reset: " + this.transform.localPosition);
+    void Update() {
+        transform.position = target.position +  offset;
     }
+
+    // public void ResetCamera() {
+    //     // this.transform.localPosition = new Vector3(startPosition.x, startPosition.y, startPosition.z);
+    //     // trigger = false;
+    //     this.transform.localPosition = new Vector3(startX, startY, startZ);
+
+    //     Debug.Log("Camera successfully reset: " + this.transform.localPosition);
+    // }
 
     // void Update() {
     //     if(FindObjectOfType<Player>().playerIsFalling() == false) {

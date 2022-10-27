@@ -98,7 +98,7 @@ public class PauseMenu : MonoBehaviour
         }
 
         FindObjectOfType<Player>().StartAtCheckpoint();
-        FindObjectOfType<MainCamera>().ResetCamera();
+        // FindObjectOfType<MainCamera>().ResetCamera();
         FindObjectOfType<AudioManager>().Play("MainSong");
 
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -118,7 +118,7 @@ public class PauseMenu : MonoBehaviour
         //     }
         // }
 
-        FindObjectOfType<MainCamera>().ResetCamera();
+        // FindObjectOfType<MainCamera>().ResetCamera();
         FindObjectOfType<Player>().StartAtCheckpoint();
         FindObjectOfType<AudioManager>().Play("Checkpoint");
 

@@ -38,11 +38,12 @@ public class FireObject : MonoBehaviour
         {
             if (fire.CompareTag("Player"))
             {
-                if(waterObtained == true) {
+                if(waterObtained == true && player.GetComponent<Player>().playerSelectedItem() == player.GetComponent<Player>().playerSelectedFilledBucket()) {
                     FindObjectOfType<AudioManager>().Play("Object");
                     triggerActive = true;
                     fireIcon.SetActive(true);
                     Debug.Log("Press O to put out the fire");
+                    // FindObjectOfType<Tutorial>().ShowControls();
                 }
             }
         }
@@ -53,6 +54,7 @@ public class FireObject : MonoBehaviour
             {
                 triggerActive = false;
                 fireIcon.SetActive(false);
+                // FindObjectOfType<Tutorial>().HideControls();
             }
         }
  
@@ -62,7 +64,7 @@ public class FireObject : MonoBehaviour
             waterObtained = player.GetComponent<Player>().WaterObtainedValue();
 
             //Keyboard Action
-            if (triggerActive && Input.GetKeyDown(KeyCode.O))
+            if (triggerActive && Input.GetKeyDown(KeyCode.E))
             {
                 Interact();
             }
@@ -75,6 +77,7 @@ public class FireObject : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Splash");
                 fireObjectItem.SetActive(false);
                 player.GetComponent<Player>().PlayerNoBucket();
+                player.GetComponent<Player>().Bucket(0);
                 Debug.Log("YAY YOU HAVE PUT OUT THE FIRE");
             }
         }

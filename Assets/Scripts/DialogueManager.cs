@@ -13,8 +13,8 @@ public class DialogueManager : MonoBehaviour
 
     public Animator animator;
     public Animator animatorInventory;
- 
-
+    public Animator checkpoint;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +25,8 @@ public class DialogueManager : MonoBehaviour
 
         animator.SetBool("IsOpen", true);
         animatorInventory.SetBool("IsMoved", true);
+        checkpoint.SetBool("OpenConvo", true);
+
         Debug.Log("Starting conversation with "+ dialogue.name);
         
         nameText.text = dialogue.name;
@@ -69,6 +71,7 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue() {
         animator.SetBool("IsOpen", false);
         animatorInventory.SetBool("IsMoved", false);
+        checkpoint.SetBool("OpenConvo", false);
         player.GetComponent<Player>().startConvoValue(1);
         // Debug.Log("End of conversation");
     }
