@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private float horizontalInput;
     [SerializeField] private Rigidbody rigidbodyComponent;
     private int superJumpsRemaining;
-    private float speed = 3f;
+    private float speed = 1.5f;
     // private float verticalSpeed = 1.5f;
 
     public float fallingThreshold = -6f;
