@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 53073547}
   - component: {fileID: 53073546}
   m_Layer: 5
-  m_Name: Tutorial Text
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TUTORIAL
+  m_text: LEVEL ONE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e24c8254ef6358419a35b203cbc22ea, type: 2}
   m_sharedMaterial: {fileID: 357441027566003599, guid: 9e24c8254ef6358419a35b203cbc22ea,
@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   completeLevelUI: {fileID: 0}
+  player: {fileID: 0}
 --- !u!4 &164158265
 Transform:
   m_ObjectHideFlags: 0
@@ -909,15 +910,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 4928b652adaeada41b5e4ccfab6c260d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1030,7 +1031,7 @@ GameObject:
   - component: {fileID: 1180536020}
   - component: {fileID: 1180536019}
   m_Layer: 5
-  m_Name: Level 1 Text
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1076,7 +1077,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: LEVEL ONE
+  m_text: LEVEL TWO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9e24c8254ef6358419a35b203cbc22ea, type: 2}
   m_sharedMaterial: {fileID: 357441027566003599, guid: 9e24c8254ef6358419a35b203cbc22ea,
@@ -1168,7 +1169,7 @@ GameObject:
   - component: {fileID: 1393537721}
   - component: {fileID: 1393537725}
   m_Layer: 5
-  m_Name: Tutorial Button
+  m_Name: Level 1 Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1723,7 +1724,7 @@ GameObject:
   - component: {fileID: 1865403397}
   - component: {fileID: 1865403401}
   m_Layer: 5
-  m_Name: Level 1
+  m_Name: Level 2 Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
