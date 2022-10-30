@@ -24,7 +24,11 @@ public class Player : MonoBehaviour
     private float horizontalInput;
     [SerializeField] private Rigidbody rigidbodyComponent;
     private int superJumpsRemaining;
-    private float speed = 2f;
+    
+    private float landSpeed = 2f;
+    private float waterSpeed = 1f;
+
+    private float speed;
     // private float verticalSpeed = 1.5f;
 
     public float fallingThreshold = -6f;
@@ -55,6 +59,7 @@ public class Player : MonoBehaviour
     [SerializeField] public Item apple;
 
     private int inventoryApples = 0;
+    private bool inWater = true; // Although not in the water to start, this is so it doesn't trigger upon the game loading
 
     void Awake () {
         //CONTROLLER FUNCTIONALITY
@@ -72,6 +77,7 @@ public class Player : MonoBehaviour
         // controls.Gameplay.Move.canceled += ctx => move = Vector2.zero;
 
         checkpointPosition = this.transform.position;
+        speed = landSpeed; //Set the speed of the player
     }
 
     void Jump() {
@@ -335,7 +341,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (player.CompareTag("Water") && selectedItem != bucket) {
+        if (player.CompareTag("Water") && selectedItem != bucket && bucketObtained == true) {
             if (FindObjectOfType<GameManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial3>().ShowInventoryControls();
             }
@@ -358,10 +364,15 @@ public class Player : MonoBehaviour
                 playerBucketIcon.SetActive(false);
 
                 if(FindObjectOfType<GameManager>().Tutorial() == true) {
-                    FindObjectOfType<Tutorial3>().HideInventoryControls();
                     FindObjectOfType<Tutorial>().HideControls();
                 }
             
+            }
+
+            else {
+                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                    FindObjectOfType<Tutorial3>().HideInventoryControls();
+                }
             }
         }
 
@@ -373,12 +384,30 @@ public class Player : MonoBehaviour
         }
     }
 
-    // private void OnCollisionEnter(Collision collision) {
-    //     isGrounded = true;
-    // }
+    public void OnCollisionEnter(Collision collision) {
+        //WATER LAYER
+        if (collision.gameObject.layer == 3) {
+            if(inWater == true) {
+            FindObjectOfType<AudioManager>().Play("Splash");
+            Debug.Log("Entered Water");
+            speed = waterSpeed;
+            inWater = false;
+            return;
+            }
+        }
+        // isGrounded = true;
+    }
 
-    // private void OnCollisionExit(Collision collision) {
-    //     isGrounded = false;
-    // }
+    public void OnCollisionExit(Collision collision) {
+        // isGrounded = false;
+
+        // WATER LAYER
+        if (collision.gameObject.layer != 3 && inWater == false) {
+            FindObjectOfType<AudioManager>().Play("Splash");
+            Debug.Log("Exited water");
+            speed = landSpeed;
+            inWater = true;
+        }
+    }
 }
 

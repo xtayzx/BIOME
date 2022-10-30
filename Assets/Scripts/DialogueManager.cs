@@ -8,6 +8,7 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
+    public Image image;
     public GameObject player;
     private Queue<string> sentences;
 
@@ -41,6 +42,8 @@ public class DialogueManager : MonoBehaviour
         foreach (string sentence in dialogue.sentences) {
             sentences.Enqueue(sentence);
         }
+
+        image.sprite = dialogue.sprite;
 
         DisplayNextSentence();
     }
