@@ -43,7 +43,17 @@ public class FireObject : MonoBehaviour
                     triggerActive = true;
                     fireIcon.SetActive(true);
                     Debug.Log("Press O to put out the fire");
-                    // FindObjectOfType<Tutorial>().ShowControls();
+
+                    if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                        FindObjectOfType<Tutorial>().ShowControls();
+                    }
+
+                }
+
+                if(waterObtained == true && player.GetComponent<Player>().playerSelectedItem() != player.GetComponent<Player>().playerSelectedFilledBucket()) {
+                        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                            FindObjectOfType<Tutorial3>().ShowInventoryControls();
+                         }
                 }
             }
         }
@@ -54,7 +64,11 @@ public class FireObject : MonoBehaviour
             {
                 triggerActive = false;
                 fireIcon.SetActive(false);
-                // FindObjectOfType<Tutorial>().HideControls();
+
+                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                    FindObjectOfType<Tutorial>().HideControls();
+                    FindObjectOfType<Tutorial3>().HideInventoryControls();
+                }
             }
         }
  
@@ -78,7 +92,12 @@ public class FireObject : MonoBehaviour
                 fireObjectItem.SetActive(false);
                 player.GetComponent<Player>().PlayerNoBucket();
                 player.GetComponent<Player>().Bucket(0);
-                Debug.Log("YAY YOU HAVE PUT OUT THE FIRE");
+                // Debug.Log("YAY YOU HAVE PUT OUT THE FIRE");
+
+                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                    FindObjectOfType<Tutorial>().HideControls();
+                    FindObjectOfType<Tutorial3>().HideInventoryControls();
+                }
             }
         }
 }

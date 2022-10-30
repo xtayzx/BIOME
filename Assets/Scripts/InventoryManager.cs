@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour
 {
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
-    private int maxCount = 4;
+    private int maxCount = 6;
 
     public int selectedSlot = 0; //IMPORTANT FOR ITEM SELECTION LATER
 
@@ -128,7 +128,7 @@ public class InventoryManager : MonoBehaviour
             // UNCOMMENT TO SUBTRACT ITEMS FROM INVENTORY
 
             // Item item = itemInSlot.item;
-            // if (use == true) {
+            // if (use == true && item.stackable == true) {
             //     itemInSlot.count--;
             //     if (itemInSlot.count <= 0) {
             //         Destroy(itemInSlot.gameObject);
@@ -148,7 +148,7 @@ public class InventoryManager : MonoBehaviour
         if (itemInSlot != null) {
 
             Item item = itemInSlot.item;
-            if (use == true) {
+            if (use == true && item.stackable == true) {
                 itemInSlot.count--;
                 if (itemInSlot.count <= 0) {
                     Destroy(itemInSlot.gameObject);

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Interaction
 public class Tutorial : MonoBehaviour
 {
     public Animator controls;

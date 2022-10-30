@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Transform groundCheckTransform;
     [SerializeField] private LayerMask playerMask;
+    
 
     private Vector3 checkpointPosition;
 
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
     private float horizontalInput;
     [SerializeField] private Rigidbody rigidbodyComponent;
     private int superJumpsRemaining;
-    private float speed = 1.5f;
+    private float speed = 2f;
     // private float verticalSpeed = 1.5f;
 
     public float fallingThreshold = -6f;
@@ -51,6 +52,9 @@ public class Player : MonoBehaviour
     private Item selectedItem;
     [SerializeField] public Item bucket;
     [SerializeField] public Item filledBucket;
+    [SerializeField] public Item apple;
+
+    private int inventoryApples = 0;
 
     void Awake () {
         //CONTROLLER FUNCTIONALITY
@@ -119,61 +123,6 @@ public class Player : MonoBehaviour
         GatherInput();
         Look();
         selectedItem = inventoryManager.GetSelectedItem();
-        // Vector3 moveN = new Vector3(1, 0, 0) * Time.deltaTime*speed;
-        // Vector3 moveW = new Vector3(0, 0, -1) * Time.deltaTime*speed;
-        // Vector3 moveS = new Vector3(-1, 0, 0) * Time.deltaTime*speed;
-        // Vector3 moveE = new Vector3(0, 0, 1) * Time.deltaTime*speed;
-        // Vector3 rotation = new Vector3(0, 0, 1);
-
-        // // Vector3 rotation = new Vector3(0, 0, Camera.main.transform.localEulerAngles.y) * Time.deltaTime*speed;
-
-        // Vector3 newN = moveN+moveE;
-        // Vector3 newS = moveS+moveW;
-        // Vector3 newW = (moveW+rotation);
-        // Vector3 newE = (moveE+rotation);
-        // // Debug.Log("ROTATION VALUE: "+ Camera.main.transform.localEulerAngles.y);
-
-        // //***CONTROLLER FUNCTIONALITY
-        // Vector3 moveWE = new Vector3(move.x, 0, 0) * Time.deltaTime*speed;
-        // Vector3 moveNS = new Vector3(0, 0, move.y) * Time.deltaTime*verticalSpeed;
-        // transform.Translate((moveNS+moveWE), Space.World);
-        
-        // //***KEYBOARD FUNCTIONALITY
-        // //FORWARD
-        // if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
-        //     // WORLD DIRECTION
-        //     // transform.Translate(Vector3.forward*Time.deltaTime*verticalSpeed);
-
-        //     transform.Translate(newN, Space.World);
-        // }
-
-        // //BACK
-        // if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) {
-        //     // WORLD DIRECTION
-        //     // transform.Translate(Vector3.back*Time.deltaTime*verticalSpeed);
-
-        //     transform.Translate(newS, Space.World);
-        // }
-
-        // //LEFT
-        // if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
-        //     // WORLD DIRECTION
-        //     // transform.Translate(Vector3.left*Time.deltaTime*speed);
-
-        //     transform.Translate((Vector3.left+rotation)*Time.deltaTime);
-        //     // transform.Translate(direction*Time.deltaTime);
-        //     // transform.Translate(desiredMoveDirection*Time.deltaTime);
-        // }
-
-        // //RIGHT
-        // if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
-        //     // WORLD DIRECTION
-        //     // transform.Translate(Vector3.right*Time.deltaTime*speed);
-            
-        //     // transform.Translate(desiredMoveDirection*Time.deltaTime);
-        //     transform.Translate((Vector3.right-rotation)*Time.deltaTime);
-        //     // transform.Translate(rotation);
-        // }
 
         //JUMP (space bar pressed)
         if (Input.GetKeyDown(KeyCode.Space))
@@ -246,7 +195,7 @@ public class Player : MonoBehaviour
             PickupItem(1);
             Debug.Log("Filled bucket is added");
             Debug.Log("Player has obtained water");
-            playersBucket.SetActive(true);
+            // playersBucket.SetActive(true);
             waterObtained = true;
             return;
             //TODO: add code here to make it look like the bucket has water now 
@@ -269,6 +218,13 @@ public class Player : MonoBehaviour
             return;
         }
         
+    }
+
+    public void Apple() {
+        // UseSelectedItem();
+        PickupItem(2);
+        inventoryApples++;
+        Debug.Log("Number of apples: "+inventoryApples);
     }
 
     public Item playerSelectedItem() {
@@ -325,7 +281,6 @@ public class Player : MonoBehaviour
             Debug.Log("No item used");
        }
     }
-
     
 
     //COLLECT BUCKET
@@ -373,8 +328,23 @@ public class Player : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Object");
                 triggerActiveWater = true;
                 playerBucketIcon.SetActive(true);
+                if(FindObjectOfType<GameManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().ShowControls();
+                }
                 Debug.Log("Press O to fill bucket");
+            }
+        }
+
+        if (player.CompareTag("Water") && selectedItem != bucket) {
+            if (FindObjectOfType<GameManager>().Tutorial() == true) {
+                FindObjectOfType<Tutorial3>().ShowInventoryControls();
+            }
+        }
+
+        if (player.CompareTag("TutorialJump"))
+        {
+            if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                FindObjectOfType<Tutorial2>().ShowJump();
             }
         }
     }
@@ -386,7 +356,19 @@ public class Player : MonoBehaviour
             if (bucketObtained == true) {
                 triggerActiveWater = false;
                 playerBucketIcon.SetActive(false);
-                FindObjectOfType<Tutorial>().HideControls();
+
+                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                    FindObjectOfType<Tutorial3>().HideInventoryControls();
+                    FindObjectOfType<Tutorial>().HideControls();
+                }
+            
+            }
+        }
+
+        if (player.CompareTag("TutorialJump"))
+        {
+            if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                FindObjectOfType<Tutorial2>().HideJump();
             }
         }
     }
@@ -397,13 +379,6 @@ public class Player : MonoBehaviour
 
     // private void OnCollisionExit(Collision collision) {
     //     isGrounded = false;
-    // }
-
-    // private void OnTriggerEnter(Collider other) {
-    //     if (other.gameObject.layer == 9) {
-    //         Destroy(other.gameObject);
-    //         superJumpsRemaining++;
-    //     }
     // }
 }
 

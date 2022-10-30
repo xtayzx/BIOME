@@ -40,7 +40,9 @@ public class Bucket : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Object");
                 triggerActive = true;
                 BucketIcon.SetActive(true);
+                if(FindObjectOfType<GameManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().ShowControls();
+                }
                 // Debug.Log("Press O to collect the bucket");
             }
         }
@@ -69,7 +71,9 @@ public class Bucket : MonoBehaviour
             //For controller input
             if (triggerActive) {
                 FindObjectOfType<AudioManager>().Play("Interact");
+                if(FindObjectOfType<GameManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().HideControls();
+                }
                 BucketObject.SetActive(false);
                 Player.GetComponent<Player>().ActiveBucket(1);
             }

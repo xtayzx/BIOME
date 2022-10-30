@@ -7,13 +7,13 @@ using UnityEngine.Tilemaps;
 public class Item : ScriptableObject
 {
     [Header("Only gameplay")]
-    public TileBase tile; //show graphic
+    // public TileBase tile; //show graphic
     public ItemType type;
     public ActionType actionType;
-    public Vector2Int range = new Vector2Int(5,4);
+    // public Vector2Int range = new Vector2Int(5,4);
 
     [Header("Only UI")]
-    public bool stackable;
+    public bool stackable; //bucket is the only exception of being a stackable item
 
     [Header("Both")]
     public Sprite image; //sprite in inventory
@@ -22,10 +22,11 @@ public class Item : ScriptableObject
 
 public enum ItemType {
     Bucket,
-    Coin
+    Shovel,
+    Apple
 }
 
 public enum ActionType {
     Tool,
-    Coin
+    Food
 }

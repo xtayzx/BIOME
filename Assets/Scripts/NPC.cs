@@ -43,8 +43,10 @@ public class NPC : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Object");
                 triggerActive = true;
                 NPCIcon.SetActive(true);
-                FindObjectOfType<Tutorial>().ShowControls();
-                // Debug.Log("Press O to interact with the character");
+                
+                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                    FindObjectOfType<Tutorial>().ShowControls();
+                }
             }
         }
  
@@ -54,7 +56,10 @@ public class NPC : MonoBehaviour
             {
                 triggerActive = false;
                 NPCIcon.SetActive(false);
-                FindObjectOfType<Tutorial>().HideControls();
+
+                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                    FindObjectOfType<Tutorial>().HideControls();
+                }
             }
         }
  

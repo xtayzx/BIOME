@@ -27,6 +27,11 @@ public class DialogueManager : MonoBehaviour
         animatorInventory.SetBool("IsMoved", true);
         checkpoint.SetBool("OpenConvo", true);
 
+        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+            FindObjectOfType<Tutorial3>().MoveInventory(true);
+        }
+
+
         Debug.Log("Starting conversation with "+ dialogue.name);
         
         nameText.text = dialogue.name;
@@ -72,6 +77,11 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("IsOpen", false);
         animatorInventory.SetBool("IsMoved", false);
         checkpoint.SetBool("OpenConvo", false);
+
+        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+            FindObjectOfType<Tutorial3>().MoveInventory(false);
+        }
+
         player.GetComponent<Player>().startConvoValue(1);
         // Debug.Log("End of conversation");
     }

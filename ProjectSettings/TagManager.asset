@@ -12,6 +12,9 @@ TagManager:
   - PushObject
   - Walls
   - Dead
+  - TutorialJump
+  - TutorialMove
+  - Food
   layers:
   - Default
   - TransparentFX
