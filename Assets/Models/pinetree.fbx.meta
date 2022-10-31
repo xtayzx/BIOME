@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 08d4baa8ae873e14492d7ae0f4b03392
+guid: 41a7d3dcbe06c6646a49e38f67969f28
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: pinetree_texture
-    second: {fileID: 2800000, guid: 2ef1d975aa38c534f93592fad6e266ea, type: 3}
+    second: {fileID: 2800000, guid: 70ddc6729f111844588122db43c9985b, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
