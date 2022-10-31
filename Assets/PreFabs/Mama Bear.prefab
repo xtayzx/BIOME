@@ -185,7 +185,7 @@ MonoBehaviour:
     - There's a bucket over there that you can use. I don't know how much help it
       will be though...
     - Please hurry... I don't want it to spread even more than it has...
-    sprite: {fileID: 21300000, guid: e66508e2c37b9994fa957cc41ee54479, type: 3}
+    sprite: {fileID: 21300000, guid: 4867b105705b99b4dbbd8ca0e5bd4d27, type: 3}
 --- !u!114 &1936134051602907370
 MonoBehaviour:
   m_ObjectHideFlags: 0

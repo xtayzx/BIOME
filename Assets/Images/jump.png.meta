@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aaa2a9bca9f26bb4d8ae8ceefd6811ae
+guid: b1e11cba99945cb42bca1701a5889076
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: jump_0
+      name: jump 2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ab9e93bcd108fd42a71d8c282b7bb5b
-      internalID: -1682036602
+      spriteID: 9ba714e712e431f4bbd1b88795a99c39
+      internalID: 1883805914
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump_1
+      name: jump 2_1
       rect:
         serializedVersion: 2
         x: 367
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4d26ee31efe85049b5ee9f8c8f0c1ac
-      internalID: -1998112724
+      spriteID: edcca5fb8a1297f4ab7e60278093bfa7
+      internalID: -305753420
       vertices: []
       indices: 
       edges: []
@@ -149,7 +149,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 04152b1e803439348ba55017f0bf3010
+    spriteID: 5c24eb4514c944741938ee2590f22374
     internalID: 0
     vertices: []
     indices: 
@@ -157,8 +157,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      jump_0: -1682036602
-      jump_1: -1998112724
+      jump 2_0: 1883805914
+      jump 2_1: -305753420
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

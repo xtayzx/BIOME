@@ -41,7 +41,7 @@ public class InventoryManager : MonoBehaviour
                 ChangeSelectedSlot(number - 1);
             }
         }
-        Debug.Log(selectedSlot);
+        // Debug.Log(selectedSlot);
     }
 
     public void IncreaseSlot() {
@@ -79,6 +79,7 @@ public class InventoryManager : MonoBehaviour
         
         inventorySlots[newValue].Select();
         selectedSlot = newValue;
+        FindObjectOfType<AudioManager>().Play("InventoryToggle");
     }
 
     public bool AddItem(Item item) {

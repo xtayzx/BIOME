@@ -94,14 +94,14 @@ public class Player : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
+    // void Start()
+    // {
         // Set game frame rate - cause my fans are going crazy so I think this sets it up
         // TODO: Delete later as already called in Main Menu
         // Application.targetFrameRate = 90;
         
         // rigidbodyComponent = GetComponent<Rigidbody>();
-    }
+    // }
 
     void GatherInput() {
         input = new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical"));
@@ -193,14 +193,14 @@ public class Player : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("Splash");
             // waterObtained = true;
             UseSelectedItem();
-            Debug.Log("Bucket is removed");
+            // Debug.Log("Bucket is removed");
             
             // Bucket(0);
             
             
             PickupItem(1);
-            Debug.Log("Filled bucket is added");
-            Debug.Log("Player has obtained water");
+            // Debug.Log("Filled bucket is added");
+            // Debug.Log("Player has obtained water");
             // playersBucket.SetActive(true);
             waterObtained = true;
             return;
@@ -295,7 +295,7 @@ public class Player : MonoBehaviour
 
         if(number == 1) {
             bucketObtained = true;
-            Debug.Log("Bucket has essentially been collected");
+            // Debug.Log("Bucket has essentially been collected");
             PickupItem(0);
             //TODO: code here to show that player has a bucket
         }
@@ -335,15 +335,16 @@ public class Player : MonoBehaviour
                 triggerActiveWater = true;
                 playerBucketIcon.SetActive(true);
                 if(FindObjectOfType<GameManager>().Tutorial() == true) {
-                FindObjectOfType<Tutorial>().ShowControls();
+                    FindObjectOfType<Tutorial>().ShowControls();
                 }
-                Debug.Log("Press O to fill bucket");
+                // Debug.Log("Press O to fill bucket");
             }
         }
 
-        if (player.CompareTag("Water") && selectedItem != bucket && bucketObtained == true) {
+        if (player.CompareTag("Water") && selectedItem != bucket && bucketObtained == true && bucketFilled == false) {
             if (FindObjectOfType<GameManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial3>().ShowInventoryControls();
+                FindObjectOfType<Tutorial4>().ShowInventoryControls();
             }
         }
 
@@ -365,13 +366,16 @@ public class Player : MonoBehaviour
 
                 if(FindObjectOfType<GameManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().HideControls();
+                    FindObjectOfType<Tutorial3>().HideInventoryControls();
+                    FindObjectOfType<Tutorial4>().HideInventoryControls();
                 }
             
             }
 
-            else {
+            else if (bucketObtained == false) {
                 if(FindObjectOfType<GameManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial3>().HideInventoryControls();
+                    FindObjectOfType<Tutorial4>().HideInventoryControls();
                 }
             }
         }

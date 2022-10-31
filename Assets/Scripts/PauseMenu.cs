@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
 
-    public GameObject pauseMenuUI, resumeButton, menuButton, exitButton;
+    public GameObject pauseMenuUI, resumeButton, menuButton, exitButton, inventory, checkpoint, inventoryControls;
 
     // public GameManager gameManager;
 
@@ -47,6 +47,14 @@ public class PauseMenu : MonoBehaviour
     public void Resume() {
         FindObjectOfType<AudioManager>().Play("MainSong");
         pauseMenuUI.SetActive(false);
+
+        inventory.SetActive(true);
+        checkpoint.SetActive(true);
+
+        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+            inventoryControls.SetActive(true);
+        }
+
         Time.timeScale = 1f;
         // gameManager.UnfreezeGame();
         GameIsPaused = false;
@@ -60,6 +68,14 @@ public class PauseMenu : MonoBehaviour
         
         FindObjectOfType<AudioManager>().Pause("MainSong");
         pauseMenuUI.SetActive(true);
+
+        inventory.SetActive(false);
+        checkpoint.SetActive(false);
+
+        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+            inventoryControls.SetActive(false);
+        }
+        
 
         //freezes the game
         // gameManager.FreezeGame();
@@ -79,6 +95,14 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu() {
         pauseMenuUI.SetActive(false);
         // gameManager.UnfreezeGame();
+
+        inventory.SetActive(true);
+        checkpoint.SetActive(true);
+
+        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+            inventoryControls.SetActive(true);
+        }
+
         Time.timeScale = 1f;
         GameIsPaused = false;
         SceneManager.LoadScene("Menu");
@@ -87,6 +111,14 @@ public class PauseMenu : MonoBehaviour
     public void ResetGame() {
         pauseMenuUI.SetActive(false);
         // gameManager.UnfreezeGame();
+
+        inventory.SetActive(true);
+        checkpoint.SetActive(true);
+
+        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+            inventoryControls.SetActive(true);
+        }
+
         Time.timeScale = 1f;
         GameIsPaused = false;
 

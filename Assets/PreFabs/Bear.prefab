@@ -76,7 +76,7 @@ Transform:
   m_GameObject: {fileID: 4871209317924236542}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 11.500001, y: 4.469, z: 11.975}
-  m_LocalScale: {x: 1, y: 0.75, z: 1}
+  m_LocalScale: {x: 1, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1936134050762248209}
@@ -185,7 +185,7 @@ MonoBehaviour:
     - There's a bucket over there that you can use. I don't know how much help it
       will be though...
     - Please hurry... I don't want it to spread even more than it has...
-    sprite: {fileID: 21300000, guid: 0dde191d7463c04429794f4a6da25e93, type: 3}
+    sprite: {fileID: 21300000, guid: a60be077cd5996f408709606c12d814c, type: 3}
 --- !u!114 &1936134051602907370
 MonoBehaviour:
   m_ObjectHideFlags: 0
