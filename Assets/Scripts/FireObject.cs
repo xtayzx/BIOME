@@ -38,7 +38,7 @@ public class FireObject : MonoBehaviour
         {
             if (fire.CompareTag("Player"))
             {
-                if(waterObtained == true && player.GetComponent<Player>().playerSelectedItem() == player.GetComponent<Player>().playerSelectedFilledBucket()) {
+                if(waterObtained == true && player.GetComponent<Player>().playerSelectedItem() == player.GetComponent<Player>().PlayerSelectedFilledBucket()) {
                     FindObjectOfType<AudioManager>().Play("Object");
                     triggerActive = true;
                     fireIcon.SetActive(true);
@@ -50,7 +50,7 @@ public class FireObject : MonoBehaviour
 
                 }
 
-                if(waterObtained == true && player.GetComponent<Player>().playerSelectedItem() != player.GetComponent<Player>().playerSelectedFilledBucket()) {
+                if(waterObtained == true && player.GetComponent<Player>().playerSelectedItem() != player.GetComponent<Player>().PlayerSelectedFilledBucket()) {
                         if(FindObjectOfType<GameManager>().Tutorial() == true) {
                             FindObjectOfType<Tutorial3>().ShowInventoryControls();
                          }

@@ -23,7 +23,9 @@ public class Item : ScriptableObject
 public enum ItemType {
     Bucket,
     Shovel,
-    Apple
+    Apple,
+    OilCleaner,
+    SaveDuck
 }
 
 public enum ActionType {

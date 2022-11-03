@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     void Start () {
         // Set game frame rate - cause my fans are going crazy so I think this sets it up
         Application.targetFrameRate = 60;
+        Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen, Screen.currentResolution.refreshRate);
         // trigger = false;
     }
 

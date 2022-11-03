@@ -14,7 +14,7 @@ public class EndTrigger : MonoBehaviour
 {
     public GameManager gameManager;
     
-     PlayerControls controls;
+    PlayerControls controls;
     private GameObject currentObject;
     public GameObject returnGameSelectionButton;
 

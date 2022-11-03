@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     private bool bucketObtained = false;
     private bool bucketFilled = false;
     private bool waterObtained = false;
+    private bool oilCleanerObtained = false;
 
     private bool triggerActiveWater = false;
 
@@ -57,9 +58,19 @@ public class Player : MonoBehaviour
     [SerializeField] public Item bucket;
     [SerializeField] public Item filledBucket;
     [SerializeField] public Item apple;
+    [SerializeField] public Item oilCleaner;
+    [SerializeField] public Item duckItem;
 
     private int inventoryApples = 0;
     private bool inWater = true; // Although not in the water to start, this is so it doesn't trigger upon the game loading
+
+    // INVENTORY KEY
+    // 0 - Empty Bucket
+    // 1 - Filled Bucket
+    // 2 - Apple
+    // 3 - Oil Cleaner
+    // 4 - Duck Item
+
 
     void Awake () {
         //CONTROLLER FUNCTIONALITY
@@ -226,19 +237,38 @@ public class Player : MonoBehaviour
         
     }
 
-    public void Apple() {
+    public void CollectInventory(int num) {
         // UseSelectedItem();
-        PickupItem(2);
-        inventoryApples++;
-        Debug.Log("Number of apples: "+inventoryApples);
+        if (num == 2) {
+            PickupItem(2);
+            inventoryApples++;
+            Debug.Log("Number of apples: "+inventoryApples);
+        }
+
+        else if (num == 3) {
+            PickupItem(3);
+            oilCleanerObtained = true;
+            Debug.Log("Picked up oil cleaner");
+            Debug.Log("Oil Cleaner Obtained: "+oilCleanerObtained);
+        }
+
+        else if (num == 4) {
+            PickupItem(4);
+            Debug.Log("Picked up Duck item");
+        }
+        
     }
 
     public Item playerSelectedItem() {
         return selectedItem;
     }
 
-    public Item playerSelectedFilledBucket() {
+    public Item PlayerSelectedFilledBucket() {
         return filledBucket;
+    }
+
+    public Item PlayerSelectedOilCleaner() {
+        return oilCleaner;
     }
 
 
@@ -318,6 +348,10 @@ public class Player : MonoBehaviour
 
     public bool WaterObtainedValue() {
         return waterObtained;
+    }
+
+    public bool OilCleanerObtainedValue() {
+        return oilCleanerObtained;
     }
 
     public void PlayerNoBucket() {
