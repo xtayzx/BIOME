@@ -44,7 +44,7 @@ public class Oil : MonoBehaviour
                     triggerActive = true;
                     oilIcon.SetActive(true);
 
-                    if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                    if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                         FindObjectOfType<Tutorial>().ShowControls();
                     }
 
@@ -66,7 +66,7 @@ public class Oil : MonoBehaviour
                 triggerActive = false;
                 oilIcon.SetActive(false);
 
-                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().HideControls();
                     FindObjectOfType<Tutorial3>().HideInventoryControls();
                 }
@@ -92,7 +92,7 @@ public class Oil : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("OilClean");
                 oilObjectItem.SetActive(false);
 
-                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().HideControls();
                     FindObjectOfType<Tutorial3>().HideInventoryControls();
                 }

@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody rigidbodyComponent;
     private int superJumpsRemaining;
     
-    private float landSpeed = 2f;
+    private float landSpeed = 2.5f;
     private float waterSpeed = 1f;
 
     private float speed;
@@ -243,6 +243,7 @@ public class Player : MonoBehaviour
             PickupItem(2);
             inventoryApples++;
             Debug.Log("Number of apples: "+inventoryApples);
+            FindObjectOfType<LevelItems>().ShowItem(inventoryApples); //For collecting items for Level 1;
         }
 
         else if (num == 3) {
@@ -368,7 +369,7 @@ public class Player : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Object");
                 triggerActiveWater = true;
                 playerBucketIcon.SetActive(true);
-                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().ShowControls();
                 }
                 // Debug.Log("Press O to fill bucket");
@@ -376,7 +377,7 @@ public class Player : MonoBehaviour
         }
 
         if (player.CompareTag("Water") && selectedItem != bucket && bucketObtained == true && bucketFilled == false) {
-            if (FindObjectOfType<GameManager>().Tutorial() == true) {
+            if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial3>().ShowInventoryControls();
                 FindObjectOfType<Tutorial4>().ShowInventoryControls();
             }
@@ -384,7 +385,7 @@ public class Player : MonoBehaviour
 
         if (player.CompareTag("TutorialJump"))
         {
-            if(FindObjectOfType<GameManager>().Tutorial() == true) {
+            if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial2>().ShowJump();
             }
         }
@@ -398,7 +399,7 @@ public class Player : MonoBehaviour
                 triggerActiveWater = false;
                 playerBucketIcon.SetActive(false);
 
-                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().HideControls();
                     FindObjectOfType<Tutorial3>().HideInventoryControls();
                     FindObjectOfType<Tutorial4>().HideInventoryControls();
@@ -407,7 +408,7 @@ public class Player : MonoBehaviour
             }
 
             else if (bucketObtained == false) {
-                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial3>().HideInventoryControls();
                     FindObjectOfType<Tutorial4>().HideInventoryControls();
                 }
@@ -416,7 +417,7 @@ public class Player : MonoBehaviour
 
         if (player.CompareTag("TutorialJump"))
         {
-            if(FindObjectOfType<GameManager>().Tutorial() == true) {
+            if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial2>().HideJump();
             }
         }

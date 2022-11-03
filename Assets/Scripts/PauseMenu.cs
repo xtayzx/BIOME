@@ -51,7 +51,7 @@ public class PauseMenu : MonoBehaviour
         inventory.SetActive(true);
         checkpoint.SetActive(true);
 
-        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+        if(FindObjectOfType<LevelManager>().Tutorial() == true) {
             inventoryControls.SetActive(true);
         }
 
@@ -72,7 +72,7 @@ public class PauseMenu : MonoBehaviour
         inventory.SetActive(false);
         checkpoint.SetActive(false);
 
-        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+        if(FindObjectOfType<LevelManager>().Tutorial() == true) {
             inventoryControls.SetActive(false);
         }
         
@@ -99,7 +99,7 @@ public class PauseMenu : MonoBehaviour
         inventory.SetActive(true);
         checkpoint.SetActive(true);
 
-        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+        if(FindObjectOfType<LevelManager>().Tutorial() == true) {
             inventoryControls.SetActive(true);
         }
 
@@ -115,7 +115,7 @@ public class PauseMenu : MonoBehaviour
         inventory.SetActive(true);
         checkpoint.SetActive(true);
 
-        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+        if(FindObjectOfType<LevelManager>().Tutorial() == true) {
             inventoryControls.SetActive(true);
         }
 

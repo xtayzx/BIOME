@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using TMPro;
 
 #if UNITY_EDITOR 
     using UnityEditor;
@@ -17,6 +18,8 @@ public class LevelSelection : MonoBehaviour
     
     PlayerControls controls;
     GameObject currentObject;
+    private int totalScoreValue;
+    public TextMeshProUGUI totalScore;
     // public GameManager gameManager;
 
     void Awake() {
@@ -29,6 +32,8 @@ public class LevelSelection : MonoBehaviour
         // gameManager.SelectFirstButton(levelFirstButton);
 
         controls.Menu.Select.performed += ctx => Select();
+        totalScoreValue = FindObjectOfType<GameManager>().TotalScoreValue();
+        totalScore.text = totalScoreValue.ToString();
     }
 
     void OnEnable() {
@@ -62,17 +67,20 @@ public class LevelSelection : MonoBehaviour
         // }
     } 
 
-    public void Tutorial() {
-        SceneManager.LoadScene("Tutorial");
+    public void LevelOne() {
+        SceneManager.LoadScene("Level1");
+        FindObjectOfType<GameManager>().CurrentActiveLevel(1);
     }
 
-    public void LevelOne() {
+    public void LevelTwo() {
         // Debug.Log("Currently not avaliable to play");
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level2");
+        FindObjectOfType<GameManager>().CurrentActiveLevel(2);
     }
 
     public void MainMenu() {
         SceneManager.LoadScene("Menu");
+        FindObjectOfType<GameManager>().CurrentActiveLevel(3);
     }
 }
 

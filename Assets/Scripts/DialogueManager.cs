@@ -28,7 +28,7 @@ public class DialogueManager : MonoBehaviour
         animatorInventory.SetBool("IsMoved", true);
         checkpoint.SetBool("OpenConvo", true);
 
-        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+        if(FindObjectOfType<LevelManager>().Tutorial() == true) {
             FindObjectOfType<Tutorial3>().MoveInventory(true);
         }
 
@@ -81,7 +81,7 @@ public class DialogueManager : MonoBehaviour
         animatorInventory.SetBool("IsMoved", false);
         checkpoint.SetBool("OpenConvo", false);
 
-        if(FindObjectOfType<GameManager>().Tutorial() == true) {
+        if(FindObjectOfType<LevelManager>().Tutorial() == true) {
             FindObjectOfType<Tutorial3>().MoveInventory(false);
         }
 

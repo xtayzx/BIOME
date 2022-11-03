@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 
 public class EndTrigger : MonoBehaviour
 {
-    public GameManager gameManager;
+    public LevelManager levelManager;
     
     PlayerControls controls;
     private GameObject currentObject;
@@ -59,7 +59,7 @@ public class EndTrigger : MonoBehaviour
     public void OnTriggerEnter(Collider exit) {
         if (exit.CompareTag("Player"))
             {
-              gameManager.CompleteLevel();
+              levelManager.CompleteLevel();
             }
     }
 

@@ -41,7 +41,7 @@ public class InteractiveObject : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Object");
                 triggerActive = true;
                 Icon.SetActive(true);
-                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().ShowControls();
                 }
                 // Debug.Log("Press O to collect the bucket");
@@ -54,7 +54,7 @@ public class InteractiveObject : MonoBehaviour
             {
                 triggerActive = false;
                 Icon.SetActive(false);
-                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().HideControls();
                 }
             }
@@ -74,7 +74,7 @@ public class InteractiveObject : MonoBehaviour
             //For controller input
             if (triggerActive) {
                 FindObjectOfType<AudioManager>().Play("Interact");
-                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().HideControls();
                 }
                 Object.SetActive(false);

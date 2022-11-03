@@ -44,7 +44,7 @@ public class NPC : MonoBehaviour
                 triggerActive = true;
                 NPCIcon.SetActive(true);
                 
-                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().ShowControls();
                 }
             }
@@ -57,7 +57,7 @@ public class NPC : MonoBehaviour
                 triggerActive = false;
                 NPCIcon.SetActive(false);
 
-                if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().HideControls();
                 }
             }
