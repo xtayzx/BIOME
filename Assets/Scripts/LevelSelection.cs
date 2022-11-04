@@ -9,29 +9,29 @@ using TMPro;
 #if UNITY_EDITOR 
     using UnityEditor;
 #endif
-// using UnityEditor;
 
 public class LevelSelection : MonoBehaviour
 {
-    // public GameObject optionsMenu, mainMenu;
     public GameObject levelFirstButton, levelOneButton, backButton;
     
     PlayerControls controls;
     GameObject currentObject;
     private int totalScoreValue;
     public TextMeshProUGUI totalScore;
-    // public GameManager gameManager;
 
     void Awake() {
-        controls = new PlayerControls();
+        
+
          //clear selected object 
         EventSystem.current.SetSelectedGameObject(null);
         //set a new selected object
         EventSystem.current.SetSelectedGameObject(levelFirstButton);
 
-        // gameManager.SelectFirstButton(levelFirstButton);
-
+        //Enable controller functionality
+        controls = new PlayerControls();
         controls.Menu.Select.performed += ctx => Select();
+
+        //Total Score Text
         totalScoreValue = FindObjectOfType<GameManager>().TotalScoreValue();
         totalScore.text = totalScoreValue.ToString();
     }
@@ -45,27 +45,16 @@ public class LevelSelection : MonoBehaviour
     }
 
     public void Select() {
+
+        //Determine what button is selected
         #if UNITY_EDITOR
         currentObject = Selection.activeGameObject;
         #endif
-        // buttonPressed = true;
-        Debug.Log("Button Pressed");
 
-        // if(currentObject = tutorialLevel) {
-        //     Tutorial();
-        //     return;
-        // }
-
-        // else if(currentObject = levelOneButton) {
-        //     LevelOne();
-        //     return;
-        // }
-
-        // else if(currentObject = backButton) {
-        //     MainMenu();
-        //     return;
-        // }
+        // Debug.Log("Button Pressed");
     } 
+
+    // LOAD LEVELS
 
     public void LevelOne() {
         SceneManager.LoadScene("Level1");
@@ -73,7 +62,6 @@ public class LevelSelection : MonoBehaviour
     }
 
     public void LevelTwo() {
-        // Debug.Log("Currently not avaliable to play");
         SceneManager.LoadScene("Level2");
         FindObjectOfType<GameManager>().CurrentActiveLevel(2);
     }

@@ -5,25 +5,22 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+    public static AudioManager instance;
 
-    // public static AudioManager instance;
-
-    // Start is called before the first frame update
     void Awake()
     {
-        // TODO: If we want music to flow in between scenes then uncomment
+        //So only one instance of AudioManager is created and is carried through each scene
+        DontDestroyOnLoad(this);
+        if (instance == null) {
+            instance = this;
+        }
 
-        // if (instance == null) {
-        //     instance = this;
-        // }
+        else {
+            Destroy(gameObject);
+            return;
+        }
 
-        // else {
-        //     Destroy(gameObject);
-        //     return;
-        // }
-
-        // DontDestoryOnLoad(gameObject);
-
+        // Settings when creating new sounds
         foreach (Sound s in sounds) {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;

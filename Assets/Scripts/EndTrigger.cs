@@ -8,44 +8,33 @@ using UnityEngine.InputSystem;
 #if UNITY_EDITOR 
     using UnityEditor;
 #endif
-// using UnityEditor;
 
 public class EndTrigger : MonoBehaviour
 {
     public LevelManager levelManager;
     
     PlayerControls controls;
+
+    // For determining buttons
     private GameObject currentObject;
     public GameObject returnGameSelectionButton;
 
     void Awake() {
         controls = new PlayerControls();
-
         controls.Menu.Select.performed += ctx => Select();
-        // gameManager.ActivateControls("MenuControls");
-         //clear selected object 
+
+        // Clear selected object 
         EventSystem.current.SetSelectedGameObject(null);
         //set a new selected object
         EventSystem.current.SetSelectedGameObject(returnGameSelectionButton);
-        // gameManager.SelectFirstButton(returnGameSelectionButton);
     }
 
     public void Select() {
         #if UNITY_EDITOR
         currentObject = Selection.activeGameObject;
         #endif
-        // buttonPressed = true;
-        Debug.Log(currentObject);
 
-        // if(currentObject = mainMenuFirstButton) {
-        //     PlayGame();
-        //     return;
-        // }
-
-        // else if(currentObject = quitButton) {
-        //     QuitGame();
-        //     return;
-        // }
+        // Debug.Log(currentObject);
     }
 
     void OnEnable() {
@@ -56,6 +45,7 @@ public class EndTrigger : MonoBehaviour
         controls.Menu.Disable();
     }
 
+    // If the player enters the finish area, then end the level
     public void OnTriggerEnter(Collider exit) {
         if (exit.CompareTag("Player"))
             {
@@ -63,14 +53,14 @@ public class EndTrigger : MonoBehaviour
             }
     }
 
+    // Return to the level hub
     public void LevelSelection() {
-        // gameManager.UnfreezeGame();
         Time.timeScale = 1f;
         SceneManager.LoadScene("LevelSelection");
     }
 
+    // Return back to the main menu
     public void MainMenu() {
-        // gameManager.UnfreezeGame();
         Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
     }

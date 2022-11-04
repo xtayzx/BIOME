@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DemoScript : MonoBehaviour
 {
+     // This script was used to test out the items in the game with the demo buttons. It will be removed on the final build of the game
     public InventoryManager inventoryManager;
     public Item[] itemsToPickup;
 

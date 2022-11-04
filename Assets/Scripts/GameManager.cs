@@ -8,97 +8,69 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
-    // public GameObject completeLevelUI;
-    // public GameObject controlsUI;
-    // public GameObject audioManager;
-    // public GameObject gameManager;
     PlayerControls controls;
-    // public GameObject player;
-    // [SerializeField] private bool tutorial;
     private int activeLevel;
     private int totalScore = 0;
-    // private int levelOneScore = 0;
-    // private int levelTwoScore = 0;
-    // private int levelThreeScore = 0;
+
     private int[] levelScores = new int[3];
     private int levels = 3; //There are 3 levels in the game
 
+    public static GameManager instance;
+
+    void Awake() {
+        //So only one instance of GameManager is created and is carried through each scene
+        DontDestroyOnLoad(this);
+        if (instance == null) {
+            instance = this;
+        }
+
+        else {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     void Start () {
-        // Set game frame rate - cause my fans are going crazy so I think this sets it up
+        //Set up game configurations, frame rate and screen ratio
         Application.targetFrameRate = 60;
         Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen, Screen.currentResolution.refreshRate);
-        // trigger = false;
 
-        for(int i = 0; i < 3; i++) {
+        // Declare array that determines how many level scores
+        for(int i = 0; i < levels; i++) {
             levelScores[i] = 0;
         }
     }
 
     public void LevelScore(int score) {
-
-        //Need to add here that if the player gets a better score than previously played, than that score is replaced when calculating the main score
+        // TODO: Need to add here that if the player gets a better score than previously played, than that score is replaced when calculating the main score
         if(activeLevel == 1) {
             levelScores[0] = score;
-            // totalScore = totalScore + levelOneScore;
         }
 
         else if(activeLevel == 2) {
             levelScores[1] = score;
-            // totalScore = totalScore + levelTwoScore;
         }
 
         else if(activeLevel == 3) {
             levelScores[2] = score;
-            // totalScore = totalScore + levelThreeScore;
         }
     }
 
+    // Determine the current level being played
     public void CurrentActiveLevel(int num) {
         activeLevel = num;
     }
 
+    // Return current level played
     public int GetActiveLevel() {
         return activeLevel;
     }
 
+    // Return total score across levels
     public int TotalScoreValue() {
         for(int i = 0; i < levels; i++) {
             totalScore += levelScores[i];
         }
         return totalScore;
     }
-
-    // public void CompleteLevel() {
-
-    //     FreezeGame();
-    //     FindObjectOfType<AudioManager>().Pause("MainSong");
-    //     FindObjectOfType<AudioManager>().Play("End");
-    //     FindObjectOfType<LevelItems>().ShowItemsEnd();
-
-    //     // GameIsPaused = true;
-    //     Debug.Log("LEVEL WON");
-
-    //     //Hide the inventory and show the items collected/statistics
-    //     controlsUI.SetActive(false);
-    //     completeLevelUI.SetActive(true);
-    // }
-
-    // public bool Tutorial() {
-    //     return tutorial;
-    // }
-
-    // public void FreezeGame() {
-    //     //freezes the game
-    //     Time.timeScale = 0f;
-    // }
-
-    // //When the End Level menu pops up, the next level button is selected first
-    // public void SelectFirstButton(GameObject firstButton) {
-
-    //     //clear selected object 
-    //     EventSystem.current.SetSelectedGameObject(null);
-    //     //set a new selected object
-    //     EventSystem.current.SetSelectedGameObject(firstButton);
-
-    // }
 }

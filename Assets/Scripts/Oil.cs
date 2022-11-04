@@ -14,88 +14,88 @@ public class Oil : MonoBehaviour
     public GameObject player;
     private bool cleanerObtained = false;
 
-    GameManager gameManager;
-
+    // GameManager gameManager;
     PlayerControls controls;
 
-        void Awake() {
-            controls = new PlayerControls();
+    void Awake() {
+        controls = new PlayerControls();
+        controls.Gameplay.Interact.performed += ctx => Interact();
+    }
 
-            // gameManager.ActivateControls("PlayControls");
-            controls.Gameplay.Interact.performed += ctx => Interact();
-            // controls.Gameplay.Conversation.performed += ctx => Conversation();
-        }
+    void OnEnable() {
+        controls.Gameplay.Enable();
+    }
 
-        void OnEnable() {
-            controls.Gameplay.Enable();
-        }
+    void OnDisable() {
+        controls.Gameplay.Disable();
+    }
 
-        void OnDisable() {
-            controls.Gameplay.Disable();
-        }
- 
-        public void OnTriggerEnter(Collider oil)
+    public void OnTriggerEnter(Collider oil)
+    {
+        if (oil.CompareTag("Player"))
         {
-            if (oil.CompareTag("Player"))
-            {
-                Debug.Log("Colliding with player");
-                if(cleanerObtained == true && player.GetComponent<Player>().playerSelectedItem() == player.GetComponent<Player>().PlayerSelectedOilCleaner()) {
-                    FindObjectOfType<AudioManager>().Play("Object");
-                    triggerActive = true;
-                    oilIcon.SetActive(true);
+            // Debug.Log("Colliding with player");
 
-                    if(FindObjectOfType<LevelManager>().Tutorial() == true) {
-                        FindObjectOfType<Tutorial>().ShowControls();
-                    }
+            // If the cleaner item is in the inventory and the player has selected the item in the inventory
+            if(cleanerObtained == true && player.GetComponent<Player>().playerSelectedItem() == player.GetComponent<Player>().PlayerSelectedOilCleaner()) {
+                FindObjectOfType<AudioManager>().Play("Object");
+                triggerActive = true;
+                oilIcon.SetActive(true);
 
-                }
+                // Item not used in tutorial
+                // if(FindObjectOfType<LevelManager>().Tutorial() == true) {
+                //     FindObjectOfType<Tutorial>().ShowControls();
+                // }
 
-                if(cleanerObtained == true && player.GetComponent<Player>().playerSelectedItem() != player.GetComponent<Player>().PlayerSelectedOilCleaner()) {
-                        // if(FindObjectOfType<GameManager>().Tutorial() == true) {
-                        //     FindObjectOfType<Tutorial3>().ShowInventoryControls();
-                        //  }
-                    Debug.Log("Oil cleaner is not selected in inventory");
-                }
+            }
+
+            if(cleanerObtained == true && player.GetComponent<Player>().playerSelectedItem() != player.GetComponent<Player>().PlayerSelectedOilCleaner()) {
+                    // Item not used in tutorial
+                    // if(FindObjectOfType<GameManager>().Tutorial() == true) {
+                    //     FindObjectOfType<Tutorial3>().ShowInventoryControls();
+                    //  }
+                Debug.Log("Oil cleaner is not selected in inventory");
             }
         }
- 
-        public void OnTriggerExit(Collider oil)
-        {
-            if (oil.CompareTag("Player"))
-            {
-                triggerActive = false;
-                oilIcon.SetActive(false);
+    }
 
-                if(FindObjectOfType<LevelManager>().Tutorial() == true) {
-                    FindObjectOfType<Tutorial>().HideControls();
-                    FindObjectOfType<Tutorial3>().HideInventoryControls();
-                }
+    public void OnTriggerExit(Collider oil)
+    {
+        if (oil.CompareTag("Player"))
+        {
+            triggerActive = false;
+            oilIcon.SetActive(false);
+
+            if(FindObjectOfType<LevelManager>().Tutorial() == true) {
+                FindObjectOfType<Tutorial>().HideControls();
+                FindObjectOfType<Tutorial3>().HideInventoryControls();
             }
         }
- 
-        private void Update()
-        {
-            //Check if player has water before they are able to put out the object
-            cleanerObtained = player.GetComponent<Player>().OilCleanerObtainedValue();
+    }
 
-            //Keyboard Action
-            if (triggerActive && Input.GetKeyDown(KeyCode.E))
-            {
-                Interact();
+    private void Update()
+    {
+        //Check if player has water before they are able to put out the object
+        cleanerObtained = player.GetComponent<Player>().OilCleanerObtainedValue();
+
+        //Keyboard Action
+        if (triggerActive && Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
+    }
+
+    public void Interact()
+    {
+        //For controller input
+        if (triggerActive) {
+            FindObjectOfType<AudioManager>().Play("OilClean");
+            oilObjectItem.SetActive(false);
+
+            if(FindObjectOfType<LevelManager>().Tutorial() == true) {
+                FindObjectOfType<Tutorial>().HideControls();
+                FindObjectOfType<Tutorial3>().HideInventoryControls();
             }
         }
- 
-        public void Interact()
-        {
-            //For controller input
-            if (triggerActive) {
-                FindObjectOfType<AudioManager>().Play("OilClean");
-                oilObjectItem.SetActive(false);
-
-                if(FindObjectOfType<LevelManager>().Tutorial() == true) {
-                    FindObjectOfType<Tutorial>().HideControls();
-                    FindObjectOfType<Tutorial3>().HideInventoryControls();
-                }
-            }
-        }
+    }
 }

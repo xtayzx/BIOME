@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CheckpointText : MonoBehaviour
 {
+    // For the UI Text telling the player they have crossed a checkpoint
     public Animator checkpoint;
 
     public void ShowText() {

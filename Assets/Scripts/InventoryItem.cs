@@ -14,18 +14,18 @@ public class InventoryItem : MonoBehaviour
     public Image image;
     public TextMeshProUGUI countText;
 
-    // [HideInInspector] public Transform parentAfterDrag;
-
     private void Start() {
         InitialiseItem(item);
     }
 
+    //If the item is stackable, then show text in the inventory
     public void RefreshCount() {
         countText.text = count.ToString();
         bool textActive = count > 1;
         countText.gameObject.SetActive(textActive);
     }
 
+    //Refresh how many of that item is in the inventory
     public void InitialiseItem(Item newItem) {
         item = newItem;
         image.sprite = newItem.image;

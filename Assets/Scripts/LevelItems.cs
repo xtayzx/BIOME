@@ -11,13 +11,7 @@ public class LevelItems : MonoBehaviour
     public TextMeshProUGUI levelScore;
     private int levelScoreValue;
 
-    // public void Start() {
-    //     star.GetComponent<Image>().color = new Color32(0,0,0,100);
-    //     item1.GetComponent<Image>().color = new Color32(0,0,0,100);
-    //     item2.GetComponent<Image>().color = new Color32(0,0,0,100);
-    //     item3.GetComponent<Image>().color = new Color32(0,0,0,100);
-    // }
-
+    //Change the alpha on the items, then set them to false. If these are set to false to start, then the GameObject cannot be changed
     public void ShowItem(int num) {
         if(num == 1) {
             item1.GetComponent<Image>().color = new Color32(255,255,225,255);
@@ -37,6 +31,7 @@ public class LevelItems : MonoBehaviour
         }
     }
 
+    // Set graphics to show on the end level screen to true and change the value of the level score
     public void ShowItemsEnd() {
        itemOneObject.SetActive(true);
        itemTwoObject.SetActive(true);
@@ -47,10 +42,5 @@ public class LevelItems : MonoBehaviour
        levelScore.text = levelScoreValue.ToString();
        levelScore.overrideColorTags = true;
        levelScore.GetComponent<TextMeshProUGUI>().color = new Color32 (255,255,255,255);
-
-        // star.GetComponent<Image>().color = new Color32(star.color.r,star.color.g,star.color.b,100);
-        // item1.GetComponent<Image>().color = new Color32(item1.color.r,item1.color.g,item1.color.b,100);
-        // item2.GetComponent<Image>().color = new Color32(item2.color.r,item2.color.g,item2.color.b,100);
-        // item3.GetComponent<Image>().color = new Color32(item3.color.r,item3.color.g,item3.color.b,100);
     }
 }

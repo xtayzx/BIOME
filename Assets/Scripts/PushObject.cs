@@ -6,20 +6,19 @@ public class PushObject : MonoBehaviour
 {
     private Vector3 objectPosition;
 
-    // Start is called before the first frame update
     void Start()
     {
         objectPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        // Debug.Log("Object Position - X Pos: " + transform.position.x + " // Y Pos: " + transform.position.y + " // Z Pos: " + transform.position.z);
     }
 
+    // Resetting the object when the game is reset to the previous checkpoint
     public void ObjectStartPosition() {
-        Debug.Log("Reset object");
+        // Debug.Log("Reset object");
         this.transform.position = objectPosition;
         this.transform.rotation = Quaternion.identity;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        GetComponent<Rigidbody>().Sleep();
+        GetComponent<Rigidbody>().Sleep(); //TODO *
     }
 
 }
