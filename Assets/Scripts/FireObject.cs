@@ -12,7 +12,7 @@ public class FireObject : MonoBehaviour
     public GameObject fireObjectItem;
     public GameObject fireIcon;
     public GameObject player;
-    
+
     private bool waterObtained;
 
     // GameManager gameManager;
@@ -20,10 +20,7 @@ public class FireObject : MonoBehaviour
 
     void Awake() {
         controls = new PlayerControls();
-
-        // gameManager.ActivateControls("PlayControls");
         controls.Gameplay.Interact.performed += ctx => Interact();
-        // controls.Gameplay.Conversation.performed += ctx => Conversation();
     }
 
     void OnEnable() {
@@ -55,7 +52,8 @@ public class FireObject : MonoBehaviour
             if(waterObtained == true && player.GetComponent<Player>().playerSelectedItem() != player.GetComponent<Player>().PlayerSelectedFilledBucket()) {
                     if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                         FindObjectOfType<Tutorial3>().ShowInventoryControls();
-                        }
+                        FindObjectOfType<Tutorial4>().ShowInventoryControls();
+                    }
             }
         }
     }
@@ -71,6 +69,7 @@ public class FireObject : MonoBehaviour
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().HideControls();
                 FindObjectOfType<Tutorial3>().HideInventoryControls();
+                FindObjectOfType<Tutorial4>().HideInventoryControls();
             }
         }
     }
