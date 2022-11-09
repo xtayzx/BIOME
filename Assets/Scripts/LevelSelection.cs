@@ -12,7 +12,7 @@ using TMPro;
 
 public class LevelSelection : MonoBehaviour
 {
-    public GameObject levelFirstButton, levelOneButton, backButton;
+    // public GameObject levelFirstButton, levelOneButton, backButton;
     
     PlayerControls controls;
     GameObject currentObject;
@@ -25,7 +25,7 @@ public class LevelSelection : MonoBehaviour
          //clear selected object 
         EventSystem.current.SetSelectedGameObject(null);
         //set a new selected object
-        EventSystem.current.SetSelectedGameObject(levelFirstButton);
+        // EventSystem.current.SetSelectedGameObject(levelFirstButton);
 
         //Enable controller functionality
         controls = new PlayerControls();

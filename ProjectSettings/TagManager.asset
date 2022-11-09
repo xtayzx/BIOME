@@ -16,6 +16,9 @@ TagManager:
   - TutorialMove
   - Food
   - Oil
+  - LevelOne
+  - LevelTwo
+  - LevelThree
   layers:
   - Default
   - TransparentFX
