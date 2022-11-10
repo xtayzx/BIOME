@@ -9,10 +9,10 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     PlayerControls controls;
-    private int activeLevel;
+    public int activeLevel;
     private int totalScore = 0;
 
-    private int[] levelScores = new int[3];
+    public int[] levelScores = new int[3];
     private int levels = 3; //There are 3 levels in the game
 
     public static GameManager instance;
@@ -42,17 +42,24 @@ public class GameManager : MonoBehaviour
     }
 
     public void LevelScore(int score) {
-        // TODO: Need to add here that if the player gets a better score than previously played, than that score is replaced when calculating the main score
         if(activeLevel == 1) {
-            levelScores[0] = score;
+            if(score >= levelScores[0]){
+                levelScores[0] = score;
+            }
         }
 
         else if(activeLevel == 2) {
-            levelScores[1] = score;
+            // levelScores[1] = score;
+            if(score >= levelScores[1]){
+                levelScores[1] = score;
+            }
         }
 
         else if(activeLevel == 3) {
-            levelScores[2] = score;
+            // levelScores[2] = score;
+            if(score >= levelScores[2]){
+                levelScores[2] = score;
+            }
         }
     }
 
@@ -73,4 +80,34 @@ public class GameManager : MonoBehaviour
         }
         return totalScore;
     }
+
+    public int LevelScoreValue(int num) {
+        if(num == 0) {
+            return levelScores[0];
+        }
+
+        else if (num == 1) {
+            return levelScores[1];
+        }
+
+        else return totalScore;
+
+        // else if (num == 2) {
+        //      return levelScores[2]
+        // }
+    }
+
+    // public void SaveGameManager() {
+    //     SaveGame.SaveGameManager(this);
+    // }
+
+    // public void LoadGameManager() {
+    //     GameData data = SaveGame.LoadGameData();
+
+    //     activeLevel = data.activeLevel;
+
+    //     for (int i = 0; i < 3; i++) {
+    //         levelScores[i] = data.levelScores[i];
+    //     }
+    // }
 }

@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
 
     private int inventoryApples = 0; //TODO - change later with other collectable items
     private bool inWater = true; // Although not in the water to start, this is so it doesn't trigger upon the game loading
+    private int selectedLevel;
 
     // INVENTORY KEY
     // 0 - Empty Bucket
@@ -90,20 +91,25 @@ public class Player : MonoBehaviour
     }
 
     void Move() {
-        rigidbodyComponent.MovePosition(transform.position + (transform.forward * input.magnitude) * speed * Time.deltaTime);
+        if(startConvo == true){
+            rigidbodyComponent.MovePosition(transform.position + (transform.forward * input.magnitude) * speed * Time.deltaTime);
+        }
     }
 
     void Look() {
-        if (input != Vector3.zero) {
-            var relative = (transform.position + input.ToIso()) - transform.position; //Find relative angle
-            var rot = Quaternion.LookRotation(relative, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
+        if(startConvo == true) {
+            if (input != Vector3.zero) {
+                var relative = (transform.position + input.ToIso()) - transform.position; //Find relative angle
+                var rot = Quaternion.LookRotation(relative, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Debug.Log("Rotation Value: "+transform.rotation);
         GatherInput(); //Get axis
         Look(); //Rotate the player in another direction
         selectedItem = inventoryManager.GetSelectedItem(); //Return which item is selected in the inventory
@@ -124,6 +130,12 @@ public class Player : MonoBehaviour
         if (this.transform.position.y < fallPoint) {
             FindObjectOfType<PauseMenu>().FallResetGame();
         }
+
+        // if (!startConvo) {
+        //     rigidbodyComponent.velocity.x = 0;
+        //     rigidbodyComponent.velocity.y = 0;
+        //     rigidbodyComponent.velocity.z = 0;
+        // }
 
         // PLAYER FALLING
         if (rigidbodyComponent.velocity.y < fallingThreshold) {
@@ -193,6 +205,15 @@ public class Player : MonoBehaviour
             return;
         }
         
+    }
+
+    // FOR THE LEVEL HUB
+    public void SelectedLevel(int num) {
+        selectedLevel = num;
+    }
+
+    public int PlayerSelectedLevel() {
+        return selectedLevel;
     }
 
     // For each item collected, this determines what to do next

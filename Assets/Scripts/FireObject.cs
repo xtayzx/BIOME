@@ -45,7 +45,6 @@ public class FireObject : MonoBehaviour
                 if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().ShowControls();
                 }
-
             }
 
             // If the player has water in the bucket and the player does not have the bucket of water selected in their inventory, if tutorial then show UI visuals
