@@ -8,116 +8,106 @@ using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject completeLevelUI;
     PlayerControls controls;
-    public GameObject player;
-    // public Camera mainCamera;
+    public int activeLevel;
+    private int totalScore = 0;
 
-    // private float newX;
-    // private float newY;
-    // private float newZ;
+    public int[] levelScores = new int[3];
+    private int levels = 3; //There are 3 levels in the game
 
-    // private bool trigger;
+    public static GameManager instance;
+
+    void Awake() {
+        //So only one instance of GameManager is created and is carried through each scene
+        DontDestroyOnLoad(this);
+        if (instance == null) {
+            instance = this;
+        }
+
+        else {
+            Destroy(gameObject);
+            return;
+        }
+    }
 
     void Start () {
-        // Set game frame rate - cause my fans are going crazy so I think this sets it up
+        //Set up game configurations, frame rate and screen ratio
         Application.targetFrameRate = 60;
-        // trigger = false;
+        Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen, Screen.currentResolution.refreshRate);
+
+        // Declare array that determines how many level scores
+        for(int i = 0; i < levels; i++) {
+            levelScores[i] = 0;
+        }
     }
 
-    // void FixedUpdate() {
-    //     if(FindObjectOfType<Player>().playerIsFalling() == false) {
-    //         newX = mainCamera.transform.position.x;
-    //         newY = mainCamera.transform.position.y;
-    //         newZ = mainCamera.transform.position.z;
-    //     }
+    public void LevelScore(int score) {
+        if(activeLevel == 1) {
+            if(score >= levelScores[0]){
+                levelScores[0] = score;
+            }
+        }
 
-    //     else if(FindObjectOfType<Player>().playerIsFalling() == true) {
-    //         trigger = true;
-    //     }
+        else if(activeLevel == 2) {
+            // levelScores[1] = score;
+            if(score >= levelScores[1]){
+                levelScores[1] = score;
+            }
+        }
 
-    //     if(trigger == true) {
-    //         StopCamera();
-    //         trigger = false;
-    //         return;
-    //     }
-    // }
-
-    // void StopCamera() {
-    //     mainCamera.transform.position = new Vector3(newX, newY, newZ);
-    //     // FindObjectOfType<AudioManager>().Play("Checkpoint");
-    // }
-
-    // public void ActivateControls(string controllerType) {
-    //     controls = new PlayerControls();
-
-    //     if(controllerType == "MenuControls") {
-    //         controls.Menu.Select.performed += ctx => Select();
-    //     }
-
-    //     else if(controllerType == "PauseControls") {
-    //         controls.Gameplay.Menu.performed += ctx => Pause();
-    //     }
-
-    //     else if(controllerType == "PlayControls") {
-    //     }
-    // }
-
-    // void Select() {
-
-    // }
-
-    // void Pause() {
-
-    // }
-    
-    // void Talk() {
-
-    // }
-
-    // void Conversation() {
-
-    // }
-
-    // void Jump() {
-
-    // }
-
-    // public void EnableMenuControls() {
-    //     controls.Menu.Enable();
-    // }
-
-    // public void DisableMenuControls() {
-    //     controls.Menu.Disable();
-    // }
-
-    public void CompleteLevel() {
-
-        FreezeGame();
-        FindObjectOfType<AudioManager>().Pause("MainSong");
-        FindObjectOfType<AudioManager>().Play("End");
-
-        // GameIsPaused = true;
-        Debug.Log("LEVEL WON");
-        completeLevelUI.SetActive(true);
+        else if(activeLevel == 3) {
+            // levelScores[2] = score;
+            if(score >= levelScores[2]){
+                levelScores[2] = score;
+            }
+        }
     }
 
-    public void FreezeGame() {
-        //freezes the game
-        Time.timeScale = 0f;
+    // Determine the current level being played
+    public void CurrentActiveLevel(int num) {
+        activeLevel = num;
     }
 
-    // public void UnfreezeGame() {
-    //     //unfreezes the game
-    //     Time.timeScale = 1f;
+    // Return current level played
+    public int GetActiveLevel() {
+        return activeLevel;
+    }
+
+    // Return total score across levels
+    public int TotalScoreValue() {
+        for(int i = 0; i < levels; i++) {
+            totalScore += levelScores[i];
+        }
+        return totalScore;
+    }
+
+    public int LevelScoreValue(int num) {
+        if(num == 0) {
+            return levelScores[0];
+        }
+
+        else if (num == 1) {
+            return levelScores[1];
+        }
+
+        else return totalScore;
+
+        // else if (num == 2) {
+        //      return levelScores[2]
+        // }
+    }
+
+    // public void SaveGameManager() {
+    //     SaveGame.SaveGameManager(this);
     // }
-    
-    public void SelectFirstButton(GameObject firstButton) {
 
-        //clear selected object 
-        EventSystem.current.SetSelectedGameObject(null);
-        //set a new selected object
-        EventSystem.current.SetSelectedGameObject(firstButton);
+    // public void LoadGameManager() {
+    //     GameData data = SaveGame.LoadGameData();
 
-    }
+    //     activeLevel = data.activeLevel;
+
+    //     for (int i = 0; i < 3; i++) {
+    //         levelScores[i] = data.levelScores[i];
+    //     }
+    // }
 }

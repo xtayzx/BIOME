@@ -16,90 +16,80 @@ public class NPC : MonoBehaviour
     private DialogueTrigger trigger;
     private bool playerStartConvo;
     //private bool convoActive = false;
-    GameManager gameManager;
+    // GameManager gameManager;
 
     PlayerControls controls;
 
-        void Awake() {
-            controls = new PlayerControls();
+    void Awake() {
+        controls = new PlayerControls();
+        controls.Gameplay.Interact.performed += ctx => Talk();
+    }
 
-            // gameManager.ActivateControls("PlayControls");
-            controls.Gameplay.Interact.performed += ctx => Talk();
-            // controls.Gameplay.Conversation.performed += ctx => Conversation();
-        }
+    void OnEnable() {
+        controls.Gameplay.Enable();
+    }
 
-        void OnEnable() {
-            controls.Gameplay.Enable();
-        }
+    void OnDisable() {
+        controls.Gameplay.Disable();
+    }
 
-        void OnDisable() {
-            controls.Gameplay.Disable();
-        }
- 
-        public void OnTriggerEnter(Collider npc)
+    public void OnTriggerEnter(Collider npc)
+    {
+        if (npc.CompareTag("Player"))
         {
-            if (npc.CompareTag("Player"))
-            {
-                FindObjectOfType<AudioManager>().Play("Object");
-                triggerActive = true;
-                NPCIcon.SetActive(true);
-                Debug.Log("Press O to interact with the character");
+            FindObjectOfType<AudioManager>().Play("Object");
+            triggerActive = true;
+            NPCIcon.SetActive(true);
+            
+            if(FindObjectOfType<LevelManager>().Tutorial() == true) {
+                FindObjectOfType<Tutorial>().ShowControls();
             }
         }
- 
-        public void OnTriggerExit(Collider npc)
+    }
+
+    public void OnTriggerExit(Collider npc)
+    {
+        if (npc.CompareTag("Player"))
         {
-            if (npc.CompareTag("Player"))
-            {
-                triggerActive = false;
-                NPCIcon.SetActive(false);
+            triggerActive = false;
+            NPCIcon.SetActive(false);
+
+            if(FindObjectOfType<LevelManager>().Tutorial() == true) {
+                FindObjectOfType<Tutorial>().HideControls();
             }
         }
- 
-        private void Update()
+    }
+
+    private void Update()
+    {
+        playerStartConvo = player.GetComponent<Player>().startConvoActive(); // The player has started a conversation with an NPC
+
+        //Keyboard Action
+        if (triggerActive && Input.GetKeyDown(KeyCode.E))
         {
-            playerStartConvo = player.GetComponent<Player>().startConvoActive();
-            //Keyboard Action
-            if (triggerActive && Input.GetKeyDown(KeyCode.O))
-            {
-                Talk();
+            Talk();
+        }
+    }
+
+    public void Talk()
+    {
+        //For controller input
+        if (triggerActive) {
+            // If the player has not started talking to an NPC
+            if(playerStartConvo == true) {
+                FindObjectOfType<AudioManager>().Play("Interact");
+                playerStartConvo = false;
+                player.GetComponent<Player>().startConvoValue(0);
+                GetComponent<DialogueTrigger>().TriggerDialogue();
+                return;
             }
 
-            // if (triggerActive && Input.GetKeyDown(KeyCode.Return)) {
-            //     Conversation();
-            //     return;
-            // }
-        }
- 
-        //TODO: implement conversation method here bc using the triangle button is not working
-        public void Talk()
-        {
-            //For controller input
-            if (triggerActive) {
-                if(playerStartConvo == true) {
-                    FindObjectOfType<AudioManager>().Play("Interact");
-                    playerStartConvo = false;
-                    player.GetComponent<Player>().startConvoValue(0);
-                    GetComponent<DialogueTrigger>().TriggerDialogue();
-                    return;
-                }
-
-                else if(playerStartConvo == false) {
-                    FindObjectOfType<AudioManager>().Play("Conversation");
-                    FindObjectOfType<DialogueManager>().DisplayNextSentence();
-                    return;
-                }
-                // FindObjectOfType<DialogueTrigger>().TriggerDialogue();
-
-                //Finds the local DialogueTrigger rather than global
-                
+            // If the player has already started talking to an NPC
+            else if(playerStartConvo == false) {
+                FindObjectOfType<AudioManager>().Play("Conversation");
+                FindObjectOfType<DialogueManager>().DisplayNextSentence();
+                return;
             }
         }
-
-        // public void Conversation() {
-        //     if (triggerActive) { 
-        //         //There is only one DialogueManager so that's why we still use FindObjectOfType
-                
-        // }
-    //}
+    }
 }

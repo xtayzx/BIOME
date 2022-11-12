@@ -12,16 +12,23 @@ TagManager:
   - PushObject
   - Walls
   - Dead
+  - TutorialJump
+  - TutorialMove
+  - Food
+  - Oil
+  - LevelOne
+  - LevelTwo
+  - LevelThree
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Underwater
   - Water
   - UI
   - Floor
   - Environment Item
-  - 
+  - Oil
   - 
   - Player
   - Walls
