@@ -20,6 +20,7 @@ public class CheckpointTrigger : MonoBehaviour
     public void OnTriggerEnter (Collider checkpoint) {
         if(checkpoint.CompareTag("Player")) {
             FindObjectOfType<AudioManager>().Play("Checkpoint");
+            FindObjectOfType<CheckpointText>().ShowText();
             Debug.Log("Entered checkpoint!");
             // player.transform.position = checkpoint.position;
             
