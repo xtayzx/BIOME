@@ -9,7 +9,8 @@ using UnityEditor;
 public class GameManager : MonoBehaviour
 {
     PlayerControls controls;
-    public int activeLevel;
+    public int activeLevel = 0;
+    private int completedLevel = 0;
     private int totalScore = 0;
 
     public int[] levelScores = new int[3];
@@ -71,6 +72,14 @@ public class GameManager : MonoBehaviour
     // Return current level played
     public int GetActiveLevel() {
         return activeLevel;
+    }
+
+    public void AddCompletedLevel() {
+        completedLevel++;
+    }
+
+    public int CompletedLevelValue() {
+        return completedLevel;
     }
 
     // Return total score across levels

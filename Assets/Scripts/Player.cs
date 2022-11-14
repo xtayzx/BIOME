@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask playerMask; //What can the player collide or not collide with
     
     private Vector3 checkpointPosition; //Setting the next checkpoint position
+    private Vector3 levelHubStartPosition = new Vector3((float)-3.5, (float)7, (float)-3.5);
 
     private bool startConvo = true; //Is the player interacting with an NPC
     private bool bucketObtained = false; //Does the player have the bucket
@@ -52,6 +53,7 @@ public class Player : MonoBehaviour
     [SerializeField] public Item trash;
 
     private int inventoryApples = 0; //TODO - change later with other collectable items
+    private int inventoryTrash = 0;
     private bool inWater = true; // Although not in the water to start, this is so it doesn't trigger upon the game loading
     private int selectedLevel;
 
@@ -71,6 +73,22 @@ public class Player : MonoBehaviour
 
         checkpointPosition = this.transform.position; //To reset the checkpoint position when a checkpoint has been reached
         speed = landSpeed; //Set the speed of the player to begin
+
+        if(FindObjectOfType<GameManager>().GetActiveLevel() == 0) {
+            //Add here for Level 3 and they have all the tools then
+            Debug.Log("Level Value: "+FindObjectOfType<GameManager>().CompletedLevelValue());
+            if(FindObjectOfType<GameManager>().CompletedLevelValue() == 2) {
+                CollectInventory(3);
+                //The duck tool
+                this.transform.position = levelHubStartPosition;
+                Bucket(0);
+            }
+
+            else if(FindObjectOfType<GameManager>().CompletedLevelValue() == 1) {
+                Bucket(0);
+                this.transform.position = levelHubStartPosition;
+            }
+        }
     }
 
     void Jump() {
@@ -239,6 +257,7 @@ public class Player : MonoBehaviour
 
         else if (num == 5) {
             PickupItem(5);
+            inventoryTrash++;
             Debug.Log("Picked up TRASH");
         }
         
@@ -255,6 +274,10 @@ public class Player : MonoBehaviour
 
     public Item PlayerSelectedOilCleaner() {
         return oilCleaner;
+    }
+
+    public int TrashTotal() {
+        return inventoryTrash;
     }
 
 

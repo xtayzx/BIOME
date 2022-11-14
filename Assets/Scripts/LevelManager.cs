@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private bool tutorial;
     PlayerControls controls;
     private int levelScore;
+    private int trashScore;
+    private int finalScore;
 
     // When the player reaches the finish of the level 
     public void CompleteLevel() {
@@ -26,15 +28,35 @@ public class LevelManager : MonoBehaviour
 
         FindObjectOfType<LevelItems>().ShowItemsEnd(); //Show items collected in the level
         FindObjectOfType<Timer>().StopTimer();
-        levelScore = FindObjectOfType<Timer>().FinalLevelScore(); //Set final level score
 
-        FindObjectOfType<GameManager>().LevelScore(levelScore); //Return back to Game Manager
+        FindObjectOfType<GameManager>().LevelScore(finalScore); //Return back to Game Manager
 
         // Debug.Log("LEVEL WON");
 
         //Hide the inventory and show the items collected/statistics
         controlsUI.SetActive(false);
         completeLevelUI.SetActive(true);
+    }
+
+    void Update() {
+        levelScore = FindObjectOfType<Timer>().FinalLevelScore(); //Set final level score
+
+        if(FindObjectOfType<Player>().TrashTotal() > 0) {
+            trashScore = FindObjectOfType<Player>().TrashTotal()*100;
+            finalScore = levelScore+trashScore;
+        }
+
+        else {
+            finalScore = levelScore;
+        }
+    }
+
+    public int TotalTrashScore() {
+        return trashScore;
+    }
+
+    public int TotalLevelScore() {
+        return finalScore;
     }
 
     // Is this level 1 with the UI controls

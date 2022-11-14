@@ -9,7 +9,9 @@ public class LevelItems : MonoBehaviour
     [SerializeField] private Image item1, item2, item3, star;
     [SerializeField] private GameObject itemOneObject, itemTwoObject, itemThreeObject, starObject, scoreObject;
     public TextMeshProUGUI levelScore;
+    public TextMeshProUGUI trashScore;
     private int levelScoreValue;
+    private int trashScoreValue;
 
     //Change the alpha on the items, then set them to false. If these are set to false to start, then the GameObject cannot be changed
     public void ShowItem(int num) {
@@ -38,9 +40,15 @@ public class LevelItems : MonoBehaviour
        itemThreeObject.SetActive(true);
        starObject.SetActive(true);
 
-       levelScoreValue = FindObjectOfType<Timer>().Score();
+       levelScoreValue = FindObjectOfType<LevelManager>().TotalLevelScore();
+       trashScoreValue = FindObjectOfType<LevelManager>().TotalTrashScore();
+
        levelScore.text = levelScoreValue.ToString();
        levelScore.overrideColorTags = true;
        levelScore.GetComponent<TextMeshProUGUI>().color = new Color32 (255,255,255,255);
+
+       trashScore.text = trashScoreValue.ToString();
+       trashScore.overrideColorTags = true;
+       trashScore.GetComponent<TextMeshProUGUI>().color = new Color32 (255,255,255,255);
     }
 }

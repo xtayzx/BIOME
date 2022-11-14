@@ -56,6 +56,11 @@ public class EndTrigger : MonoBehaviour
     // Return to the level hub
     public void LevelSelection() {
         Time.timeScale = 1f;
+        if (FindObjectOfType<GameManager>().GetActiveLevel() > FindObjectOfType<GameManager>().CompletedLevelValue()) {
+            FindObjectOfType<GameManager>().AddCompletedLevel();
+            Debug.Log("Advance to next level");
+        }
+        FindObjectOfType<GameManager>().CurrentActiveLevel(0);
         SceneManager.LoadScene("LevelSelection");
     }
 
