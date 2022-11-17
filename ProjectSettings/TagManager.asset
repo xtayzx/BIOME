@@ -19,6 +19,7 @@ TagManager:
   - LevelOne
   - LevelTwo
   - LevelThree
+  - Collider
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Floor
   - Environment Item
   - Oil
-  - 
+  - Collider
   - Player
   - Walls
   - 

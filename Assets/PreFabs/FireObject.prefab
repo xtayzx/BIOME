@@ -626,7 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 182291423534187284}
   - component: {fileID: 1410734189490388531}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: FireCollider
   m_TagString: Fire
   m_Icon: {fileID: 0}

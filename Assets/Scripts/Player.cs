@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
     private int inventoryTrash = 0;
     private bool inWater = true; // Although not in the water to start, this is so it doesn't trigger upon the game loading
     private int selectedLevel;
+    private bool showingUI = false; //For detecting if there's more colliders and preventing multiple jumps
 
     // INVENTORY KEY
     // 0 - Empty Bucket
@@ -291,6 +292,11 @@ public class Player : MonoBehaviour
             return;
         }
 
+        //If the player is within a bounding box for the UI
+        if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length == 1 && showingUI == true) {
+            return;
+        }
+
         // Check if space key is pressed down
         if (jumpKeyPressed)
         {
@@ -299,6 +305,8 @@ public class Player : MonoBehaviour
             rigidbodyComponent.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
             jumpKeyPressed = false;
         }
+
+       
     }
 
     // INVENTORY
@@ -358,6 +366,15 @@ public class Player : MonoBehaviour
         playersBucket.SetActive(false);
     }
 
+    // CHECKING IF IN COLLISION WITH ANOTHER COLLIDER
+    public void WithinCollider(bool state) {
+        showingUI = state;
+    }
+
+    public bool ColliderStatus() {
+        return showingUI;
+    }
+
     public void OnTriggerEnter(Collider player)
     {
         //If the player is near water and they have the bucket, then enable they can interact with it
@@ -367,6 +384,7 @@ public class Player : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Object");
                 triggerActiveWater = true;
                 playerBucketIcon.SetActive(true);
+                showingUI = true;
 
                 if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().ShowControls();
@@ -380,13 +398,16 @@ public class Player : MonoBehaviour
                 FindObjectOfType<Tutorial3>().ShowInventoryControls();
                 FindObjectOfType<Tutorial4>().ShowInventoryControls();
             }
+            showingUI = true;
         }
 
         if (player.CompareTag("TutorialJump"))
         {
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial2>().ShowJump();
+                
             }
+            showingUI = true;
         }
     }
  
@@ -402,15 +423,18 @@ public class Player : MonoBehaviour
                     FindObjectOfType<Tutorial>().HideControls();
                     FindObjectOfType<Tutorial3>().HideInventoryControls();
                     FindObjectOfType<Tutorial4>().HideInventoryControls();
+                    
                 }
+                showingUI = false;
             
             }
 
             else if (bucketObtained == false) {
                 if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial3>().HideInventoryControls();
-                    FindObjectOfType<Tutorial4>().HideInventoryControls();
+                    FindObjectOfType<Tutorial4>().HideInventoryControls();  
                 }
+                showingUI = false;
             }
         }
 
@@ -419,6 +443,7 @@ public class Player : MonoBehaviour
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial2>().HideJump();
             }
+            showingUI = false;
         }
     }
 

@@ -44,7 +44,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!1 &4871209317924236542
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +184,7 @@ MonoBehaviour:
     - There's a bucket over there that you can use. I don't know how much help it
       will be though...
     - Please hurry... I don't want it to spread even more than it has...
+    sprite: {fileID: 0}
 --- !u!114 &1936134051602907370
 MonoBehaviour:
   m_ObjectHideFlags: 0

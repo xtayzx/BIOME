@@ -40,7 +40,7 @@ public class NPC : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("Object");
             triggerActive = true;
             NPCIcon.SetActive(true);
-            
+            FindObjectOfType<Player>().WithinCollider(true);
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().ShowControls();
             }
@@ -53,7 +53,7 @@ public class NPC : MonoBehaviour
         {
             triggerActive = false;
             NPCIcon.SetActive(false);
-
+            FindObjectOfType<Player>().WithinCollider(false);
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().HideControls();
             }

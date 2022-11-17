@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PushObject : MonoBehaviour
 {
-
     [SerializeField] private bool triggerActive = false;
 
     public GameObject icon;
@@ -41,9 +40,11 @@ public class PushObject : MonoBehaviour
                 // FindObjectOfType<AudioManager>().Play("Object");
                 triggerActive = true;
                 icon.SetActive(true);
+                FindObjectOfType<Player>().WithinCollider(true);
 
                 if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().ShowControls();
+                    
                 }
         }
     }
@@ -55,9 +56,11 @@ public class PushObject : MonoBehaviour
         {
             triggerActive = false;
             icon.SetActive(false);
+    FindObjectOfType<Player>().WithinCollider(false);
 
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().HideControls();
+                
             }
         }
     }

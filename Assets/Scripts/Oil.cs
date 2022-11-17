@@ -65,6 +65,7 @@ public class Oil : MonoBehaviour
         {
             triggerActive = false;
             oilIcon.SetActive(false);
+            FindObjectOfType<Player>().WithinCollider(false);
 
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().HideControls();
@@ -91,6 +92,7 @@ public class Oil : MonoBehaviour
         if (triggerActive) {
             FindObjectOfType<AudioManager>().Play("OilClean");
             oilObjectItem.SetActive(false);
+            FindObjectOfType<Player>().WithinCollider(false);
 
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().HideControls();

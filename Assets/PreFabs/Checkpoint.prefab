@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 8925796940117506998}
   - component: {fileID: 8925796940117506996}
   - component: {fileID: 8925796940117506999}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Collider
   m_TagString: Checkpoint
   m_Icon: {fileID: 0}

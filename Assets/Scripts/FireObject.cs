@@ -45,14 +45,17 @@ public class FireObject : MonoBehaviour
                 if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().ShowControls();
                 }
+                FindObjectOfType<Player>().WithinCollider(true);
             }
 
+            
             // If the player has water in the bucket and the player does not have the bucket of water selected in their inventory, if tutorial then show UI visuals
             if(waterObtained == true && player.GetComponent<Player>().playerSelectedItem() != player.GetComponent<Player>().PlayerSelectedFilledBucket()) {
                     if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                         FindObjectOfType<Tutorial3>().ShowInventoryControls();
                         FindObjectOfType<Tutorial4>().ShowInventoryControls();
                     }
+                FindObjectOfType<Player>().WithinCollider(true);
             }
         }
     }
@@ -64,6 +67,7 @@ public class FireObject : MonoBehaviour
         {
             triggerActive = false;
             fireIcon.SetActive(false);
+            FindObjectOfType<Player>().WithinCollider(false);
 
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().HideControls();
@@ -93,10 +97,11 @@ public class FireObject : MonoBehaviour
             fireObjectItem.SetActive(false);
             player.GetComponent<Player>().PlayerNoBucket();
             player.GetComponent<Player>().Bucket(0);
-
+            FindObjectOfType<Player>().WithinCollider(false);
+            
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().HideControls();
-                FindObjectOfType<Tutorial3>().HideInventoryControls();
+                FindObjectOfType<Tutorial3>().HideInventoryControls(); 
             }
         }
     }

@@ -41,7 +41,8 @@ public class Bucket : MonoBehaviour
             BucketIcon.SetActive(true);
             
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
-            FindObjectOfType<Tutorial>().ShowControls();
+                FindObjectOfType<Tutorial>().ShowControls();
+                FindObjectOfType<Player>().WithinCollider(true);
             }
         }
     }
@@ -72,7 +73,8 @@ public class Bucket : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("Interact");
 
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
-            FindObjectOfType<Tutorial>().HideControls();
+                FindObjectOfType<Tutorial>().HideControls();
+                FindObjectOfType<Player>().WithinCollider(false);
             }
 
             BucketObject.SetActive(false); //Remove bucket item from the level
