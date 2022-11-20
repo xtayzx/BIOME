@@ -62,7 +62,7 @@ public class InteractiveObject : MonoBehaviour
     private void Update()
     {
         //Keyboard Action
-        if (triggerActive && Input.GetKeyDown(KeyCode.E))
+        if (triggerActive && Input.GetKeyDown(KeyCode.J))
         {
             Interact();
         }

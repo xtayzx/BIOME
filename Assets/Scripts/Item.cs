@@ -23,11 +23,12 @@ public enum ItemType {
     Apple,
     OilCleaner,
     SaveDuck,
-    Trash
+    Trash,
+    Star
 }
 
 public enum ActionType {
     Tool,
     Food,
-    Trash
+    Collectable
 }

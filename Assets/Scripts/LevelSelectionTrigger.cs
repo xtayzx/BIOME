@@ -28,10 +28,11 @@ public class LevelSelectionTrigger : MonoBehaviour
         controls.Gameplay.Disable();
     }
 
-    private void Update()
+    void Update()
     {
+        FindObjectOfType<LevelText>().LoadText();
         //Keyboard Action
-        if (triggerActive && Input.GetKeyDown(KeyCode.E))
+        if (triggerActive && Input.GetKeyDown(KeyCode.J))
         {
             Interact();
         }
@@ -47,7 +48,7 @@ public class LevelSelectionTrigger : MonoBehaviour
 
                 FindObjectOfType<Player>().SelectedLevel(levelNum);
                 FindObjectOfType<LevelText>().ShowText();
-
+                
                 if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                     FindObjectOfType<Tutorial>().ShowControls();
                 }

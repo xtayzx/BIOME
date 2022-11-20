@@ -11,6 +11,10 @@ public class DialogueManager : MonoBehaviour
     public Image image;
     public GameObject player;
     private Queue<string> sentences;
+    private bool skip = false;
+    private string currentSentence;
+
+    private bool showSecondarySentences = false;
 
     public Animator animator;
     public Animator animatorInventory;
@@ -36,36 +40,60 @@ public class DialogueManager : MonoBehaviour
     
         nameText.text = dialogue.name;
 
-        // Clear the queued sentences and then load the sentences for the NPC being interacted with
-        sentences.Clear();
-        foreach (string sentence in dialogue.sentences) {
-            sentences.Enqueue(sentence);
-        }
-
         //Load the image of the NPC speaking
         image.sprite = dialogue.sprite;
 
-        //Start the conversation
-        DisplayNextSentence();
+        if(showSecondarySentences == false) {
+            // Clear the queued sentences and then load the sentences for the NPC being interacted with
+            sentences.Clear();
+            foreach (string sentence in dialogue.sentences) {
+                sentences.Enqueue(sentence);
+            }
+
+            //Start the conversation
+            DisplayNextSentence();
+        }
+
+        else if(showSecondarySentences == true) {
+            // Clear the queued sentences and then load the sentences for the NPC being interacted with
+            sentences.Clear();
+            foreach (string sentence in dialogue.otherSentences) {
+                sentences.Enqueue(sentence);
+            }
+
+            //Start the conversation
+            DisplayNextSentence();
+        }
     }
 
     public void DisplayNextSentence () {
-        if (sentences.Count == 0) {
+
+        //If player would like to skip the loading of the dialogue
+        if(skip == true) {
+            StopAllCoroutines();
+            dialogueText.text = "";
+            dialogueText.text = currentSentence;
+            skip = false;
+        }
+        
+        //Loading dialogue from start and typing animation
+        else if(skip == false) {
+            if (sentences.Count == 0) {
             EndDialogue();
             return;
+            }
+
+            //Get next in queue
+            string sentence = sentences.Dequeue();
+            currentSentence = sentence;
+
+            //Wait till last sentence finishes
+            StopAllCoroutines();
+
+            //Animate next sentence
+            StartCoroutine(TypeSentence(sentence));
+            skip = true;
         }
-
-        //Get next in queue
-        string sentence = sentences.Dequeue();
-
-        //Wait till last sentence finishes
-        StopAllCoroutines();
-
-        //Animate next sentence
-        StartCoroutine(TypeSentence(sentence));
-        
-        // dialogueText.text = sentence;
-        // Debug.Log(sentence);
     }
 
     // Animate the sentence
@@ -76,6 +104,7 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += letter;
             yield return null;
         }
+        skip = false;
     }
 
     // When the dialogue is finished
@@ -90,6 +119,14 @@ public class DialogueManager : MonoBehaviour
 
         // Say the player can now talk interact with a new NPC
         player.GetComponent<Player>().startConvoValue(1);
+    }
+
+    public void CompletedGoal(bool state) {
+        showSecondarySentences = state;
+    }
+
+    public bool ShowStateCompletedGoal() {
+        return showSecondarySentences;
     }
 
 }

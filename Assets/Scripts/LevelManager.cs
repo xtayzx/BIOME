@@ -18,6 +18,8 @@ public class LevelManager : MonoBehaviour
     private int trashScore;
     private int finalScore;
 
+    private int completedTasks = 0;
+
     // When the player reaches the finish of the level 
     public void CompleteLevel() {
         FreezeGame();
@@ -39,6 +41,12 @@ public class LevelManager : MonoBehaviour
     }
 
     void Update() {
+
+        if(completedTasks >= 3) {
+            CompleteLevel();
+            completedTasks = 0;
+        }
+
         levelScore = FindObjectOfType<Timer>().FinalLevelScore(); //Set final level score
 
         if(FindObjectOfType<Player>().TrashTotal() > 0) {
@@ -77,5 +85,9 @@ public class LevelManager : MonoBehaviour
         //Set a new selected object
         EventSystem.current.SetSelectedGameObject(firstButton);
 
+    }
+
+    public void AddCompletedTasks() {
+        completedTasks++;
     }
 }

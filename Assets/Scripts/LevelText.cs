@@ -17,7 +17,7 @@ public class LevelText : MonoBehaviour
         // levelScoreText = levelScore.ToString();
     }
 
-    public void ShowText() {
+    public void LoadText(){
         if (selectedLevel == 1) {
             levelScore = FindObjectOfType<GameManager>().LevelScoreValue(selectedLevel-1);
             levelText.text = "LEVEL 1 SCORE: "+levelScore;
@@ -32,6 +32,9 @@ public class LevelText : MonoBehaviour
             levelScore = FindObjectOfType<GameManager>().LevelScoreValue(selectedLevel-1);
             levelText.text = "LEVEL 3 SCORE: "+levelScore;
         }
+    }
+
+    public void ShowText() {
         animator.SetBool("IsSelected", true);
     }
 

@@ -10,5 +10,8 @@ public class Dialogue {
     [TextArea(3,10)] //How much text for each sentence
     public string[] sentences;
 
+    [TextArea(3,10)] //How much text for each sentence
+    public string[] otherSentences;
+
     [SerializeField] public Sprite sprite; // NPC image
 }

@@ -80,7 +80,7 @@ public class Oil : MonoBehaviour
         cleanerObtained = player.GetComponent<Player>().OilCleanerObtainedValue();
 
         //Keyboard Action
-        if (triggerActive && Input.GetKeyDown(KeyCode.E))
+        if (triggerActive && Input.GetKeyDown(KeyCode.J))
         {
             Interact();
         }

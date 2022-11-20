@@ -46,12 +46,12 @@ public class EndTrigger : MonoBehaviour
     }
 
     // If the player enters the finish area, then end the level
-    public void OnTriggerEnter(Collider exit) {
-        if (exit.CompareTag("Player"))
-            {
-              levelManager.CompleteLevel();
-            }
-    }
+    // public void OnTriggerEnter(Collider exit) {
+    //     if (exit.CompareTag("Player"))
+    //         {
+    //           levelManager.CompleteLevel();
+    //         }
+    // }
 
     // Return to the level hub
     public void LevelSelection() {

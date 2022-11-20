@@ -20,6 +20,8 @@ TagManager:
   - LevelTwo
   - LevelThree
   - Collider
+  - Bear
+  - Duck
   layers:
   - Default
   - TransparentFX

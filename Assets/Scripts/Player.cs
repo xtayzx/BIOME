@@ -51,8 +51,9 @@ public class Player : MonoBehaviour
     [SerializeField] public Item oilCleaner;
     [SerializeField] public Item duckItem;
     [SerializeField] public Item trash;
+    [SerializeField] public Item star;
 
-    private int inventoryApples = 0; //TODO - change later with other collectable items
+    private int inventoryStars = 0; //TODO - change later with other collectable items
     private int inventoryTrash = 0;
     private bool inWater = true; // Although not in the water to start, this is so it doesn't trigger upon the game loading
     private int selectedLevel;
@@ -65,6 +66,7 @@ public class Player : MonoBehaviour
     // 3 - Oil Cleaner
     // 4 - Duck Item
     // 5 - Trash Item - TODO - maybe move this closer to the top of the key
+    // 6 - Star/Collectable
 
     void Awake () {
         //CONTROLLER FUNCTIONALITY
@@ -140,7 +142,7 @@ public class Player : MonoBehaviour
         }
 
         //GETTING WATER
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.J))
         {
             Interact();
         }
@@ -239,9 +241,9 @@ public class Player : MonoBehaviour
     public void CollectInventory(int num) {
         if (num == 2) {
             PickupItem(2);
-            inventoryApples++;
-            Debug.Log("Number of apples: "+inventoryApples);
-            FindObjectOfType<LevelItems>().ShowItem(inventoryApples); //For collecting items for Level 1 and getting a star
+            // inventoryApples++;
+            // Debug.Log("Number of apples: "+inventoryApples);
+            // FindObjectOfType<LevelItems>().ShowItem(inventoryApples); //For collecting items for Level 1 and getting a star
         }
 
         else if (num == 3) {
@@ -262,6 +264,12 @@ public class Player : MonoBehaviour
             Debug.Log("Picked up TRASH");
         }
         
+        else if(num == 6) {
+            PickupItem(6);
+            inventoryStars++;
+            Debug.Log("Number of stars: "+inventoryStars);
+            FindObjectOfType<LevelItems>().ShowItem(inventoryStars); //For collecting items for Level 1 and getting a star
+        }
     }
 
     // PLAYER SELECTED ITEMS
@@ -271,6 +279,10 @@ public class Player : MonoBehaviour
 
     public Item PlayerSelectedFilledBucket() {
         return filledBucket;
+    }
+
+    public Item PlayerSelectedApple() {
+        return apple;
     }
 
     public Item PlayerSelectedOilCleaner() {
@@ -400,6 +412,12 @@ public class Player : MonoBehaviour
             }
             showingUI = true;
         }
+
+        // if (player.CompareTag("Bear") && selectedItem == apple) {
+        //     // FindObjectOfType<Tutorial4>().ShowInventoryControls();
+        //     FindObjectOfType<NPC>().TriggerCompletedState(true);
+        //     Debug.Log("running the trigger code");
+        // }
 
         if (player.CompareTag("TutorialJump"))
         {
