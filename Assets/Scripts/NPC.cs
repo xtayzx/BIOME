@@ -62,6 +62,19 @@ public class NPC : MonoBehaviour
                     }
                 }
 
+                else if(FindObjectOfType<GameManager>().GetActiveLevel() == 2) {
+                    if(player.GetComponent<Player>().playerSelectedItem() == player.GetComponent<Player>().PlayerSelectedApple()) {
+                        //show other icon
+                        NPCActionIcon.SetActive(true);
+                        triggerCompletedState = true;
+                    }
+
+                    //Just wanting to talk to the player
+                    else {
+                        NPCIcon.SetActive(true);
+                    }
+                }
+
                 //For testing this is 0, should be 2 for Level 3
                 if(FindObjectOfType<GameManager>().GetActiveLevel() == 3) {
                     // if(player.GetComponent<Player>().playerSelectedItem() == player.GetComponent<Player>().PlayerSelectedApple()) {
@@ -132,6 +145,11 @@ public class NPC : MonoBehaviour
             if(FindObjectOfType<GameManager>().GetActiveLevel() == 1) {
                 player.GetComponent<Player>().UseSelectedItem();
                 FindObjectOfType<LevelManager>().AddCompletedTasks();
+            }
+
+            else if(FindObjectOfType<GameManager>().GetActiveLevel() == 2) {
+                player.GetComponent<Player>().UseSelectedItem();
+                FindObjectOfType<LevelManager>().FinishLevel2();
             }
 
             //Level 3

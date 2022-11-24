@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 public class LaurelMenu : MonoBehaviour
 {
@@ -12,9 +14,15 @@ public class LaurelMenu : MonoBehaviour
     PlayerControls controls;
     private GameManager gameManager;
 
+    private int gameState;
+
+    public TextMeshProUGUI taskText;
+
     void Awake() {
         controls = new PlayerControls();
         controls.Gameplay.Objective.performed += ctx => Objective();
+
+        gameState = FindObjectOfType<GameManager>().GetActiveLevel();
     }
 
     void OnEnable() {
@@ -23,6 +31,28 @@ public class LaurelMenu : MonoBehaviour
 
     void OnDisable() {
         controls.Gameplay.Disable();
+    }
+
+    void Start() {
+        //If game is in the level hub
+        if(gameState == 0) {
+            taskText.text = "Adventure around. What do the animals of the land say?";
+        }
+
+        //If at level 1
+        if(gameState == 1) {
+            taskText.text = "Is there any food that you can find for the bears?";
+        }
+
+        //If at level 2
+        if(gameState == 2) {
+            taskText.text = "Beware of the poision ivy they say";
+        }
+
+        //If at level 3
+        if(gameState == 3) {
+            taskText.text = "Where are all the ducklings, can you find them?";
+        }
     }
 
     void Update()
@@ -39,10 +69,12 @@ public class LaurelMenu : MonoBehaviour
     }
 
     public void Resume() {
-        // FindObjectOfType<AudioManager>().Play("MainSong");
         laurelMenuUI.SetActive(false);
         inventory.SetActive(true);
         checkpoint.SetActive(true);
+
+        taskText.overrideColorTags = true;
+        taskText.GetComponent<TextMeshProUGUI>().color = new Color32 (255,255,255,0);
 
         if(FindObjectOfType<LevelManager>().Tutorial() == true) {
             inventoryControls.SetActive(true);
@@ -59,7 +91,6 @@ public class LaurelMenu : MonoBehaviour
             return;
         }
         
-        // FindObjectOfType<AudioManager>().Pause("MainSong");
         laurelMenuUI.SetActive(true);
         inventory.SetActive(false);
         checkpoint.SetActive(false);
@@ -73,66 +104,7 @@ public class LaurelMenu : MonoBehaviour
         LaurelLoaded = true;
         FindObjectOfType<GameManager>().SetPaused(true);
 
-        // //Clear selected object 
-        // EventSystem.current.SetSelectedGameObject(null);
-        // //Set a new selected object
-        // EventSystem.current.SetSelectedGameObject(resumeButton);
-
+        taskText.overrideColorTags = true;
+        taskText.GetComponent<TextMeshProUGUI>().color = new Color32 (255,255,255,255);
     }
-
-    // public void LoadMenu() {
-
-    //     // Hide and load elements
-    //     pauseMenuUI.SetActive(false);
-    //     inventory.SetActive(true);
-    //     checkpoint.SetActive(true);
-
-    //     if(FindObjectOfType<LevelManager>().Tutorial() == true) {
-    //         inventoryControls.SetActive(true);
-    //     }
-
-    //     Time.timeScale = 1f;
-    //     GameIsPaused = false;
-    //     SceneManager.LoadScene("Menu");
-    // }
-
-    // public void ResetGame() {
-
-    //      // Hide and load elements
-    //     pauseMenuUI.SetActive(false);
-    //     inventory.SetActive(true);
-    //     checkpoint.SetActive(true);
-
-    //     if(FindObjectOfType<LevelManager>().Tutorial() == true) {
-    //         inventoryControls.SetActive(true);
-    //     }
-
-    //     Time.timeScale = 1f;
-    //     GameIsPaused = false;
-
-    //     // Reset all objects in the level
-    //     PushObject[] pushObjects = FindObjectsOfType<PushObject>();
-    //     for (int i = 0; i < pushObjects.Length; i++) {
-    //         {
-    //             pushObjects[i].ObjectStartPosition();
-    //         }
-    //     }
-
-    //     FindObjectOfType<Player>().StartAtCheckpoint();
-    //     FindObjectOfType<AudioManager>().Play("MainSong");
-
-    //     //TODO: what does this classify, what is the reset?
-    // }
-
-    // public void FallResetGame() {
-    //     FindObjectOfType<Player>().StartAtCheckpoint();
-    //     FindObjectOfType<AudioManager>().Play("Checkpoint");
-
-    //     //TODO: what does this classify, what is the reset?
-    // }
-
-    // public void QuitGame () {
-    //     // Debug.Log("QUIT!");
-    //     Application.Quit();
-    // }
 }

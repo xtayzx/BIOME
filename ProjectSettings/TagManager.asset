@@ -22,6 +22,7 @@ TagManager:
   - Collider
   - Bear
   - Duck
+  - Ivy
   layers:
   - Default
   - TransparentFX
@@ -35,7 +36,7 @@ TagManager:
   - Collider
   - Player
   - Walls
-  - 
+  - Ivy
   - 
   - 
   - 

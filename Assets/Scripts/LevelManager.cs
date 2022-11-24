@@ -90,4 +90,8 @@ public class LevelManager : MonoBehaviour
     public void AddCompletedTasks() {
         completedTasks++;
     }
+
+    public void FinishLevel2() {
+        completedTasks = 3;
+    }
 }
