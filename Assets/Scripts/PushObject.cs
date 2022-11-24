@@ -70,7 +70,7 @@ public class PushObject : MonoBehaviour
         // input = new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical"));
 
         //Keyboard Action
-        if (triggerActive && Input.GetKeyDown(KeyCode.E))
+        if (triggerActive && Input.GetKeyDown(KeyCode.J))
         {
             Interact();
         }

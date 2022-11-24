@@ -14,4 +14,12 @@ public class Tutorial : MonoBehaviour
     public void HideControls() {
         controls.SetBool("IsMoved", false);
     }
+
+    public void ShowTalk() {
+        controls.SetBool("IsTalking", true);
+    }
+    
+    public void HideTalk() {
+        controls.SetBool("IsTalking", false);
+    }
 }

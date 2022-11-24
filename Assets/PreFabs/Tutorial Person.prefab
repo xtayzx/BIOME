@@ -74,14 +74,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8357166134415097543}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5625, y: 1.25, z: 1.5625}
+  m_LocalScale: {x: 1.25, y: 1, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3079928795327021608}
   - {fileID: 1349216290290939791}
   - {fileID: 3563552060716895730}
+  - {fileID: 3455679665175060944}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -100,7 +101,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8357166134415097543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -182,17 +183,21 @@ MonoBehaviour:
     sentences:
     - Hi there! I guess you're new here? I've never seen you around before.
     - I'll tell you about what you can do here!
-    - To move around, use the arrow keys or use ASDW to navigate your way through.
-    - To interact with items that have a little yellow thingy on top, press E (or
-      the right button on your controller)
+    - To move around, use the arrow keys or use WASD to navigate your way through
+      (or on your controller, use the left joystick)
+    - To talk with characters when you see the little yellow icon appear on the top,
+      press K (or the right button on your controller)
+    - If there are elements that have a blue icon, press J (or the left button on
+      your controller) to interact with them
     - To jump, press the spacebar (or on your controller, press the south button)
-    - If you find items along the way, awesome! To use them, make sure you have it
-      selected in your inventory.
-    - You can navigate by pressing 1-6 on the keyboard (or using the bumpers on your
-      controller)
+    - If you find items along the way, awesome! To use them, make sure you have them
+      item selected in your inventory.
+    - You can navigate your inventory by pressing 1-6 on the keyboard (or using the
+      top bumpers on your controller)
     - I know that's a lot to remember, but don't worry I'll try to help you along
       the way while you go adventure!
     - Have fun and feel free to come back if you forget anything!
+    otherSentences: []
     sprite: {fileID: 21300000, guid: a16137a970b250140bd5e0fd95dd4a4f, type: 3}
 --- !u!114 &3079928793945232083
 MonoBehaviour:
@@ -208,8 +213,106 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerActive: 0
   NPCObject: {fileID: 8357166134415097543}
-  NPCIcon: {fileID: 1349216290290939788}
+  NPCIcon: {fileID: 4616009404022943191}
+  NPCActionIcon: {fileID: 0}
   player: {fileID: 0}
+  levelStateNPC: 0
+--- !u!1001 &682543029276141976
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8357166134415097536}
+    m_Modifications:
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.24000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.24000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293908091799733327, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_Name
+      value: TalkIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293908091799733327, guid: 72c644e147723f449b284f76d8180cb1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 72c644e147723f449b284f76d8180cb1, type: 3}
+--- !u!4 &3455679665175060944 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2778135052387649608, guid: 72c644e147723f449b284f76d8180cb1,
+    type: 3}
+  m_PrefabInstance: {fileID: 682543029276141976}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4616009404022943191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5293908091799733327, guid: 72c644e147723f449b284f76d8180cb1,
+    type: 3}
+  m_PrefabInstance: {fileID: 682543029276141976}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3079928794898917750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -284,12 +387,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bb25e9c66df4a64d9b8606193f3c3e7, type: 3}
---- !u!1 &1349216290290939788 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4037331908701740794, guid: 2bb25e9c66df4a64d9b8606193f3c3e7,
-    type: 3}
-  m_PrefabInstance: {fileID: 3079928794898917750}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1349216290290939791 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4037331908701740793, guid: 2bb25e9c66df4a64d9b8606193f3c3e7,
@@ -311,22 +408,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 09254eb5a5b6c854ebfd2dfca029ee43,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.64
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 09254eb5a5b6c854ebfd2dfca029ee43,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 09254eb5a5b6c854ebfd2dfca029ee43,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.64
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 09254eb5a5b6c854ebfd2dfca029ee43,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.554
+      value: 3.96
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 09254eb5a5b6c854ebfd2dfca029ee43,
         type: 3}
@@ -372,6 +469,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 09254eb5a5b6c854ebfd2dfca029ee43,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 09254eb5a5b6c854ebfd2dfca029ee43,
         type: 3}

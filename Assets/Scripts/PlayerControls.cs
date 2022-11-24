@@ -80,6 +80,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Objective"",
+                    ""type"": ""Button"",
+                    ""id"": ""c6279756-0985-4695-a9e9-56756a6a94ee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -108,7 +117,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""347ff499-2178-46d8-8588-71102fd2ada9"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -119,7 +128,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""35bc3b0b-5e19-4cfa-a179-3d4a54e9b461"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -146,6 +155,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""InventoryDecrease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2119a536-d7cf-46f4-b15e-177e24b39538"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Objective"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -190,6 +210,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay_Conversation = m_Gameplay.FindAction("Conversation", throwIfNotFound: true);
         m_Gameplay_InventoryIncrease = m_Gameplay.FindAction("InventoryIncrease", throwIfNotFound: true);
         m_Gameplay_InventoryDecrease = m_Gameplay.FindAction("InventoryDecrease", throwIfNotFound: true);
+        m_Gameplay_Objective = m_Gameplay.FindAction("Objective", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Select = m_Menu.FindAction("Select", throwIfNotFound: true);
@@ -258,6 +279,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Conversation;
     private readonly InputAction m_Gameplay_InventoryIncrease;
     private readonly InputAction m_Gameplay_InventoryDecrease;
+    private readonly InputAction m_Gameplay_Objective;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -268,6 +290,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Conversation => m_Wrapper.m_Gameplay_Conversation;
         public InputAction @InventoryIncrease => m_Wrapper.m_Gameplay_InventoryIncrease;
         public InputAction @InventoryDecrease => m_Wrapper.m_Gameplay_InventoryDecrease;
+        public InputAction @Objective => m_Wrapper.m_Gameplay_Objective;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -295,6 +318,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @InventoryDecrease.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventoryDecrease;
                 @InventoryDecrease.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventoryDecrease;
                 @InventoryDecrease.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnInventoryDecrease;
+                @Objective.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnObjective;
+                @Objective.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnObjective;
+                @Objective.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnObjective;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -317,6 +343,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @InventoryDecrease.started += instance.OnInventoryDecrease;
                 @InventoryDecrease.performed += instance.OnInventoryDecrease;
                 @InventoryDecrease.canceled += instance.OnInventoryDecrease;
+                @Objective.started += instance.OnObjective;
+                @Objective.performed += instance.OnObjective;
+                @Objective.canceled += instance.OnObjective;
             }
         }
     }
@@ -362,6 +391,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnConversation(InputAction.CallbackContext context);
         void OnInventoryIncrease(InputAction.CallbackContext context);
         void OnInventoryDecrease(InputAction.CallbackContext context);
+        void OnObjective(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

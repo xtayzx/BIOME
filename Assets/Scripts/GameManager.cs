@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private int levels = 3; //There are 3 levels in the game
 
     public static GameManager instance;
+    private bool gamePaused = false;
 
     void Awake() {
         //So only one instance of GameManager is created and is carried through each scene
@@ -82,6 +83,14 @@ public class GameManager : MonoBehaviour
         return completedLevel;
     }
 
+    public bool IsGamePaused() {
+        return gamePaused;
+    }
+
+    public void SetPaused(bool paused) {
+        gamePaused = paused;
+    }
+
     // Return total score across levels
     public int TotalScoreValue() {
         for(int i = 0; i < levels; i++) {
@@ -97,6 +106,10 @@ public class GameManager : MonoBehaviour
 
         else if (num == 1) {
             return levelScores[1];
+        }
+
+        else if (num == 2) {
+            return levelScores[2];
         }
 
         else return totalScore;

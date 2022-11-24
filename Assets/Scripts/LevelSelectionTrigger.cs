@@ -30,7 +30,9 @@ public class LevelSelectionTrigger : MonoBehaviour
 
     void Update()
     {
-        FindObjectOfType<LevelText>().LoadText();
+        if(FindObjectOfType<GameManager>().IsGamePaused() == false) {
+            FindObjectOfType<LevelText>().LoadText();
+        }
         //Keyboard Action
         if (triggerActive && Input.GetKeyDown(KeyCode.J))
         {

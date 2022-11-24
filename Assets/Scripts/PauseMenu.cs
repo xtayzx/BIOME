@@ -50,6 +50,7 @@ public class PauseMenu : MonoBehaviour
 
         Time.timeScale = 1f;
         GameIsPaused = false;
+        FindObjectOfType<GameManager>().SetPaused(false);
     }
 
     void Pause() {
@@ -70,6 +71,7 @@ public class PauseMenu : MonoBehaviour
         //Freezes the game
         Time.timeScale = 0f;
         GameIsPaused = true;
+        FindObjectOfType<GameManager>().SetPaused(true);
 
         //Clear selected object 
         EventSystem.current.SetSelectedGameObject(null);

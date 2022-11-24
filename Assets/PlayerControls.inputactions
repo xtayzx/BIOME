@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Objective",
+                    "type": "Button",
+                    "id": "c6279756-0985-4695-a9e9-56756a6a94ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -86,7 +95,7 @@
                 {
                     "name": "",
                     "id": "347ff499-2178-46d8-8588-71102fd2ada9",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -97,7 +106,7 @@
                 {
                     "name": "",
                     "id": "35bc3b0b-5e19-4cfa-a179-3d4a54e9b461",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -124,6 +133,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "InventoryDecrease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2119a536-d7cf-46f4-b15e-177e24b39538",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Objective",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

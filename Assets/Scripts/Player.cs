@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     // private float horizontalInput;
     [SerializeField] private Rigidbody rigidbodyComponent; //Set player RigidBody
     
-    private float landSpeed = 2.5f; //Speed on land
+    private float landSpeed = 3.5f; //Speed on land
     private float waterSpeed = 1f; //Speed in water
     private float speed; //The speed the player is moving at
 
@@ -51,9 +51,9 @@ public class Player : MonoBehaviour
     [SerializeField] public Item oilCleaner;
     [SerializeField] public Item duckItem;
     [SerializeField] public Item trash;
-    [SerializeField] public Item star;
+    // [SerializeField] public Item star;
 
-    private int inventoryStars = 0; //TODO - change later with other collectable items
+    // private int inventoryStars = 0; //TODO - change later with other collectable items
     private int inventoryTrash = 0;
     private bool inWater = true; // Although not in the water to start, this is so it doesn't trigger upon the game loading
     private int selectedLevel;
@@ -262,14 +262,15 @@ public class Player : MonoBehaviour
             PickupItem(5);
             inventoryTrash++;
             Debug.Log("Picked up TRASH");
+            FindObjectOfType<LevelItems>().ShowItem(inventoryTrash); //For collecting items for Level 1 and getting a star
         }
         
-        else if(num == 6) {
-            PickupItem(6);
-            inventoryStars++;
-            Debug.Log("Number of stars: "+inventoryStars);
-            FindObjectOfType<LevelItems>().ShowItem(inventoryStars); //For collecting items for Level 1 and getting a star
-        }
+        // else if(num == 6) {
+        //     PickupItem(6);
+        //     inventoryStars++;
+        //     Debug.Log("Number of stars: "+inventoryStars);
+        //     FindObjectOfType<LevelItems>().ShowItem(inventoryStars); //For collecting items for Level 1 and getting a star
+        // }
     }
 
     // PLAYER SELECTED ITEMS

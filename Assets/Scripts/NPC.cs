@@ -62,8 +62,8 @@ public class NPC : MonoBehaviour
                     }
                 }
 
-                //For testing this is 0, should be 2 for Level 2
-                if(FindObjectOfType<GameManager>().GetActiveLevel() == 2) {
+                //For testing this is 0, should be 2 for Level 3
+                if(FindObjectOfType<GameManager>().GetActiveLevel() == 3) {
                     // if(player.GetComponent<Player>().playerSelectedItem() == player.GetComponent<Player>().PlayerSelectedApple()) {
                         //show other icon
                         NPCActionIcon.SetActive(true);
@@ -83,7 +83,7 @@ public class NPC : MonoBehaviour
 
             FindObjectOfType<Player>().WithinCollider(true);
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
-                FindObjectOfType<Tutorial>().ShowControls();
+                FindObjectOfType<Tutorial>().ShowTalk();
             }
         }
     }
@@ -102,7 +102,7 @@ public class NPC : MonoBehaviour
 
             FindObjectOfType<Player>().WithinCollider(false);
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
-                FindObjectOfType<Tutorial>().HideControls();
+                FindObjectOfType<Tutorial>().HideTalk();
             }
         }
     }
@@ -134,8 +134,8 @@ public class NPC : MonoBehaviour
                 FindObjectOfType<LevelManager>().AddCompletedTasks();
             }
 
-            //Level 2
-            else if(FindObjectOfType<GameManager>().GetActiveLevel() == 0) {
+            //Level 3
+            else if(FindObjectOfType<GameManager>().GetActiveLevel() == 3) {
                 player.GetComponent<Player>().PickupItem(4);
                 NPCObject.SetActive(false);
                 FindObjectOfType<Level2Ducks>().AddDuck();
@@ -177,6 +177,10 @@ public class NPC : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void ChangeCompletedGoal(bool state) {
+        completedGoal = state;
     }
 
     // public void TriggerCompletedState(bool state) {
