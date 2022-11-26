@@ -42,7 +42,6 @@ public class NPC : MonoBehaviour
     {
         if (npc.CompareTag("Player"))
         {
-            FindObjectOfType<AudioManager>().Play("Object");
             triggerActive = true;
 
             //here about showing the other icon
@@ -54,11 +53,13 @@ public class NPC : MonoBehaviour
                         //show other icon
                         NPCActionIcon.SetActive(true);
                         triggerCompletedState = true;
+                        FindObjectOfType<AudioManager>().Play("Action");
                     }
 
                     //Just wanting to talk to the player
                     else {
                         NPCIcon.SetActive(true);
+                        FindObjectOfType<AudioManager>().Play("Object");
                     }
                 }
 
@@ -67,22 +68,26 @@ public class NPC : MonoBehaviour
                         //show other icon
                         NPCActionIcon.SetActive(true);
                         triggerCompletedState = true;
+                        FindObjectOfType<AudioManager>().Play("Action");
                     }
 
                     //Just wanting to talk to the player
                     else {
                         NPCIcon.SetActive(true);
+                        FindObjectOfType<AudioManager>().Play("Object");
                     }
                 }
 
                 if(FindObjectOfType<GameManager>().GetActiveLevel() == 3) {
                         NPCActionIcon.SetActive(true);
                         triggerCompletedState = true;
+                        FindObjectOfType<AudioManager>().Play("Action");
                 }
             }
 
             else {
                 NPCIcon.SetActive(true);
+                FindObjectOfType<AudioManager>().Play("Object");
             }
 
             FindObjectOfType<Player>().WithinCollider(true);

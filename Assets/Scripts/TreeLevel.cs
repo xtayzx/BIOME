@@ -56,6 +56,11 @@ public class TreeLevel : MonoBehaviour
             tree2.SetActive(false);
             tree3.SetActive(false);
 
+            //When game complete, these are true - this is for playtesting only and to see if lvl 2 is too hard
+            tree4.SetActive(false);
+            tree5.SetActive(false);
+            tree6.SetActive(false);
+
             deer.SetActive(false);
             bobcat.SetActive(false);
 
