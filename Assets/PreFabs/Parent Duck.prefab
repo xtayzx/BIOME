@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4414225328922132159}
   - component: {fileID: 5440342160384343774}
   - component: {fileID: 7207727757823398560}
-  - component: {fileID: 1506614860853687274}
   m_Layer: 7
   m_Name: Parent Duck
   m_TagString: NPC
@@ -165,18 +164,6 @@ MonoBehaviour:
   NPCActionIcon: {fileID: 6629727254490724351}
   player: {fileID: 0}
   levelStateNPC: 0
---- !u!114 &1506614860853687274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4414225328922132148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b4f8f997a19c234eb7fe05b6be39570, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7207727759129690716
 GameObject:
   m_ObjectHideFlags: 0

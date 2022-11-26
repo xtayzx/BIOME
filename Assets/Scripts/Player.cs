@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     // private float horizontalInput;
     [SerializeField] private Rigidbody rigidbodyComponent; //Set player RigidBody
     
-    private float landSpeed = 3.5f; //Speed on land
+    private float landSpeed = 3f; //Speed on land
     private float waterSpeed = 1f; //Speed in water
     private float speed; //The speed the player is moving at
 
@@ -80,16 +80,8 @@ public class Player : MonoBehaviour
         if(FindObjectOfType<GameManager>().GetActiveLevel() == 0) {
             //Add here for Level 3 and they have all the tools then
             Debug.Log("Level Value: "+FindObjectOfType<GameManager>().CompletedLevelValue());
-            if(FindObjectOfType<GameManager>().CompletedLevelValue() == 2) {
-                CollectInventory(3);
-                //The duck tool
-                this.transform.position = levelHubStartPosition;
-                Bucket(0);
-            }
-
-            else if(FindObjectOfType<GameManager>().CompletedLevelValue() == 1) {
-                Bucket(0);
-                this.transform.position = levelHubStartPosition;
+            if(FindObjectOfType<GameManager>().CompletedLevelValue() >= 1) {
+                this.transform.position = levelHubStartPosition; //TODO: This position might need to be changed later
             }
         }
     }
@@ -151,12 +143,6 @@ public class Player : MonoBehaviour
         if (this.transform.position.y < fallPoint) {
             FindObjectOfType<PauseMenu>().FallResetGame();
         }
-
-        // if (!startConvo) {
-        //     rigidbodyComponent.velocity.x = 0;
-        //     rigidbodyComponent.velocity.y = 0;
-        //     rigidbodyComponent.velocity.z = 0;
-        // }
 
         // PLAYER FALLING
         if (rigidbodyComponent.velocity.y < fallingThreshold) {
@@ -265,6 +251,7 @@ public class Player : MonoBehaviour
             FindObjectOfType<LevelItems>().ShowItem(inventoryTrash); //For collecting items for Level 1 and getting a star
         }
         
+        // NO LONGER USING STAR ITEM
         // else if(num == 6) {
         //     PickupItem(6);
         //     inventoryStars++;
@@ -313,12 +300,11 @@ public class Player : MonoBehaviour
         // Check if space key is pressed down
         if (jumpKeyPressed)
         {
-            FindObjectOfType<AudioManager>().Play("Jump");
             float jumpPower = 5f;
             rigidbodyComponent.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
             jumpKeyPressed = false;
+            FindObjectOfType<AudioManager>().Play("Jump");
         }
-
        
     }
 

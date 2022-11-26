@@ -51,14 +51,12 @@ public class GameManager : MonoBehaviour
         }
 
         else if(activeLevel == 2) {
-            // levelScores[1] = score;
             if(score >= levelScores[1]){
                 levelScores[1] = score;
             }
         }
 
         else if(activeLevel == 3) {
-            // levelScores[2] = score;
             if(score >= levelScores[2]){
                 levelScores[2] = score;
             }
@@ -113,12 +111,9 @@ public class GameManager : MonoBehaviour
         }
 
         else return totalScore;
-
-        // else if (num == 2) {
-        //      return levelScores[2]
-        // }
     }
 
+    // STUFF FOR TRYING TO INTEGRATE SAVE COMPONENT BUT CURRENTLY NOT WORKING
     // public void SaveGameManager() {
     //     SaveGame.SaveGameManager(this);
     // }

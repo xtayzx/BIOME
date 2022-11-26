@@ -84,11 +84,11 @@ public class LevelSelectionTrigger : MonoBehaviour
             return;
         }
 
-        // else if (num == 3) {
-        //     SceneManager.LoadScene("Menu");
-        //     FindObjectOfType<GameManager>().CurrentActiveLevel(3);
-        //     return;
-        // }
+        else if (num == 3) {
+            SceneManager.LoadScene("Level3");
+            FindObjectOfType<GameManager>().CurrentActiveLevel(3);
+            return;
+        }
     }
 
     public void Interact()

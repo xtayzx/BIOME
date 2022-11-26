@@ -90,43 +90,37 @@ public class PushObject : MonoBehaviour
     {
         //For controller input
         if (triggerActive) {
-            // FindObjectOfType<AudioManager>().Play("Splash");
-            // a sound here to drag the rock
-            // icon.SetActive(false);
             rigidBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
             Debug.Log("PLAYER POS X: "+player.transform.position.x+" /// BLOCK POS X: "+transform.position.x+" /// PLAYER POS Z: "+player.transform.position.z+" /// BLOCK POS Z: "+transform.position.z);
 
             if(player.transform.position.x < transform.position.x && (player.transform.position.z < (transform.position.z+0.5)) && (player.transform.position.z > (transform.position.z-0.5))) {
                 rigidBody.velocity = movementX;
                 Debug.Log("Move block east");
-                
+                FindObjectOfType<AudioManager>().Play("RockPush");
                 return;
             }
 
             else if(player.transform.position.x > transform.position.x && (player.transform.position.z < (transform.position.z+0.5)) && (player.transform.position.z > (transform.position.z-0.5))) {
                 rigidBody.velocity = movementXNeg;
                 Debug.Log("Move block west");
-                // rigidBody.constraints = originalConstraints;
+                FindObjectOfType<AudioManager>().Play("RockPush");
                 return;
             }
 
             else if(player.transform.position.z < transform.position.z && (player.transform.position.x < (transform.position.x+0.5)) && (player.transform.position.x > (transform.position.x-0.5))) {
                 rigidBody.velocity = movementZ;
                 Debug.Log("Move block up");
-                // rigidBody.constraints = originalConstraints;
+                FindObjectOfType<AudioManager>().Play("RockPush");
                 return;
             }
 
             else if(player.transform.position.z > transform.position.z && (player.transform.position.x < (transform.position.x+0.5)) && (player.transform.position.x > (transform.position.x-0.5))) {
                 rigidBody.velocity = movementZNeg;
                 Debug.Log("Move block down");
-                // rigidBody.constraints = originalConstraints;
+                FindObjectOfType<AudioManager>().Play("RockPush");
                 return;
             }
             
-            // rigidBody.AddRelativeForce(movementZ);
-            // rigidBody.MovePosition(transform.position + (transform.forward * 20) * 2 * Time.deltaTime);
-            // rigidBody.constraints = Rigid
         }
     
         

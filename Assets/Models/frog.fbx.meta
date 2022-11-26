@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: addb185b96a99ec42803af8271a3647a
+guid: 216e5c805919f5246b7682b3abf9782b
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
-      name: applebase
-    second: {fileID: 2800000, guid: 23bda6fb22a82e34d9f6c6a34e4453ee, type: 3}
+      name: froggytexture
+    second: {fileID: 2800000, guid: 5867e1283375cd8419638715dc5f8f30, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

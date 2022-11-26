@@ -22,6 +22,10 @@ public class TreeLevel : MonoBehaviour
     public GameObject Duckling2;
     public GameObject Duckling3;
 
+    public GameObject deer;
+    public GameObject bobcat;
+    public GameObject rabbit;
+
     public GameObject MamaBear;
     public GameObject MamaDuck;
 
@@ -33,11 +37,14 @@ public class TreeLevel : MonoBehaviour
     
     void Update()
     {
-        //For testing or I will forget they exist
+        //Keeping them in for programming otherwise I will forget they exist
         if(completedLevel == 0) {
             Bear1.SetActive(false);
             Bear2.SetActive(false);
             Bear3.SetActive(false);
+
+            deer.SetActive(false);
+            bobcat.SetActive(false);
 
             Duckling1.SetActive(false);
             Duckling2.SetActive(false);
@@ -49,9 +56,16 @@ public class TreeLevel : MonoBehaviour
             tree2.SetActive(false);
             tree3.SetActive(false);
 
+            deer.SetActive(false);
+            bobcat.SetActive(false);
+
             Bear1.SetActive(true);
             Bear2.SetActive(true);
             Bear3.SetActive(true);
+
+            Duckling1.SetActive(false);
+            Duckling2.SetActive(false);
+            Duckling3.SetActive(false);
         }
 
         else if(completedLevel == 2) {
@@ -63,11 +77,16 @@ public class TreeLevel : MonoBehaviour
             tree5.SetActive(false);
             tree6.SetActive(false);
 
+            deer.SetActive(true);
+            bobcat.SetActive(true);
+
             Bear1.SetActive(true);
             Bear2.SetActive(true);
             Bear3.SetActive(true);
 
-            //The other NPCs here
+            Duckling1.SetActive(false);
+            Duckling2.SetActive(false);
+            Duckling3.SetActive(false);
         }
 
         //  All levels complete
@@ -84,10 +103,12 @@ public class TreeLevel : MonoBehaviour
             Bear2.SetActive(true);
             Bear3.SetActive(true);
 
+            deer.SetActive(true);
+            bobcat.SetActive(true);
+
             Duckling1.SetActive(true);
             Duckling2.SetActive(true);
             Duckling3.SetActive(true);
-            //The other NPCs here
         }
     }
 }

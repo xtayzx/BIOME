@@ -33,8 +33,6 @@ public class LevelManager : MonoBehaviour
 
         FindObjectOfType<GameManager>().LevelScore(finalScore); //Return back to Game Manager
 
-        // Debug.Log("LEVEL WON");
-
         //Hide the inventory and show the items collected/statistics
         controlsUI.SetActive(false);
         completeLevelUI.SetActive(true);

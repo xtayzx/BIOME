@@ -75,18 +75,9 @@ public class NPC : MonoBehaviour
                     }
                 }
 
-                //For testing this is 0, should be 2 for Level 3
                 if(FindObjectOfType<GameManager>().GetActiveLevel() == 3) {
-                    // if(player.GetComponent<Player>().playerSelectedItem() == player.GetComponent<Player>().PlayerSelectedApple()) {
-                        //show other icon
                         NPCActionIcon.SetActive(true);
                         triggerCompletedState = true;
-                    // }
-
-                        //Just wanting to talk to the player
-                    // else {
-                    //     NPCIcon.SetActive(true);
-                    // }
                 }
             }
 
@@ -139,24 +130,26 @@ public class NPC : MonoBehaviour
 
     public void Action() {
         if(triggerCompletedState == true && completedGoal == false) {
-            FindObjectOfType<AudioManager>().Play("Interact"); //Put action sound here
 
             //Level 1
             if(FindObjectOfType<GameManager>().GetActiveLevel() == 1) {
                 player.GetComponent<Player>().UseSelectedItem();
                 FindObjectOfType<LevelManager>().AddCompletedTasks();
+                FindObjectOfType<AudioManager>().Play("AppleCrunch");
             }
 
             else if(FindObjectOfType<GameManager>().GetActiveLevel() == 2) {
                 player.GetComponent<Player>().UseSelectedItem();
                 FindObjectOfType<LevelManager>().FinishLevel2();
+                FindObjectOfType<AudioManager>().Play("AppleCrunch");
             }
 
             //Level 3
             else if(FindObjectOfType<GameManager>().GetActiveLevel() == 3) {
                 player.GetComponent<Player>().PickupItem(4);
                 NPCObject.SetActive(false);
-                FindObjectOfType<Level2Ducks>().AddDuck();
+                FindObjectOfType<Level3Ducks>().AddDuck();
+                FindObjectOfType<AudioManager>().Play("Interact"); //Replace with Quack sound later
             }
 
             //something here to make the npc look happier for animation
