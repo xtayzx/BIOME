@@ -35,8 +35,8 @@ public class GameManager : MonoBehaviour
     void Start () {
         //Set up game configurations, frame rate and screen ratio
         Application.targetFrameRate = 60;
-        Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen, Screen.currentResolution.refreshRate);
-
+        // Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen, Screen.currentResolution.refreshRate);
+        Screen.SetResolution(1280, 720, false);
         // Declare array that determines how many level scores
         for(int i = 0; i < levels; i++) {
             levelScores[i] = 0;

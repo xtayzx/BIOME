@@ -143,6 +143,7 @@ public class NPC : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("AppleCrunch");
             }
 
+            //Level 2
             else if(FindObjectOfType<GameManager>().GetActiveLevel() == 2) {
                 player.GetComponent<Player>().UseSelectedItem();
                 FindObjectOfType<LevelManager>().FinishLevel2();
