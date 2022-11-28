@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public GameObject playersBucket; // TODO - possibly delete this later
 
     PlayerControls controls;
+    public Animator laurelAnimation;
 
     private Vector3 input; //Input from controller
     private float turnSpeed = 360; //Turning the palyer
@@ -84,6 +85,10 @@ public class Player : MonoBehaviour
                 this.transform.position = levelHubStartPosition; //TODO: This position might need to be changed later
             }
         }
+
+        laurelAnimation.SetBool("isJumping", false);
+        laurelAnimation.SetBool("isWalking", false);
+        laurelAnimation.SetBool("isIdle", true);
     }
 
     void Jump() {
@@ -106,6 +111,11 @@ public class Player : MonoBehaviour
     void Move() {
         if(startConvo == true){
             rigidbodyComponent.MovePosition(transform.position + (transform.forward * input.magnitude) * speed * Time.deltaTime);
+            // laurelAnimation.SetBool("isJumping", false);
+            // laurelAnimation.SetBool("isWalking", true);
+            laurelAnimation.SetBool("isJumping", false);
+            laurelAnimation.SetBool("isWalking", true);
+            laurelAnimation.SetBool("isIdle", false);
         }
     }
 
@@ -304,6 +314,10 @@ public class Player : MonoBehaviour
             rigidbodyComponent.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
             jumpKeyPressed = false;
             FindObjectOfType<AudioManager>().Play("Jump");
+
+            laurelAnimation.SetBool("isJumping", true);
+            laurelAnimation.SetBool("isWalking", false);
+            laurelAnimation.SetBool("isIdle", false);
         }
        
     }
