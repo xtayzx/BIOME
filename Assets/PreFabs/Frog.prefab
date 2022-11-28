@@ -140,7 +140,7 @@ MonoBehaviour:
     sentences:
     - ribbit
     otherSentences: []
-    sprite: {fileID: 21300000, guid: 7fea1272c48aaa54bba79316b8f2d35a, type: 3}
+    sprite: {fileID: 21300000, guid: ef474c10f102ef24dbe271c87b265b98, type: 3}
 --- !u!114 &8731584876227123680
 MonoBehaviour:
   m_ObjectHideFlags: 0
