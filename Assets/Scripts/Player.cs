@@ -113,9 +113,7 @@ public class Player : MonoBehaviour
             rigidbodyComponent.MovePosition(transform.position + (transform.forward * input.magnitude) * speed * Time.deltaTime);
             // laurelAnimation.SetBool("isJumping", false);
             // laurelAnimation.SetBool("isWalking", true);
-            laurelAnimation.SetBool("isJumping", false);
-            laurelAnimation.SetBool("isWalking", true);
-            laurelAnimation.SetBool("isIdle", false);
+            
         }
     }
 
@@ -125,6 +123,16 @@ public class Player : MonoBehaviour
                 var relative = (transform.position + input.ToIso()) - transform.position; //Find relative angle
                 var rot = Quaternion.LookRotation(relative, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
+
+                laurelAnimation.SetBool("isJumping", false);
+                laurelAnimation.SetBool("isWalking", true);
+                laurelAnimation.SetBool("isIdle", false);
+            }
+
+            else {
+                laurelAnimation.SetBool("isJumping", false);
+                laurelAnimation.SetBool("isWalking", false);
+                laurelAnimation.SetBool("isIdle", true);
             }
         }
     }
@@ -315,9 +323,9 @@ public class Player : MonoBehaviour
             jumpKeyPressed = false;
             FindObjectOfType<AudioManager>().Play("Jump");
 
-            laurelAnimation.SetBool("isJumping", true);
-            laurelAnimation.SetBool("isWalking", false);
-            laurelAnimation.SetBool("isIdle", false);
+            // laurelAnimation.SetBool("isJumping", true);
+            // laurelAnimation.SetBool("isWalking", false);
+            // laurelAnimation.SetBool("isIdle", false);
         }
        
     }
