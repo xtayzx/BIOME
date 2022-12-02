@@ -93,6 +93,7 @@ public class Oil : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("OilClean");
             oilObjectItem.SetActive(false);
             FindObjectOfType<Player>().WithinCollider(false);
+            FindObjectOfType<Level3Ducks>().AddOilsCleaned();
 
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().HideControls();

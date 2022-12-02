@@ -180,7 +180,20 @@ public class Player : MonoBehaviour
     }
 
     public void StartAtCheckpoint() {
-        this.transform.position = checkpointPosition;
+        rigidbodyComponent.velocity = new Vector3(0,0,0);
+        this.transform.position = checkpointPosition+new Vector3(1,(float)0.5,0);
+
+        if(FindObjectOfType<GameManager>().GetActiveLevel() == 3) {
+            
+            //Remove ducks from inventory
+            // duckItem
+            FindObjectOfType<Level3Ducks>().Level3Reset(true);
+            inventoryManager.RemoveItem(duckItem);
+        }
+    }
+
+    public Vector3 PlayerCheckpointPosition() {
+        return checkpointPosition;
     }
 
     //INTERACTING WITH OBJECTS AND NPC
@@ -259,6 +272,7 @@ public class Player : MonoBehaviour
 
         else if (num == 4) {
             PickupItem(4);
+            FindObjectOfType<AudioManager>().Play("DuckQuack");
             Debug.Log("Picked up Duck item");
         }
 
@@ -311,7 +325,9 @@ public class Player : MonoBehaviour
         }
 
         //If the player is within a bounding box for the UI
-        if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length == 1 && showingUI == true) {
+        if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length == 1 
+        // && showingUI == true
+        ) {
             return;
         }
 

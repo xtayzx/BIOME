@@ -115,6 +115,41 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
 
+    //Removing Ducks in Level 3
+    public Item RemoveItem(Item item) {
+
+        //check if any slot has the same item with count lower than max
+        for (int i = 0; i < inventorySlots.Length; i++) {
+            InventorySlot slot = inventorySlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+            if (itemInSlot != null && 
+            itemInSlot.item == item &&
+            itemInSlot.count < maxCount &&
+            itemInSlot.item.stackable == true) {
+
+                itemInSlot.count = 0;
+                itemInSlot.RefreshCount();
+                Destroy(itemInSlot.gameObject);
+                // SpawnNewItem(item, slot);
+                return itemInSlot.item;
+            }
+        }
+
+        //find any empty slot
+        // for (int i = 0; i < inventorySlots.Length; i++) {
+        //     InventorySlot slot = inventorySlots[i];
+        //     InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+
+        //     if (itemInSlot == null) {
+        //         SpawnNewItem(item, slot);
+        //         return true;
+        //     }
+        // }
+
+        return null;
+    }
+
     void SpawnNewItem(Item item, InventorySlot slot) {
         GameObject newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
         InventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();

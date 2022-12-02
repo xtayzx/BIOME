@@ -13,7 +13,8 @@ public class Timer : MonoBehaviour
     bool subtractScore = true;
 
     public int startMinutes;
-    private int calculatedLevelScore;
+    private int calculatedLevelScore; //Actual score value
+    private int calculatedTimerValue; //Timer value
 
     public TextMeshProUGUI currentTimeText;
 
@@ -21,6 +22,7 @@ public class Timer : MonoBehaviour
     {
         currentTime = startMinutes * 60;
         calculatedLevelScore = (int)currentTime; //Type case from float to int
+        calculatedTimerValue = 0;
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class Timer : MonoBehaviour
             //If the modulus is divisible by 5 (or is a multiple of 5), then change the score
             if(((int)currentTimeScore % 5 == 0) && subtractScore == true) {
                 calculatedLevelScore--;
+                calculatedTimerValue++;
                 subtractScore = false; //The boolean makes sure that this does not read the float value, otherwise it subtracts 60
                 return;
             }
@@ -42,7 +45,7 @@ public class Timer : MonoBehaviour
                 subtractScore = true;
             }
         }
-        currentTimeText.text = calculatedLevelScore.ToString();
+        currentTimeText.text = calculatedTimerValue.ToString();
     }
 
     public void StartTimer() {

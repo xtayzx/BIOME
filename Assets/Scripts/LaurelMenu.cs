@@ -15,6 +15,7 @@ public class LaurelMenu : MonoBehaviour
     private GameManager gameManager;
 
     private int gameState;
+    public GameObject player;
 
     public TextMeshProUGUI taskText;
 
@@ -57,8 +58,7 @@ public class LaurelMenu : MonoBehaviour
 
     void Update()
     {
-        //ESC pauses the game
-        if(Input.GetKeyDown(KeyCode.I)) {
+        if(Input.GetKeyDown(KeyCode.I) && player.GetComponent<Player>().startConvoActive() == true) {
             if (LaurelLoaded) {
                 Resume();
             }

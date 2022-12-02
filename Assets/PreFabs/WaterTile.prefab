@@ -508,7 +508,7 @@ PrefabInstance:
     - target: {fileID: 1596354495344949680, guid: 1f58a57daa2ec804ca633170f34982f0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1596354495344949680, guid: 1f58a57daa2ec804ca633170f34982f0,
         type: 3}
@@ -704,6 +704,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596354495344949710, guid: 1f58a57daa2ec804ca633170f34982f0,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1596354495344949710, guid: 1f58a57daa2ec804ca633170f34982f0,
         type: 3}

@@ -39,6 +39,17 @@ public class TreeLevel : MonoBehaviour
     {
         //Keeping them in for programming otherwise I will forget they exist
         if(completedLevel == 0) {
+            //When game complete, these are true - this is for playtesting only and to see if lvl 2 is too hard
+            tree1.SetActive(false);
+            tree2.SetActive(false);
+            tree3.SetActive(false);
+
+            //When game complete, these are true - this is for playtesting only and to see if lvl 2 is too hard
+            tree4.SetActive(false);
+            tree5.SetActive(false);
+            tree6.SetActive(false);
+
+
             Bear1.SetActive(false);
             Bear2.SetActive(false);
             Bear3.SetActive(false);

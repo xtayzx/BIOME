@@ -17,6 +17,8 @@ public class NPC : MonoBehaviour
     private bool playerStartConvo;
     private bool completedGoal = false;
 
+    // private bool restartLevel3 = false;
+
     private bool triggerCompletedState = false;
     [SerializeField] private bool levelStateNPC = false;
     //private bool convoActive = false;
@@ -78,7 +80,7 @@ public class NPC : MonoBehaviour
                     }
                 }
 
-                if(FindObjectOfType<GameManager>().GetActiveLevel() == 3) {
+                else if(FindObjectOfType<GameManager>().GetActiveLevel() == 3) {
                         NPCActionIcon.SetActive(true);
                         triggerCompletedState = true;
                         FindObjectOfType<AudioManager>().Play("Action");
@@ -196,13 +198,25 @@ public class NPC : MonoBehaviour
         }
     }
 
+    public bool ShowCompleteGoal() {
+        return completedGoal;
+    }
+
     public void ChangeCompletedGoal(bool state) {
         completedGoal = state;
     }
 
-    // public void TriggerCompletedState(bool state) {
-    //     triggerCompletedState = state;
-    // }
+    public void TriggerActiveState(bool state) {
+        triggerActive = state;
+    }
+
+    public void TriggerCompletedState(bool state) {
+        triggerCompletedState = state;
+    }
+
+    public void ResetActionIcon() {
+        NPCActionIcon.SetActive(false);
+    }
 
     // public bool ShowtriggerCompletedState() {
     //     return triggerCompletedState;

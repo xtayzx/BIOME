@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1dfaece9c03da408c09d1ce9df485e, type: 3}
   m_Name: Bucket
   m_EditorClassIdentifier: 
-  tile: {fileID: 0}
   type: 0
   actionType: 0
-  range: {x: 5, y: 4}
   stackable: 1
   image: {fileID: 21300000, guid: 812002663f6f9094bac916c92c191a9b, type: 3}

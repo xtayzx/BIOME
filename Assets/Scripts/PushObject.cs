@@ -30,7 +30,30 @@ public class PushObject : MonoBehaviour
         controls.Gameplay.Disable();
     }
 
-        //When the player enters the boundaries, then allow them to interact with the object
+    void Start()
+    {
+        objectPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        rigidBody = GetComponent<Rigidbody>();
+
+        movementZ = new Vector3(0,0,5);
+        movementZNeg = new Vector3(0,0,-5);
+        movementX = new Vector3(5,0,0);
+        movementXNeg = new Vector3(-5,0,0);
+
+        originalConstraints = rigidBody.constraints;
+    }
+
+    //Sound when entering water
+    public void OnCollisionEnter(Collision collision) {
+        //WATER LAYER
+        if (collision.gameObject.layer == 3) {
+            FindObjectOfType<AudioManager>().Play("Splash");
+            Debug.Log("Rock entered Water");
+            return;
+        }
+    }
+
+    //When the player enters the boundaries, then allow them to interact with the object
     public void OnTriggerEnter(Collider rock)
     {
         if (rock.CompareTag("Player"))
@@ -56,7 +79,7 @@ public class PushObject : MonoBehaviour
         {
             triggerActive = false;
             icon.SetActive(false);
-    FindObjectOfType<Player>().WithinCollider(false);
+            FindObjectOfType<Player>().WithinCollider(false);
 
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
                 FindObjectOfType<Tutorial>().HideControls();
@@ -75,9 +98,9 @@ public class PushObject : MonoBehaviour
             Interact();
         }
 
-        else if (triggerActive == false) {
-            //something here about that it can't move
-        }
+        // else if (triggerActive == false) {
+            // something here about that it can't move
+        // }
     }
 
     void FixedUpdate() {
@@ -124,20 +147,6 @@ public class PushObject : MonoBehaviour
         }
     
         
-    }
-
-
-    void Start()
-    {
-        objectPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        rigidBody = GetComponent<Rigidbody>();
-
-        movementZ = new Vector3(0,0,5);
-        movementZNeg = new Vector3(0,0,-5);
-        movementX = new Vector3(5,0,0);
-        movementXNeg = new Vector3(-5,0,0);
-
-        originalConstraints = rigidBody.constraints;
     }
 
     // Resetting the object when the game is reset to the previous checkpoint
