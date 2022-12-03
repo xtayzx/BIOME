@@ -46,7 +46,6 @@ SubShader {
   Name "Universal Forward"
   Tags { "QUEUE"="Transparent" "RenderType"="Transparent" "RenderPipeline"="UniversalPipeline" "UniversalMaterialType"="Unlit" "ShaderGraphShader"="true" "ShaderGraphTargetId"="UniversalUnlitSubTarget" }
   ZWrite On
-  // ZWrite Off
   Cull Off
   Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
   //////////////////////////////////
