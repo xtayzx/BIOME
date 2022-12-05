@@ -59,7 +59,12 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame() {
         FindObjectOfType<GameManager>().CurrentActiveLevel(0);
-        SceneManager.LoadScene("LevelSelection");
+
+        if (FindObjectOfType<GameManager>().CompletedLevelValue() >= 1) {
+            SceneManager.LoadScene("LevelSelection");
+        }
+        else
+        SceneManager.LoadScene("Intro");
     }
 
     public void OpenOptions() {

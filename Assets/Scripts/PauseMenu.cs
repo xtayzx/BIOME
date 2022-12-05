@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
+    private bool talking = false;
     public GameObject pauseMenuUI, resumeButton, menuButton, exitButton, inventory, checkpoint, inventoryControls;
     PlayerControls controls;
 
@@ -53,35 +54,40 @@ public class PauseMenu : MonoBehaviour
         FindObjectOfType<GameManager>().SetPaused(false);
     }
 
-    void Pause() {
-        if (GameIsPaused) {
-            Resume();
-            return;
-        }
-        
-        FindObjectOfType<AudioManager>().Pause("MainSong");
-        pauseMenuUI.SetActive(true);
-        inventory.SetActive(false);
-        checkpoint.SetActive(false);
+    public void TalkingStatus(bool state) {
+        talking = state;
+    }
 
-        if(FindObjectOfType<LevelManager>().Tutorial() == true) {
-            inventoryControls.SetActive(false);
-        }
-        
-        //Freezes the game
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-        FindObjectOfType<GameManager>().SetPaused(true);
+    public void Pause() {
+        if(talking == false) {
+            if (GameIsPaused) {
+                Resume();
+                return;
+            }
+            
+            FindObjectOfType<AudioManager>().Pause("MainSong");
+            pauseMenuUI.SetActive(true);
+            inventory.SetActive(false);
+            checkpoint.SetActive(false);
 
-        //Clear selected object 
-        EventSystem.current.SetSelectedGameObject(null);
-        //Set a new selected object
-        EventSystem.current.SetSelectedGameObject(resumeButton);
+            if(FindObjectOfType<LevelManager>().Tutorial() == true) {
+                inventoryControls.SetActive(false);
+            }
+            
+            //Freezes the game
+            Time.timeScale = 0f;
+            GameIsPaused = true;
+            FindObjectOfType<GameManager>().SetPaused(true);
+
+            //Clear selected object 
+            EventSystem.current.SetSelectedGameObject(null);
+            //Set a new selected object
+            EventSystem.current.SetSelectedGameObject(resumeButton);
+        }
 
     }
 
     public void LoadMenu() {
-
         // Hide and load elements
         pauseMenuUI.SetActive(false);
         inventory.SetActive(true);
@@ -120,19 +126,14 @@ public class PauseMenu : MonoBehaviour
 
         FindObjectOfType<Player>().StartAtCheckpoint();
         FindObjectOfType<AudioManager>().Play("MainSong");
-
-        //TODO: what does this classify, what is the reset?
     }
 
     public void FallResetGame() {
         FindObjectOfType<Player>().StartAtCheckpoint();
         FindObjectOfType<AudioManager>().Play("Checkpoint");
-
-        //TODO: what does this classify, what is the reset?
     }
 
     public void QuitGame () {
-        // Debug.Log("QUIT!");
         Application.Quit();
     }
 }

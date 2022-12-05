@@ -12,7 +12,27 @@ ModelImporter:
   - first:
       74: -7545327385355763552
     second: metarig|metarig|metarig|metarig|metarig|metarigAction|metarig|metarigAc
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bearcub_texture.002
+    second: {fileID: 2100000, guid: 1ba3fed4e0365a24c8d351490c31a26e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bearcub_texture.004
+    second: {fileID: 2100000, guid: 3d75b289900f62f41b6d2686a68df071, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bearcub_texture.005
+    second: {fileID: 2100000, guid: 6716c89f3bb44ee4ea0e7a5649010593, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bow_texture.001
+    second: {fileID: 2100000, guid: 647402477279597438c2ad54e2d0826c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -25,8 +45,7 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
-      human bone 'Head' not found\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 

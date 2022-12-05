@@ -33,15 +33,15 @@ public class Timer : MonoBehaviour
             currentTime = currentTime - Time.deltaTime;
             currentTimeScore = (int)currentTime;
 
-            //If the modulus is divisible by 5 (or is a multiple of 5), then change the score
-            if(((int)currentTimeScore % 5 == 0) && subtractScore == true) {
+            //If the modulus is divisible by 2 (or is a multiple of 2), then change the score
+            if(((int)currentTimeScore % 2 == 0) && subtractScore == true) {
                 calculatedLevelScore--;
                 calculatedTimerValue++;
                 subtractScore = false; //The boolean makes sure that this does not read the float value, otherwise it subtracts 60
                 return;
             }
 
-            else if ((int)currentTimeScore % 5 != 0) {
+            else if ((int)currentTimeScore % 2 != 0) {
                 subtractScore = true;
             }
         }

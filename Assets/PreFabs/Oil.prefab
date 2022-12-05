@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7537375510804558750}
   - component: {fileID: 6010696846093869197}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Oil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -376,6 +376,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Oil
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2ec780f08f32a2148bcffa5fc697f97f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2ec780f08f32a2148bcffa5fc697f97f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Oil
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ec780f08f32a2148bcffa5fc697f97f, type: 3}
 --- !u!4 &2966393198724727121 stripped
@@ -455,6 +465,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004212719451293660, guid: 142ae39215a00e8469cf35cad68a26fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 142ae39215a00e8469cf35cad68a26fd, type: 3}
@@ -536,6 +551,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7004212719451293660, guid: 142ae39215a00e8469cf35cad68a26fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 142ae39215a00e8469cf35cad68a26fd, type: 3}
 --- !u!4 &5667442121942569857 stripped
@@ -616,6 +636,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7004212719451293660, guid: 142ae39215a00e8469cf35cad68a26fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 142ae39215a00e8469cf35cad68a26fd, type: 3}
 --- !u!4 &5086219135223492146 stripped
@@ -695,6 +720,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7004212719451293660, guid: 142ae39215a00e8469cf35cad68a26fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 142ae39215a00e8469cf35cad68a26fd, type: 3}

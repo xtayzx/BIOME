@@ -48,26 +48,26 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Base_Scale: -0.43
-    - _Base_Speed: 0.06
-    - _Base_Strength: 0.39
-    - _Cloud_Speed: 2
-    - _Curvature_Radius: 4
+    - _Base_Scale: 0.27
+    - _Base_Speed: 0.53
+    - _Base_Strength: 0.56
+    - _Cloud_Speed: 0.1
+    - _Curvature_Radius: -6
     - _Depth_of_Clouds: 100
-    - _Emission_Strength: 1.75
-    - _Fersnel_Opacity: 0.63
-    - _Fersnel_Power: 3.4
-    - _Noise_Depth: 80.18
-    - _Noise_Edge_1: -0
-    - _Noise_Edge_2: 0.61
-    - _Noise_Power: 1.28
-    - _Noise_Scale: 0.06
+    - _Emission_Strength: 2.5
+    - _Fersnel_Opacity: 1.05
+    - _Fersnel_Power: 0.17
+    - _Noise_Depth: 17.3
+    - _Noise_Edge_1: 0.15
+    - _Noise_Edge_2: 0.52
+    - _Noise_Power: 0.2
+    - _Noise_Scale: 0.66
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Range_of_Transparency: 121.07
+    - _Range_of_Transparency: 83.6
     m_Colors:
     - _Color_Peak: {r: 1, g: 0.9753056, b: 0.9481132, a: 0}
     - _Color_Valley: {r: 0.2264151, g: 0.08743459, b: 0.0032039813, a: 0}
-    - _Noise_Remap: {r: 0.04, g: -3.31, b: 0.46, a: 2.1}
+    - _Noise_Remap: {r: -1.03, g: -4.65, b: 0.73, a: 2.53}
     - _Rotate_Projection: {r: 1, g: 0, b: 0, a: 90}
   m_BuildTextureStacks: []

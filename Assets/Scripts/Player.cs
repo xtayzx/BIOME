@@ -85,8 +85,6 @@ public class Player : MonoBehaviour
                 this.transform.position = levelHubStartPosition; //TODO: This position might need to be changed later
             }
         }
-
-        laurelAnimation.SetBool("isJumping", false);
         laurelAnimation.SetBool("isWalking", false);
         laurelAnimation.SetBool("isIdle", true);
     }
@@ -110,10 +108,7 @@ public class Player : MonoBehaviour
 
     void Move() {
         if(startConvo == true){
-            rigidbodyComponent.MovePosition(transform.position + (transform.forward * input.magnitude) * speed * Time.deltaTime);
-            // laurelAnimation.SetBool("isJumping", false);
-            // laurelAnimation.SetBool("isWalking", true);
-            
+            rigidbodyComponent.MovePosition(transform.position + (transform.forward * input.magnitude) * speed * Time.deltaTime);  
         }
     }
 
@@ -124,15 +119,17 @@ public class Player : MonoBehaviour
                 var rot = Quaternion.LookRotation(relative, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
 
-                laurelAnimation.SetBool("isJumping", false);
+                // laurelAnimation.SetBool("isJumping", false);
                 laurelAnimation.SetBool("isWalking", true);
                 laurelAnimation.SetBool("isIdle", false);
+                // FindObjectOfType<AudioManager>().Play("Walking");
             }
 
             else {
-                laurelAnimation.SetBool("isJumping", false);
+                // laurelAnimation.SetBool("isJumping", false);
                 laurelAnimation.SetBool("isWalking", false);
                 laurelAnimation.SetBool("isIdle", true);
+                FindObjectOfType<AudioManager>().Play("Walking"); //Play walking sound
             }
         }
     }
@@ -140,7 +137,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log("Rotation Value: "+transform.rotation);
         GatherInput(); //Get axis
         Look(); //Rotate the player in another direction
         selectedItem = inventoryManager.GetSelectedItem(); //Return which item is selected in the inventory
@@ -170,8 +166,6 @@ public class Player : MonoBehaviour
         else {
             falling = false;
         }
-
-        // horizontalInput = Input.GetAxis("Horizontal");
     }
 
     //CHECKPOINT
@@ -186,7 +180,6 @@ public class Player : MonoBehaviour
         if(FindObjectOfType<GameManager>().GetActiveLevel() == 3) {
             
             //Remove ducks from inventory
-            // duckItem
             FindObjectOfType<Level3Ducks>().Level3Reset(true);
             inventoryManager.RemoveItem(duckItem);
         }
@@ -207,13 +200,13 @@ public class Player : MonoBehaviour
 
     //Is the player interacting with an NPC
     public void startConvoValue(int value) {
-            if(value == 0) {
-                startConvo = false;
-            }
+        if(value == 0) {
+            startConvo = false;
+        }
 
-            if(value == 1) {
-                startConvo = true;
-            }
+        if(value == 1) {
+            startConvo = true;
+        }
     }
 
     private void Interact() {
@@ -258,9 +251,6 @@ public class Player : MonoBehaviour
     public void CollectInventory(int num) {
         if (num == 2) {
             PickupItem(2);
-            // inventoryApples++;
-            // Debug.Log("Number of apples: "+inventoryApples);
-            // FindObjectOfType<LevelItems>().ShowItem(inventoryApples); //For collecting items for Level 1 and getting a star
         }
 
         else if (num == 3) {
@@ -282,14 +272,12 @@ public class Player : MonoBehaviour
             Debug.Log("Picked up TRASH");
             FindObjectOfType<LevelItems>().ShowItem(inventoryTrash); //For collecting items for Level 1 and getting a star
         }
-        
-        // NO LONGER USING STAR ITEM
-        // else if(num == 6) {
-        //     PickupItem(6);
-        //     inventoryStars++;
-        //     Debug.Log("Number of stars: "+inventoryStars);
-        //     FindObjectOfType<LevelItems>().ShowItem(inventoryStars); //For collecting items for Level 1 and getting a star
-        // }
+    }
+
+    public void IdleAnimation() {
+        laurelAnimation.SetBool("isWalking", false);
+        laurelAnimation.SetBool("isIdle", true);
+        FindObjectOfType<AudioManager>().Pause("Walking");
     }
 
     // PLAYER SELECTED ITEMS
@@ -319,29 +307,28 @@ public class Player : MonoBehaviour
     void FixedUpdate() {
         Move();
 
+        Debug.Log("Layers: "+Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length);
+        
         //Since its always colliding with self
         if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length == 0) {
-            return;
-        }
-
-        //If the player is within a bounding box for the UI
-        if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length == 1 
-        // && showingUI == true
-        ) {
             return;
         }
 
         // Check if space key is pressed down
         if (jumpKeyPressed)
         {
+
+            // laurelAnimation.SetBool("isJumping", true);
+            laurelAnimation.SetBool("isWalking", false);
+            laurelAnimation.SetBool("isIdle", true);
+            laurelAnimation.SetTrigger("triggerJump");
+            FindObjectOfType<AudioManager>().Pause("Walking");
+            
+
             float jumpPower = 5f;
             rigidbodyComponent.AddForce(Vector3.up * jumpPower, ForceMode.VelocityChange);
             jumpKeyPressed = false;
             FindObjectOfType<AudioManager>().Play("Jump");
-
-            // laurelAnimation.SetBool("isJumping", true);
-            // laurelAnimation.SetBool("isWalking", false);
-            // laurelAnimation.SetBool("isIdle", false);
         }
        
     }
@@ -438,12 +425,6 @@ public class Player : MonoBehaviour
             showingUI = true;
         }
 
-        // if (player.CompareTag("Bear") && selectedItem == apple) {
-        //     // FindObjectOfType<Tutorial4>().ShowInventoryControls();
-        //     FindObjectOfType<NPC>().TriggerCompletedState(true);
-        //     Debug.Log("running the trigger code");
-        // }
-
         if (player.CompareTag("TutorialJump"))
         {
             if(FindObjectOfType<LevelManager>().Tutorial() == true) {
@@ -502,11 +483,10 @@ public class Player : MonoBehaviour
             return;
             }
         }
-        // isGrounded = true;
+
     }
 
     public void OnCollisionExit(Collision collision) {
-        // isGrounded = false;
 
         // WATER LAYER
         if (collision.gameObject.layer != 3 && inWater == false) {
@@ -515,5 +495,6 @@ public class Player : MonoBehaviour
             speed = landSpeed;
             inWater = true;
         }
+
     }
 }

@@ -35,8 +35,6 @@ public class DialogueManager : MonoBehaviour
         if(FindObjectOfType<LevelManager>().Tutorial() == true) {
             FindObjectOfType<Tutorial3>().MoveInventory(true);
         }
-
-        // Debug.Log("Starting conversation with "+ dialogue.name);
     
         nameText.text = dialogue.name;
 
@@ -119,6 +117,7 @@ public class DialogueManager : MonoBehaviour
 
         // Say the player can now talk interact with a new NPC
         player.GetComponent<Player>().startConvoValue(1);
+        FindObjectOfType<PauseMenu>().TalkingStatus(false); //Player can now pause game
     }
 
     public void CompletedGoal(bool state) {

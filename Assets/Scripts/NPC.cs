@@ -17,12 +17,8 @@ public class NPC : MonoBehaviour
     private bool playerStartConvo;
     private bool completedGoal = false;
 
-    // private bool restartLevel3 = false;
-
     private bool triggerCompletedState = false;
     [SerializeField] private bool levelStateNPC = false;
-    //private bool convoActive = false;
-    // GameManager gameManager;
 
     PlayerControls controls;
 
@@ -159,11 +155,7 @@ public class NPC : MonoBehaviour
                 FindObjectOfType<Level3Ducks>().AddDuck();
                 FindObjectOfType<AudioManager>().Play("Interact"); //Replace with Quack sound later
             }
-
-            //something here to make the npc look happier for animation
-            //add here to the level count
             completedGoal = true; //This NPC has their item
-            // FindObjectOfType<LevelManager>().AddCompletedTasks();
         }
     }
 
@@ -185,6 +177,8 @@ public class NPC : MonoBehaviour
                 FindObjectOfType<AudioManager>().Play("Interact");
                 playerStartConvo = false;
                 player.GetComponent<Player>().startConvoValue(0);
+                player.GetComponent<Player>().IdleAnimation(); //Change back to idle animation
+                FindObjectOfType<PauseMenu>().TalkingStatus(true); //Player cannot pause game (closing method in DialogueManager)
                 GetComponent<DialogueTrigger>().TriggerDialogue();
                 return;
             }
@@ -217,8 +211,4 @@ public class NPC : MonoBehaviour
     public void ResetActionIcon() {
         NPCActionIcon.SetActive(false);
     }
-
-    // public bool ShowtriggerCompletedState() {
-    //     return triggerCompletedState;
-    // }
 }
