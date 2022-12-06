@@ -17,8 +17,8 @@ public class EndGame : MonoBehaviour
     public void OnTriggerEnter(Collider level) {
         if (level.CompareTag("Player"))
             {
-                if(completedLevel == 3) {
-                    SceneManager.LoadScene("Intro"); //CHANGE
+                if(completedLevel >= 3) {
+                    SceneManager.LoadScene("End");
                 }
             }
     }

@@ -29,6 +29,8 @@ public class TreeLevel : MonoBehaviour
     public GameObject MamaBear;
     public GameObject MamaDuck;
 
+    public GameObject endFrog;
+
     private int completedLevel;
 
     void Awake() {
@@ -60,6 +62,8 @@ public class TreeLevel : MonoBehaviour
             Duckling1.SetActive(false);
             Duckling2.SetActive(false);
             Duckling3.SetActive(false);
+
+            endFrog.SetActive(false);
         }
 
         if(completedLevel == 1) {
@@ -82,6 +86,8 @@ public class TreeLevel : MonoBehaviour
             Duckling1.SetActive(false);
             Duckling2.SetActive(false);
             Duckling3.SetActive(false);
+
+            endFrog.SetActive(false);
         }
 
         else if(completedLevel == 2) {
@@ -103,6 +109,8 @@ public class TreeLevel : MonoBehaviour
             Duckling1.SetActive(false);
             Duckling2.SetActive(false);
             Duckling3.SetActive(false);
+
+            endFrog.SetActive(false);
         }
 
         //  All levels complete
@@ -125,6 +133,8 @@ public class TreeLevel : MonoBehaviour
             Duckling1.SetActive(true);
             Duckling2.SetActive(true);
             Duckling3.SetActive(true);
+
+            endFrog.SetActive(true);
         }
     }
 }

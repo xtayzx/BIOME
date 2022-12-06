@@ -12,8 +12,6 @@ using TMPro;
 
 public class LevelSelection : MonoBehaviour
 {
-    // public GameObject levelFirstButton, levelOneButton, backButton;
-    
     PlayerControls controls;
     GameObject currentObject;
     private int totalScoreValue;
@@ -21,11 +19,8 @@ public class LevelSelection : MonoBehaviour
 
     void Awake() {
         
-
          //clear selected object 
         EventSystem.current.SetSelectedGameObject(null);
-        //set a new selected object
-        // EventSystem.current.SetSelectedGameObject(levelFirstButton);
 
         //Enable controller functionality
         controls = new PlayerControls();
@@ -51,7 +46,6 @@ public class LevelSelection : MonoBehaviour
         currentObject = Selection.activeGameObject;
         #endif
 
-        // Debug.Log("Button Pressed");
     } 
 
     // LOAD LEVELS

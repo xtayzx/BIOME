@@ -14,7 +14,6 @@ public class LevelText : MonoBehaviour
  
     void Update() {
         selectedLevel = FindObjectOfType<Player>().PlayerSelectedLevel();
-        // levelScoreText = levelScore.ToString();
     }
 
     public void LoadText(){

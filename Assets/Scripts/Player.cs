@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask playerMask; //What can the player collide or not collide with
     
     private Vector3 checkpointPosition; //Setting the next checkpoint position
-    private Vector3 levelHubStartPosition = new Vector3((float)-3.5, (float)7, (float)-3.5);
+    private Vector3 levelHubStartPosition = new Vector3((float)-6, (float)7, (float)-6);
 
     private bool startConvo = true; //Is the player interacting with an NPC
     private bool bucketObtained = false; //Does the player have the bucket
@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
     private bool triggerActiveWater = false; //Is the trigger active when the player is near water
 
     private bool jumpKeyPressed; //Jump key pressed on space or controller
-    // private float horizontalInput;
     [SerializeField] private Rigidbody rigidbodyComponent; //Set player RigidBody
     
     private float landSpeed = 3f; //Speed on land
@@ -34,7 +33,6 @@ public class Player : MonoBehaviour
 
     GameManager gameManager;
     public GameObject playerBucketIcon; //Icon on player to fill bucket
-    public GameObject playersBucket; // TODO - possibly delete this later
 
     PlayerControls controls;
     public Animator laurelAnimation;
@@ -52,9 +50,7 @@ public class Player : MonoBehaviour
     [SerializeField] public Item oilCleaner;
     [SerializeField] public Item duckItem;
     [SerializeField] public Item trash;
-    // [SerializeField] public Item star;
 
-    // private int inventoryStars = 0; //TODO - change later with other collectable items
     private int inventoryTrash = 0;
     private bool inWater = true; // Although not in the water to start, this is so it doesn't trigger upon the game loading
     private int selectedLevel;
@@ -66,8 +62,7 @@ public class Player : MonoBehaviour
     // 2 - Apple
     // 3 - Oil Cleaner
     // 4 - Duck Item
-    // 5 - Trash Item - TODO - maybe move this closer to the top of the key
-    // 6 - Star/Collectable
+    // 5 - Trash Item
 
     void Awake () {
         //CONTROLLER FUNCTIONALITY
@@ -79,7 +74,6 @@ public class Player : MonoBehaviour
         speed = landSpeed; //Set the speed of the player to begin
 
         if(FindObjectOfType<GameManager>().GetActiveLevel() == 0) {
-            //Add here for Level 3 and they have all the tools then
             Debug.Log("Level Value: "+FindObjectOfType<GameManager>().CompletedLevelValue());
             if(FindObjectOfType<GameManager>().CompletedLevelValue() >= 1) {
                 this.transform.position = levelHubStartPosition; //TODO: This position might need to be changed later
@@ -214,8 +208,6 @@ public class Player : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("Splash");
             UseSelectedItem();
             PickupItem(1);
-
-            // playersBucket.SetActive(true); TODO - check this later if this item is still here
             waterObtained = true;
             return;
         }
@@ -317,8 +309,6 @@ public class Player : MonoBehaviour
         // Check if space key is pressed down
         if (jumpKeyPressed)
         {
-
-            // laurelAnimation.SetBool("isJumping", true);
             laurelAnimation.SetBool("isWalking", false);
             laurelAnimation.SetBool("isIdle", true);
             laurelAnimation.SetTrigger("triggerJump");
@@ -387,7 +377,6 @@ public class Player : MonoBehaviour
     public void PlayerNoBucket() {
         bucketFilled = false;
         waterObtained = false;
-        playersBucket.SetActive(false);
     }
 
     // CHECKING IF IN COLLISION WITH ANOTHER COLLIDER
