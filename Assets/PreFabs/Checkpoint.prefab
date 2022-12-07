@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8925796939985556009}
   - component: {fileID: 8925796939985556008}
   - component: {fileID: 8925796939985556011}
-  - component: {fileID: 8925796939985556010}
   m_Layer: 0
   m_Name: Checkpoint
   m_TagString: Untagged
@@ -100,18 +99,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &8925796939985556010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8925796939985556012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd4e605a2c414fc4996003093c538141, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8925796940117507001
 GameObject:
   m_ObjectHideFlags: 0

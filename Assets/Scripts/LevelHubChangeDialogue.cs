@@ -32,10 +32,4 @@ public class LevelHubChangeDialogue : MonoBehaviour
             GetComponent<NPC>().ChangeCompletedGoal(true);
         }
     }
-
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
 }

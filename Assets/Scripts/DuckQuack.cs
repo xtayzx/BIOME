@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DuckQuack : MonoBehaviour
 {
-    // [SerializeField] private Collider quack;
     [SerializeField] private GameObject duck;
     private bool duckSaved;
     

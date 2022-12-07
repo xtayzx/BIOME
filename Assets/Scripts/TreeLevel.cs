@@ -39,18 +39,15 @@ public class TreeLevel : MonoBehaviour
     
     void Update()
     {
-        //Keeping them in for programming otherwise I will forget they exist
+        // Keeping them in for programming otherwise I will forget they exist
         if(completedLevel == 0) {
-            //When game complete, these are true - this is for playtesting only and to see if lvl 2 is too hard
-            tree1.SetActive(false);
-            tree2.SetActive(false);
-            tree3.SetActive(false);
+            tree1.SetActive(true);
+            tree2.SetActive(true);
+            tree3.SetActive(true);
 
-            //When game complete, these are true - this is for playtesting only and to see if lvl 2 is too hard
-            tree4.SetActive(false);
-            tree5.SetActive(false);
-            tree6.SetActive(false);
-
+            tree4.SetActive(true);
+            tree5.SetActive(true);
+            tree6.SetActive(true);
 
             Bear1.SetActive(false);
             Bear2.SetActive(false);
@@ -71,10 +68,9 @@ public class TreeLevel : MonoBehaviour
             tree2.SetActive(false);
             tree3.SetActive(false);
 
-            //When game complete, these are true - this is for playtesting only and to see if lvl 2 is too hard
-            tree4.SetActive(false);
-            tree5.SetActive(false);
-            tree6.SetActive(false);
+            tree4.SetActive(true);
+            tree5.SetActive(true);
+            tree6.SetActive(true);
 
             deer.SetActive(false);
             bobcat.SetActive(false);

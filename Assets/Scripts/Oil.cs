@@ -14,7 +14,6 @@ public class Oil : MonoBehaviour
     public GameObject player;
     private bool cleanerObtained = false;
 
-    // GameManager gameManager;
     PlayerControls controls;
 
     void Awake() {
@@ -34,26 +33,15 @@ public class Oil : MonoBehaviour
     {
         if (oil.CompareTag("Player"))
         {
-            // Debug.Log("Colliding with player");
 
             // If the cleaner item is in the inventory and the player has selected the item in the inventory
             if(cleanerObtained == true && player.GetComponent<Player>().playerSelectedItem() == player.GetComponent<Player>().PlayerSelectedOilCleaner()) {
                 FindObjectOfType<AudioManager>().Play("Object");
                 triggerActive = true;
                 oilIcon.SetActive(true);
-
-                // Item not used in tutorial
-                // if(FindObjectOfType<LevelManager>().Tutorial() == true) {
-                //     FindObjectOfType<Tutorial>().ShowControls();
-                // }
-
             }
 
             if(cleanerObtained == true && player.GetComponent<Player>().playerSelectedItem() != player.GetComponent<Player>().PlayerSelectedOilCleaner()) {
-                    // Item not used in tutorial
-                    // if(FindObjectOfType<GameManager>().Tutorial() == true) {
-                    //     FindObjectOfType<Tutorial3>().ShowInventoryControls();
-                    //  }
                 Debug.Log("Oil cleaner is not selected in inventory");
             }
         }

@@ -7,15 +7,11 @@ using UnityEngine.InputSystem;
 
 public class Bucket : MonoBehaviour
 {
-    // TODO: Can possibly merge with interactive object
-    
    [SerializeField] private bool triggerActive = false;
 
     public GameObject BucketObject; //Exact bucket object
     public GameObject BucketIcon; //Exact icon for bucket
     public GameObject Player; //Player in the level
-
-    // GameManager gameManager;
 
     PlayerControls controls;
 

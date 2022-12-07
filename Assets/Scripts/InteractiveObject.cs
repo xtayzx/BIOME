@@ -13,7 +13,6 @@ public class InteractiveObject : MonoBehaviour
     public GameObject Object; //Exact item GameObject
     public GameObject Icon; //Exact item Icon
     public GameObject Player; //Player in level
-    // GameManager gameManager;
 
     PlayerControls controls;
 

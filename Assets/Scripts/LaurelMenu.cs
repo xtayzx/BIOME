@@ -47,12 +47,12 @@ public class LaurelMenu : MonoBehaviour
 
         //If at level 2
         if(gameState == 2) {
-            taskText.text = "Beware of the poision ivy they say";
+            taskText.text = "Can you find Rabbit's friend?";
         }
 
         //If at level 3
         if(gameState == 3) {
-            taskText.text = "Where are all the ducklings, can you find them?";
+            taskText.text = "Where are all of Mama Duck's ducklings?";
         }
     }
 

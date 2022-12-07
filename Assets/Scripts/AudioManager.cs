@@ -5,21 +5,10 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
-    // public static AudioManager instance;
 
     void Awake()
     {
-        //So only one instance of AudioManager is created and is carried through each scene
-        // DontDestroyOnLoad(this);
-        // if (instance == null) {
-        //     instance = this;
-        // }
-
-        // else {
-        //     Destroy(gameObject);
-        //     return;
-        // }
-
+        // So only one instance of AudioManager is created and is carried through each scene
         // Settings when creating new sounds
         foreach (Sound s in sounds) {
             s.source = gameObject.AddComponent<AudioSource>();

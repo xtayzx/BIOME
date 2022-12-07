@@ -112,19 +112,4 @@ public class GameManager : MonoBehaviour
 
         else return totalScore;
     }
-
-    // STUFF FOR TRYING TO INTEGRATE SAVE COMPONENT BUT CURRENTLY NOT WORKING
-    // public void SaveGameManager() {
-    //     SaveGame.SaveGameManager(this);
-    // }
-
-    // public void LoadGameManager() {
-    //     GameData data = SaveGame.LoadGameData();
-
-    //     activeLevel = data.activeLevel;
-
-    //     for (int i = 0; i < 3; i++) {
-    //         levelScores[i] = data.levelScores[i];
-    //     }
-    // }
 }

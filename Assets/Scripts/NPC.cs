@@ -127,8 +127,6 @@ public class NPC : MonoBehaviour
         if (triggerActive && Input.GetKeyDown(KeyCode.J) && triggerCompletedState == true) {
             Action();
         }
-
-        Debug.Log("Trigger Completed State: "+triggerCompletedState);
     }
 
     public void Action() {
@@ -153,7 +151,7 @@ public class NPC : MonoBehaviour
                 player.GetComponent<Player>().PickupItem(4);
                 NPCObject.SetActive(false);
                 FindObjectOfType<Level3Ducks>().AddDuck();
-                FindObjectOfType<AudioManager>().Play("Interact"); //Replace with Quack sound later
+                FindObjectOfType<AudioManager>().Play("DuckQuack");
             }
             completedGoal = true; //This NPC has their item
         }

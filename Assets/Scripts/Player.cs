@@ -79,6 +79,7 @@ public class Player : MonoBehaviour
                 this.transform.position = levelHubStartPosition; //TODO: This position might need to be changed later
             }
         }
+        
         laurelAnimation.SetBool("isWalking", false);
         laurelAnimation.SetBool("isIdle", true);
     }
@@ -113,14 +114,11 @@ public class Player : MonoBehaviour
                 var rot = Quaternion.LookRotation(relative, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
 
-                // laurelAnimation.SetBool("isJumping", false);
                 laurelAnimation.SetBool("isWalking", true);
                 laurelAnimation.SetBool("isIdle", false);
-                // FindObjectOfType<AudioManager>().Play("Walking");
             }
 
             else {
-                // laurelAnimation.SetBool("isJumping", false);
                 laurelAnimation.SetBool("isWalking", false);
                 laurelAnimation.SetBool("isIdle", true);
                 FindObjectOfType<AudioManager>().Play("Walking"); //Play walking sound
@@ -248,20 +246,16 @@ public class Player : MonoBehaviour
         else if (num == 3) {
             PickupItem(3);
             oilCleanerObtained = true;
-            Debug.Log("Picked up oil cleaner");
-            Debug.Log("Oil Cleaner Obtained: "+oilCleanerObtained);
         }
 
         else if (num == 4) {
             PickupItem(4);
             FindObjectOfType<AudioManager>().Play("DuckQuack");
-            Debug.Log("Picked up Duck item");
         }
 
         else if (num == 5) {
             PickupItem(5);
             inventoryTrash++;
-            Debug.Log("Picked up TRASH");
             FindObjectOfType<LevelItems>().ShowItem(inventoryTrash); //For collecting items for Level 1 and getting a star
         }
     }
@@ -298,8 +292,6 @@ public class Player : MonoBehaviour
     // FixedUpdate called once every physics update
     void FixedUpdate() {
         Move();
-
-        Debug.Log("Layers: "+Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length);
         
         //Since its always colliding with self
         if (Physics.OverlapSphere(groundCheckTransform.position, 0.1f, playerMask).Length == 0) {
@@ -326,22 +318,22 @@ public class Player : MonoBehaviour
     // INVENTORY
     public void PickupItem(int id) {
        bool result = inventoryManager.AddItem(itemsToPickup[id]);
-       if (result == true) {
-            Debug.Log("Item added");
-       }
-       else {
-            Debug.Log("Item not added");
-       }
+    //    if (result == true) {
+    //         Debug.Log("Item added");
+    //    }
+    //    else {
+    //         Debug.Log("Item not added");
+    //    }
     }
 
     public void UseSelectedItem() {
        Item receivedItem = inventoryManager.UseItem(true);
-       if (receivedItem != null) {
-            Debug.Log("Used item: " + receivedItem);
-       }
-       else {
-            Debug.Log("No item used");
-       }
+    //    if (receivedItem != null) {
+    //         Debug.Log("Used item: " + receivedItem);
+    //    }
+    //    else {
+    //         Debug.Log("No item used");
+    //    }
     }
     
     //COLLECT BUCKET
@@ -466,7 +458,6 @@ public class Player : MonoBehaviour
         if (collision.gameObject.layer == 3) {
             if(inWater == true) {
             FindObjectOfType<AudioManager>().Play("Splash");
-            Debug.Log("Entered Water");
             speed = waterSpeed;
             inWater = false;
             return;
@@ -480,7 +471,6 @@ public class Player : MonoBehaviour
         // WATER LAYER
         if (collision.gameObject.layer != 3 && inWater == false) {
             FindObjectOfType<AudioManager>().Play("Splash");
-            Debug.Log("Exited water");
             speed = landSpeed;
             inWater = true;
         }

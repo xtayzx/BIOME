@@ -12,6 +12,5 @@ public class CheckpointText : MonoBehaviour
     }
 
     public void HideText() {
-        // checkpoint.Se("IsTriggered", false);
     }
 }

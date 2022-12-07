@@ -13,7 +13,6 @@ public class InventoryManager : MonoBehaviour
 
     public int selectedSlot = 0; //IMPORTANT FOR ITEM SELECTION LATER
 
-    // GameManager gameManager;
     PlayerControls controls;
 
     private void Start() {
@@ -41,7 +40,6 @@ public class InventoryManager : MonoBehaviour
                 ChangeSelectedSlot(number - 1);
             }
         }
-        // Debug.Log(selectedSlot);
     }
 
     public void IncreaseSlot() {
@@ -55,7 +53,6 @@ public class InventoryManager : MonoBehaviour
         }
 
         ChangeSelectedSlot(value);
-        // Debug.Log("INCREASING");
     }
 
     public void DecreaseSlot() {
@@ -69,7 +66,6 @@ public class InventoryManager : MonoBehaviour
         }
 
         ChangeSelectedSlot(value);
-        // Debug.Log("DECREASING");
     }
 
     void ChangeSelectedSlot(int newValue) {
@@ -96,7 +92,6 @@ public class InventoryManager : MonoBehaviour
 
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
-                // SpawnNewItem(item, slot);
                 return true;
             }
         }
@@ -131,21 +126,9 @@ public class InventoryManager : MonoBehaviour
                 itemInSlot.count = 0;
                 itemInSlot.RefreshCount();
                 Destroy(itemInSlot.gameObject);
-                // SpawnNewItem(item, slot);
                 return itemInSlot.item;
             }
         }
-
-        //find any empty slot
-        // for (int i = 0; i < inventorySlots.Length; i++) {
-        //     InventorySlot slot = inventorySlots[i];
-        //     InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-
-        //     if (itemInSlot == null) {
-        //         SpawnNewItem(item, slot);
-        //         return true;
-        //     }
-        // }
 
         return null;
     }
@@ -160,19 +143,6 @@ public class InventoryManager : MonoBehaviour
         InventorySlot slot = inventorySlots[selectedSlot];
         InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
         if (itemInSlot != null) {
-            
-            // UNCOMMENT TO SUBTRACT ITEMS FROM INVENTORY
-
-            // Item item = itemInSlot.item;
-            // if (use == true && item.stackable == true) {
-            //     itemInSlot.count--;
-            //     if (itemInSlot.count <= 0) {
-            //         Destroy(itemInSlot.gameObject);
-            //     } else {
-            //         itemInSlot.RefreshCount();
-            //     }
-            // }
-
             return itemInSlot.item;
         }
         return null;

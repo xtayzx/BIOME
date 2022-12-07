@@ -15,7 +15,6 @@ public class FireObject : MonoBehaviour
 
     private bool waterObtained;
 
-    // GameManager gameManager;
     PlayerControls controls;
 
     void Awake() {

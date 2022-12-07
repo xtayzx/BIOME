@@ -33,8 +33,6 @@ public class EndTrigger : MonoBehaviour
         #if UNITY_EDITOR
         currentObject = Selection.activeGameObject;
         #endif
-
-        // Debug.Log(currentObject);
     }
 
     void OnEnable() {
@@ -45,20 +43,11 @@ public class EndTrigger : MonoBehaviour
         controls.Menu.Disable();
     }
 
-    // If the player enters the finish area, then end the level
-    // public void OnTriggerEnter(Collider exit) {
-    //     if (exit.CompareTag("Player"))
-    //         {
-    //           levelManager.CompleteLevel();
-    //         }
-    // }
-
     // Return to the level hub
     public void LevelSelection() {
         Time.timeScale = 1f;
         if (FindObjectOfType<GameManager>().GetActiveLevel() > FindObjectOfType<GameManager>().CompletedLevelValue()) {
             FindObjectOfType<GameManager>().AddCompletedLevel();
-            Debug.Log("Advance to next level");
         }
         FindObjectOfType<GameManager>().CurrentActiveLevel(0);
         SceneManager.LoadScene("LevelSelection");

@@ -9,10 +9,8 @@ public class PushObject : MonoBehaviour
     public GameObject icon;
     public GameObject player;
 
-    // GameManager gameManager;
     PlayerControls controls;
     private Vector3 objectPosition;
-    // private Vector3 input;
     Rigidbody rigidBody;
     Vector3 movementZ, movementX, movementZNeg, movementXNeg;
     RigidbodyConstraints originalConstraints;
@@ -59,8 +57,6 @@ public class PushObject : MonoBehaviour
         if (rock.CompareTag("Player"))
         {
             // If the player has water in the bucket and the player has selected the bucket of water in their inventory, enable the trigger
-            // if(waterObtained == true && player.GetComponent<Player>().playerSelectedItem() == player.GetComponent<Player>().PlayerSelectedFilledBucket()) {
-                // FindObjectOfType<AudioManager>().Play("Object");
                 triggerActive = true;
                 icon.SetActive(true);
                 FindObjectOfType<Player>().WithinCollider(true);
@@ -90,17 +86,11 @@ public class PushObject : MonoBehaviour
 
     private void Update()
     {
-        // input = new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical"));
-
         //Keyboard Action
         if (triggerActive && Input.GetKeyDown(KeyCode.J))
         {
             Interact();
         }
-
-        // else if (triggerActive == false) {
-            // something here about that it can't move
-        // }
     }
 
     void FixedUpdate() {
@@ -151,12 +141,11 @@ public class PushObject : MonoBehaviour
 
     // Resetting the object when the game is reset to the previous checkpoint
     public void ObjectStartPosition() {
-        // Debug.Log("Reset object");
         this.transform.position = objectPosition;
         this.transform.rotation = Quaternion.identity;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        GetComponent<Rigidbody>().Sleep(); //TODO *
+        GetComponent<Rigidbody>().Sleep();
     }
 
 }
