@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33fbf5cf6b7eb2749bec9780986d5273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  levelManager: {fileID: 0}
   returnGameSelectionButton: {fileID: 0}
 --- !u!1 &2842395150496943986
 GameObject:
@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 2842395150496943993}
   - component: {fileID: 2842395150496943990}
   - component: {fileID: 2842395150496943991}
-  - component: {fileID: 2842395150496943988}
   m_Layer: 0
   m_Name: FinishPad
   m_TagString: Untagged
@@ -212,15 +211,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2842395150496943988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2842395150496943986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd4e605a2c414fc4996003093c538141, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

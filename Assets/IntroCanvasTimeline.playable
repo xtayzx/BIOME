@@ -4605,6 +4605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 0
   m_Tracks:
+  - {fileID: -2180492401606322348}
   - {fileID: 8755805925136514490}
   - {fileID: 9000672310311856539}
   - {fileID: -1140954157327018272}
@@ -4625,7 +4626,6 @@ MonoBehaviour:
   - {fileID: -2929963027151422107}
   - {fileID: -4800145730476374770}
   - {fileID: 7594242899646735577}
-  - {fileID: -2180492401606322348}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
