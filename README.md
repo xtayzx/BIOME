@@ -4,11 +4,7 @@ BIOME: Find My Way Home is a 2.5D isometric-style puzzle-adventure game develope
 Team:
 
 Alex King
-
 Taylen Lee-Chin
-
 Shirley Liang
-
 Ricky Lin
-
 Crystal Wei
